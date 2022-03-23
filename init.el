@@ -29,6 +29,7 @@
       mouse-wheel-scroll-amount '(2 ((shift) . 4) ((control) . 6)))
 (setq initial-scratch-message "")
 (setq split-width-threshold 80)
+(setq indent-tabs-mode nil)
 
 ;; disable
 
@@ -51,7 +52,6 @@
 (blink-cursor-mode 0)
 
 (global-display-line-numbers-mode)
-(global-visual-line-mode)
 (global-hl-line-mode)
 (show-paren-mode)
 
@@ -62,11 +62,11 @@
 (use-package modus-themes
   :init
   (setq modus-themes-region '(bg-only no-extend)
-	modus-themes-syntax '(yellow-comments)
-	modus-themes-hl-line '(accented)
-	modus-themes-italic-constructs t
-	modus-themes-mode-line '(accented borderless)
-	modus-themes-headings '((t . (rainbow))))
+        modus-themes-syntax '(yellow-comments)
+        modus-themes-hl-line '(accented)
+        modus-themes-italic-constructs t
+        modus-themes-mode-line '(accented borderless)
+        modus-themes-headings '((t . (rainbow))))
   (modus-themes-load-themes)
   :config
   (modus-themes-load-operandi)
@@ -75,12 +75,10 @@
 (use-package dashboard
   :config
   (setq dashboard-center-content t
-	dashboard-show-shortcuts nil)
+        dashboard-show-shortcuts nil)
   (dashboard-setup-startup-hook))
 
-(use-package visual-fill-column
-  :config
-  (global-visual-fill-column-mode))
+(use-package visual-fill-column)
 
 ;; keyboard
 
@@ -119,7 +117,9 @@
 
 (use-package org
   :pin gnu
-  :hook (org-mode . org-indent-mode))
+  :hook (org-mode . org-indent-mode)
+  :hook (org-mode . visual-line-mode)
+  :hook (org-mode . visual-fill-column-mode))
 
 (use-package evil-org
   :after org
