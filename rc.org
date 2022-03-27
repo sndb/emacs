@@ -49,19 +49,8 @@
         frame-resize-pixelwise t
         sentence-end-double-space nil
         scroll-conservatively 101
-        indent-tabs-mode nil)
-
-#+end_src
-
-** Review later
-
-#+begin_src emacs-lisp
-
-  ;(server-start)
-  ;(recentf-mode t)
-  ;(fset 'yes-or-no-p 'y-or-n-p)
-  ;(setq initial-scratch-message "")
-  ;(setq split-width-threshold 80)
+        indent-tabs-mode nil
+        initial-scratch-message "")
 
 #+end_src
 
@@ -232,6 +221,11 @@
   (use-package vertico
     :init
     (vertico-mode))
+
+  (use-package orderless
+    :custom
+    (orderless-matching-styles '(orderless-flex))
+    (completion-styles '(orderless)))
 
   (use-package savehist
     :init
