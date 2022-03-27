@@ -19,19 +19,20 @@
 
 ;; general
 
-(recentf-mode t)
-(fset 'yes-or-no-p 'y-or-n-p)
-(setq initial-major-mode 'org-mode)
-(setq frame-resize-pixelwise t)
 (setq-default truncate-lines t)
 (setq-default fill-column 80)
+(setq initial-major-mode 'org-mode)
+(setq frame-resize-pixelwise t)
 (setq sentence-end-double-space nil)
 (setq scroll-conservatively 101)
-(setq mouse-wheel-progressive-speed nil
-      mouse-wheel-scroll-amount '(2 ((shift) . 4) ((control) . 6)))
-(setq initial-scratch-message "")
-(setq split-width-threshold 80)
 (setq indent-tabs-mode nil)
+
+; review later
+;(server-start)
+;(recentf-mode t)
+;(fset 'yes-or-no-p 'y-or-n-p)
+;(setq initial-scratch-message "")
+;(setq split-width-threshold 80)
 
 ;; disable
 
@@ -39,14 +40,12 @@
       make-backup-files nil
       auto-save-default nil)
 
-;; modeline
+;; visuals
 
 (setq display-time-default-load-average nil)
 (line-number-mode)
 (column-number-mode)
 (size-indication-mode)
-
-;; visuals
 
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
@@ -101,8 +100,6 @@
   (setq evil-want-keybinding nil
         evil-undo-system 'undo-fu)
   :config
-  (evil-global-set-key 'normal (kbd "SPC f") 'affe-find)
-  (evil-global-set-key 'normal (kbd "SPC g") 'affe-grep)
   (evil-mode 1))
 
 (use-package evil-collection
@@ -133,6 +130,13 @@
 
 (use-package org-superstar
   :hook (org-mode . org-superstar-mode))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (shell . t)))
+
+(setq org-confirm-babel-evaluate nil)
 
 ;; completion
 
@@ -201,8 +205,14 @@
   :init
   (marginalia-mode))
 
-(use-package affe)
-
-;; also
+;; applications
 
 (use-package vterm)
+
+(use-package pdf-tools
+  :init
+  (pdf-tools-install))
+
+(use-package nov
+  :init
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
