@@ -264,6 +264,8 @@
 #+begin_src emacs-lisp
 
   (use-package nov
+    :custom
+    (nov-text-width 80)
     :init
     (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 
