@@ -50,7 +50,8 @@
         sentence-end-double-space nil
         scroll-conservatively 101
         indent-tabs-mode nil
-        initial-scratch-message "")
+        initial-scratch-message ""
+        split-width-threshold 80)
 
 #+end_src
 
@@ -96,7 +97,7 @@
 
 #+end_src
 
-** Disable GUI interface
+** Disable GUI
 
 #+begin_src emacs-lisp
 
@@ -157,6 +158,10 @@
     :config
     (which-key-mode))
 
+  (use-package aggressive-indent
+    :init
+    (global-aggressive-indent-mode 1))
+
 #+end_src
 
 ** Evil
@@ -197,7 +202,11 @@
 
   (use-package evil-org
     :after org
-    :hook (org-mode . evil-org-mode)
+    :hook
+    (org-mode . (lambda ()
+                  (evil-org-mode)
+                  (evil-define-key 'motion 'evil-org-mode
+                    (kbd "$") 'evil-end-of-line)))
     :config
     (require 'evil-org-agenda)
     (evil-org-agenda-set-keys))
