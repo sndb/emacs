@@ -34,28 +34,16 @@
 
 * Files
 
+** Custom file
+
 #+begin_src emacs-lisp
 
-  (setq custom-file "~/.config/emacs/custom.el")
+  (setq custom-file (locate-user-emacs-file "custom.el"))
   (load custom-file)
 
 #+end_src
 
-* General
-
-#+begin_src emacs-lisp
-
-  (setq initial-major-mode 'org-mode
-        frame-resize-pixelwise t
-        sentence-end-double-space nil
-        scroll-conservatively 101
-        indent-tabs-mode nil
-        initial-scratch-message ""
-        split-width-threshold 80)
-
-#+end_src
-
-* Disable temporary files
+** Temporary files
 
 #+begin_src emacs-lisp
 
@@ -65,11 +53,53 @@
 
 #+end_src
 
+** Recently edited files
+
+#+begin_src emacs-lisp
+
+  (recentf-mode)
+
+#+end_src
+
+** Save place
+
+#+begin_src emacs-lisp
+
+  (setq save-place-limit 128)
+  (save-place-mode)
+
+#+end_src
+
+** Auto revert
+
+#+begin_src emacs-lisp
+
+  (setq global-auto-revert-non-file-buffers t)
+  (global-auto-revert-mode)
+
+#+end_src
+
+* General
+
+#+begin_src emacs-lisp
+
+  (setq initial-major-mode 'org-mode
+        sentence-end-double-space nil
+        scroll-conservatively 101
+        indent-tabs-mode nil
+        inhibit-startup-screen t
+        initial-scratch-message ""
+        split-width-threshold 80)
+
+#+end_src
+
 * Visuals
 
 ** Basics
 
 #+begin_src emacs-lisp
+
+  (setq frame-resize-pixelwise t)
 
   (blink-cursor-mode 0)
   (global-display-line-numbers-mode)
@@ -160,7 +190,7 @@
 
   (use-package aggressive-indent
     :init
-    (global-aggressive-indent-mode 1))
+    (global-aggressive-indent-mode))
 
 #+end_src
 
@@ -175,7 +205,7 @@
     (setq evil-want-keybinding nil
           evil-undo-system 'undo-fu)
     :config
-    (evil-mode 1))
+    (evil-mode))
 
   (use-package evil-collection
     :after evil
@@ -186,7 +216,7 @@
 
   (use-package evil-surround
     :config
-    (global-evil-surround-mode 1))
+    (global-evil-surround-mode))
 
 #+end_src
 
@@ -227,6 +257,9 @@
 
 #+begin_src emacs-lisp
 
+  (setq history-length 32)
+  (savehist-mode)
+
   (use-package vertico
     :init
     (vertico-mode))
@@ -235,10 +268,6 @@
     :custom
     (orderless-matching-styles '(orderless-flex))
     (completion-styles '(orderless)))
-
-  (use-package savehist
-    :init
-    (savehist-mode))
 
   (use-package marginalia
     :init
