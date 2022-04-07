@@ -273,6 +273,17 @@
     :init
     (marginalia-mode))
 
+  (use-package corfu
+    :custom
+    (corfu-auto t)
+    :init
+    (corfu-global-mode))
+
+  (defun corfu-enable-always-in-minibuffer ()
+    (unless (bound-and-true-p vertico--input)
+      (corfu-mode 1)))
+  (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
+
 #+end_src
 
 * Applications
