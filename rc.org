@@ -69,10 +69,8 @@
 
 #+begin_src emacs-lisp
   (setq sentence-end-double-space nil
-        scroll-conservatively 101
         indent-tabs-mode nil
-        inhibit-startup-screen t
-        split-width-threshold 80)
+        inhibit-startup-screen t)
 #+end_src
 
 * Visuals
@@ -86,6 +84,15 @@
   (use-package visual-fill-column
     :init
     (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
+#+end_src
+
+** Scrolling
+
+#+begin_src emacs-lisp
+  (setq scroll-preserve-screen-position t
+        scroll-conservatively 1
+        next-screen-context-lines 4
+        scroll-margin 4)
 #+end_src
 
 ** Modeline
