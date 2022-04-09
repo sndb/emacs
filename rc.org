@@ -80,20 +80,12 @@
 ** Basics
 
 #+begin_src emacs-lisp
-  (setq frame-resize-pixelwise t)
-
-  (blink-cursor-mode 0)
   (global-display-line-numbers-mode)
   (global-hl-line-mode)
-  (show-paren-mode)
 
-  (setq-default truncate-lines t)
-  (setq-default fill-column 80)
-  (use-package visual-fill-column)
-
-  (use-package centered-cursor-mode
-    :config
-    (global-centered-cursor-mode))
+  (use-package visual-fill-column
+    :init
+    (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
 #+end_src
 
 ** Modeline
@@ -105,9 +97,11 @@
   (size-indication-mode)
 #+end_src
 
-** Disable GUI
+** Frame
 
 #+begin_src emacs-lisp
+  (setq frame-resize-pixelwise t)
+
   (menu-bar-mode 0)
   (scroll-bar-mode 0)
   (tool-bar-mode 0)
@@ -134,7 +128,7 @@
           modus-themes-headings '((t . (rainbow))))
     (modus-themes-load-themes)
     :config
-    (modus-themes-load-operandi)
+    (modus-themes-load-vivendi)
     :bind ("<f5>" . modus-themes-toggle))
 #+end_src
 
@@ -152,49 +146,11 @@
     (global-aggressive-indent-mode))
 #+end_src
 
-** Evil
-
-#+begin_src emacs-lisp
-  (use-package undo-fu)
-
-  (use-package evil
-    :init
-    (setq evil-want-keybinding nil
-          evil-undo-system 'undo-fu)
-    :config
-    (evil-mode))
-
-  (use-package evil-collection
-    :after evil
-    :config
-    (setq evil-collection-mode-list
-          (remove 'org evil-collection-mode-list))
-    (evil-collection-init))
-
-  (use-package evil-surround
-    :config
-    (global-evil-surround-mode))
-#+end_src
-
 * Org
 
 #+begin_src emacs-lisp
-  (use-package org
-    :pin gnu
-    :hook (org-mode . org-indent-mode)
-    :hook (org-mode . visual-line-mode)
-    :hook (org-mode . visual-fill-column-mode))
-
-  (use-package evil-org
-    :after org
-    :hook
-    (org-mode . (lambda ()
-                  (evil-org-mode)
-                  (evil-define-key 'motion 'evil-org-mode
-                    (kbd "$") 'evil-end-of-line)))
-    :config
-    (require 'evil-org-agenda)
-    (evil-org-agenda-set-keys))
+  (setq org-startup-indented t)
+  (add-hook 'org-mode-hook #'visual-line-mode)
 
   (org-babel-do-load-languages
    'org-babel-load-languages
