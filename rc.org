@@ -61,7 +61,6 @@
 ** Auto revert
 
 #+begin_src emacs-lisp
-  (setq global-auto-revert-non-file-buffers t)
   (global-auto-revert-mode)
 #+end_src
 
@@ -90,9 +89,7 @@
 
 #+begin_src emacs-lisp
   (setq scroll-preserve-screen-position t
-        scroll-conservatively 1
-        next-screen-context-lines 4
-        scroll-margin 4)
+        scroll-conservatively 1)
 #+end_src
 
 ** Modeline
