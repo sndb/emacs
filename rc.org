@@ -28,6 +28,13 @@
   (setq use-package-always-ensure t)
 #+end_src
 
+* General
+
+#+begin_src emacs-lisp
+  (server-start)
+  (setq inhibit-startup-screen t)
+#+end_src
+
 * Files
 
 ** Custom file
@@ -62,14 +69,6 @@
 
 #+begin_src emacs-lisp
   (global-auto-revert-mode)
-#+end_src
-
-* General
-
-#+begin_src emacs-lisp
-  (setq sentence-end-double-space nil
-        indent-tabs-mode nil
-        inhibit-startup-screen t)
 #+end_src
 
 * Visuals
@@ -139,6 +138,9 @@
 * Keyboard
 
 #+begin_src emacs-lisp
+  (setq sentence-end-double-space nil
+        indent-tabs-mode nil)
+
   (use-package which-key
     :init
     (setq which-key-idle-delay 0.25)
