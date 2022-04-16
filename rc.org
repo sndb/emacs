@@ -94,7 +94,7 @@
 ** Modeline
 
 #+begin_src emacs-lisp
-  (setq display-time-default-load-average nil)
+  (display-time-mode)
   (line-number-mode)
   (column-number-mode)
   (size-indication-mode)
@@ -115,7 +115,7 @@
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil :family "Iosevka" :height 120)
   (set-face-attribute 'fixed-pitch nil :family "Iosevka" :height 1.0)
-  (set-face-attribute 'variable-pitch nil :family "Iosevka Etoile" :height 120)
+  (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :height 120)
 #+end_src
 
 ** Theme
@@ -155,7 +155,7 @@
 * Org
 
 #+begin_src emacs-lisp
-  (setq org-default-notes-file "~/org/notes.org"
+  (setq org-default-notes-file (concat org-directory "/notes.org")
         org-startup-indented t
         org-confirm-babel-evaluate nil)
 
