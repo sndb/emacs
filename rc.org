@@ -1,10 +1,10 @@
 #+title: Emacs Configuration
 #+author: sndb
 
+* Intro
+
 #+begin_src emacs-lisp
-
   ;; -*- lexical-binding: t -*-
-
 #+end_src
 
 * Packages
@@ -30,9 +30,24 @@
 
 * General
 
+** Basic
+
+#+begin_src emacs-lisp
+  (setq inhibit-startup-screen t)
+  (setq use-short-answers t)
+#+end_src
+
+** Server
+
 #+begin_src emacs-lisp
   (server-start)
-  (setq inhibit-startup-screen t)
+#+end_src
+
+** Keybindings
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c r") #'recentf-open-files)
+  (global-set-key (kbd "C-c w") #'delete-trailing-whitespace)
 #+end_src
 
 * Files
@@ -138,8 +153,8 @@
 * Keyboard
 
 #+begin_src emacs-lisp
-  (setq sentence-end-double-space nil
-        indent-tabs-mode nil)
+  (setq sentence-end-double-space nil)
+  (setq indent-tabs-mode nil)
 
   (use-package which-key
     :init
@@ -155,9 +170,9 @@
 * Org
 
 #+begin_src emacs-lisp
-  (setq org-default-notes-file (concat org-directory "/notes.org")
-        org-startup-indented t
-        org-confirm-babel-evaluate nil)
+  (global-set-key (kbd "C-c l") #'org-store-link)
+  (global-set-key (kbd "C-c a") #'org-agenda)
+  (global-set-key (kbd "C-c c") #'org-capture)
 
   (add-hook 'org-mode-hook #'visual-line-mode)
 
@@ -165,6 +180,18 @@
    'org-babel-load-languages
    '((python . t)
      (shell . t)))
+
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (setq org-startup-indented t)
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-capture-templates
+        '(("t" "Task" entry (file+headline "" "Tasks")
+           "* TODO %?\n%u\n%a\n%i"
+           :empty-lines 1)
+          ("j" "Journal" entry (file+olp+datetree "journal.org")
+           "* %?"
+           :empty-lines 1
+           :jump-to-captured t)))
 #+end_src
 
 * Completion
@@ -224,15 +251,4 @@
     (nov-text-width 80)
     :init
     (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
-#+end_src
-
-* Keybindings
-
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-c r") #'recentf-open-files)
-  (global-set-key (kbd "C-c w") #'delete-trailing-whitespace)
-
-  (global-set-key (kbd "C-c l") #'org-store-link)
-  (global-set-key (kbd "C-c a") #'org-agenda)
-  (global-set-key (kbd "C-c c") #'org-capture)
 #+end_src
