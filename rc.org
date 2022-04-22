@@ -128,9 +128,15 @@
 ** Fonts
 
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil :family "Iosevka" :height 120)
-  (set-face-attribute 'fixed-pitch nil :family "Iosevka" :height 1.0)
-  (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :height 120)
+  (setq sndb-mono-font "Iosevka")
+  (setq sndb-mono-font-height 120)
+
+  (setq sndb-sans-font "Iosevka Aile")
+  (setq sndb-sans-font-height 120)
+
+  (set-face-attribute 'default nil :family sndb-mono-font :height sndb-mono-font-height)
+  (set-face-attribute 'fixed-pitch nil :family sndb-mono-font :height sndb-mono-font-height)
+  (set-face-attribute 'variable-pitch nil :family sndb-sans-font :height sndb-sans-font-height)
 #+end_src
 
 ** Theme
