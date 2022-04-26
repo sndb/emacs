@@ -46,8 +46,8 @@
 ** Keybindings
 
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-c r") #'recentf-open-files)
-  (global-set-key (kbd "C-c w") #'delete-trailing-whitespace)
+  (global-set-key (kbd "C-c r") 'recentf-open-files)
+  (global-set-key (kbd "C-c w") 'delete-trailing-whitespace)
 #+end_src
 
 * Files
@@ -91,12 +91,12 @@
 ** Basics
 
 #+begin_src emacs-lisp
-  (global-display-line-numbers-mode)
-  (global-hl-line-mode)
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+  (add-hook 'prog-mode-hook 'hl-line-mode)
 
   (use-package visual-fill-column
     :init
-    (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
+    (add-hook 'visual-line-mode-hook 'visual-fill-column-mode))
 #+end_src
 
 ** Scrolling
@@ -128,15 +128,12 @@
 ** Fonts
 
 #+begin_src emacs-lisp
-  (setq sndb-mono-font "Iosevka")
-  (setq sndb-mono-font-height 120)
+  (setq sndb-mono-font "Iosevka-12")
+  (setq sndb-sans-font "Iosevka Aile-12")
 
-  (setq sndb-sans-font "Iosevka Aile")
-  (setq sndb-sans-font-height 120)
-
-  (set-face-attribute 'default nil :family sndb-mono-font :height sndb-mono-font-height)
-  (set-face-attribute 'fixed-pitch nil :family sndb-mono-font :height sndb-mono-font-height)
-  (set-face-attribute 'variable-pitch nil :family sndb-sans-font :height sndb-sans-font-height)
+  (set-face-attribute 'default nil :font sndb-mono-font)
+  (set-face-attribute 'fixed-pitch nil :font sndb-mono-font)
+  (set-face-attribute 'variable-pitch nil :font sndb-sans-font)
 #+end_src
 
 ** Theme
@@ -168,19 +165,26 @@
     :config
     (which-key-mode))
 
-  (use-package aggressive-indent
-    :init
-    (global-aggressive-indent-mode))
+  (defun scroll-third-screen-up ()
+    (interactive)
+    (scroll-up (/ (window-height) 3)))
+
+  (defun scroll-third-screen-down ()
+    (interactive)
+    (scroll-down (/ (window-height) 3)))
+
+  (global-set-key (kbd "C-S-n") 'scroll-third-screen-up)
+  (global-set-key (kbd "C-S-p") 'scroll-third-screen-down)
 #+end_src
 
 * Org
 
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-c l") #'org-store-link)
-  (global-set-key (kbd "C-c a") #'org-agenda)
-  (global-set-key (kbd "C-c c") #'org-capture)
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture)
 
-  (add-hook 'org-mode-hook #'visual-line-mode)
+  (add-hook 'org-mode-hook 'visual-line-mode)
 
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -228,7 +232,7 @@
   (defun corfu-enable-always-in-minibuffer ()
     (unless (bound-and-true-p vertico--input)
       (corfu-mode 1)))
-  (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
+  (add-hook 'minibuffer-setup-hook 'corfu-enable-always-in-minibuffer 1)
 #+end_src
 
 * Applications
