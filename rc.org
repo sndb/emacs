@@ -139,6 +139,15 @@
 ** Theme
 
 #+begin_src emacs-lisp
+  (defun sndb-load-theme ()
+    "Loads a theme corresponding to the current time.
+  Selects the light theme in the morning or afternoon, the dark
+  theme in the evening or at night."
+    (interactive)
+    (if (<= 6 (decoded-time-hour (decode-time)) 18)
+        (modus-themes-load-operandi)
+      (modus-themes-load-vivendi)))
+
   (use-package modus-themes
     :init
     (setq modus-themes-region '(bg-only no-extend)
@@ -146,10 +155,11 @@
           modus-themes-hl-line '(accented)
           modus-themes-italic-constructs t
           modus-themes-mode-line '(accented borderless)
-          modus-themes-headings '((t . (rainbow))))
+          modus-themes-headings '((t . (rainbow)))
+          modus-themes-mixed-fonts t)
     (modus-themes-load-themes)
     :config
-    (modus-themes-load-vivendi)
+    (sndb-load-theme)
     :bind ("<f5>" . modus-themes-toggle))
 #+end_src
 
@@ -165,16 +175,18 @@
     :config
     (which-key-mode))
 
-  (defun scroll-third-screen-up ()
+  (defun sndb-scroll-third-height-up ()
+    "Scrolls text up a third of the window height."
     (interactive)
     (scroll-up (/ (window-height) 3)))
 
-  (defun scroll-third-screen-down ()
+  (defun sndb-scroll-third-height-down ()
+    "Scrolls text down a third of the window height."
     (interactive)
     (scroll-down (/ (window-height) 3)))
 
-  (global-set-key (kbd "C-S-n") 'scroll-third-screen-up)
-  (global-set-key (kbd "C-S-p") 'scroll-third-screen-down)
+  (global-set-key (kbd "C-S-n") 'sndb-scroll-third-height-up)
+  (global-set-key (kbd "C-S-p") 'sndb-scroll-third-height-down)
 #+end_src
 
 * Org
