@@ -109,6 +109,8 @@
 ** Modeline
 
 #+begin_src emacs-lisp
+  (setq display-time-day-and-date t)
+
   (display-time-mode)
   (line-number-mode)
   (column-number-mode)
@@ -150,13 +152,16 @@
 
   (use-package modus-themes
     :init
-    (setq modus-themes-region '(bg-only no-extend)
-          modus-themes-syntax '(yellow-comments)
-          modus-themes-hl-line '(accented)
+    (setq modus-themes-bold-constructs t
           modus-themes-italic-constructs t
-          modus-themes-mode-line '(accented borderless)
-          modus-themes-headings '((t . (rainbow)))
-          modus-themes-mixed-fonts t)
+          modus-themes-syntax '(yellow-comments)
+          modus-themes-mixed-fonts t
+          modus-themes-prompts '(background bold)
+          modus-themes-mode-line '(3d)
+          modus-themes-paren-match '(bold)
+          modus-themes-region '(bg-only no-extend)
+          modus-themes-org-blocks 'tinted-background
+          modus-themes-headings '((t . (overline background))))
     (modus-themes-load-themes)
     :config
     (sndb-load-theme)
