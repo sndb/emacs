@@ -15,6 +15,37 @@
   (require 'package)
   (add-to-list 'package-archives
                '("melpa" . "https://melpa.org/packages/"))
+
+  (setq sndb-package-list
+        '(vertico
+          orderless
+          marginalia
+          embark
+          consult
+          embark-consult
+          wgrep
+          corfu
+
+          magit
+          vterm
+          nov
+          pdf-tools
+
+          eglot
+          racket-mode
+          go-mode
+          rust-mode
+
+          visual-fill-column
+          diff-hl))
+
+  (defun sndb-install-packages ()
+    "Install all the packages from 'sndb-package-list'."
+    (interactive)
+    (package-refresh-contents)
+    (dolist (package sndb-package-list)
+      (unless (package-installed-p package)
+        (package-install package))))
 #+end_src
 
 ** use-package
@@ -35,6 +66,7 @@
 #+begin_src emacs-lisp
   (setq inhibit-startup-screen t)
   (setq use-short-answers t)
+  (setq echo-keystrokes 0.25)
 #+end_src
 
 ** Server
@@ -46,7 +78,9 @@
 ** Keybindings
 
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-c w") 'delete-trailing-whitespace)
+  (global-set-key (kbd "C-c w w") 'delete-trailing-whitespace)
+  (global-set-key (kbd "C-c w t") 'whitespace-mode)
+  (global-set-key (kbd "C-c w f") 'fixup-whitespace)
 #+end_src
 
 * Files
@@ -69,13 +103,14 @@
 ** Recently edited files
 
 #+begin_src emacs-lisp
+  (setq recentf-max-saved-items 256)
   (recentf-mode)
 #+end_src
 
 ** Save place
 
 #+begin_src emacs-lisp
-  (setq save-place-limit 128)
+  (setq save-place-limit 256)
   (save-place-mode)
 #+end_src
 
@@ -92,6 +127,10 @@
 #+begin_src emacs-lisp
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (add-hook 'prog-mode-hook 'hl-line-mode)
+
+  (global-diff-hl-mode)
+  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
   (use-package visual-fill-column
     :init
@@ -140,14 +179,25 @@
 ** Theme
 
 #+begin_src emacs-lisp
+  (defun sndb-part-of-day ()
+    "Compute the current part of the day.
+  Return 'morning, 'day, 'evening, or 'night."
+    (let ((hour (decoded-time-hour (decode-time))))
+      (cond
+       ((< hour 6) 'night)
+       ((< hour 12) 'morning)
+       ((< hour 18) 'day)
+       ((< hour 24) 'evening))))
+
   (defun sndb-load-theme ()
-    "Loads a theme corresponding to the current time.
-  Selects the light theme in the morning or afternoon, the dark
-  theme in the evening or at night."
+    "Load a theme corresponding to the current part of the day.
+  Select the light theme in the morning or afternoon, the dark theme in
+  the evening or at night."
     (interactive)
-    (if (<= 6 (decoded-time-hour (decode-time)) 18)
-        (modus-themes-load-operandi)
-      (modus-themes-load-vivendi)))
+    (let ((part (sndb-part-of-day)))
+      (if (or (eq part 'morning) (eq part 'day))
+          (modus-themes-load-operandi)
+        (modus-themes-load-vivendi))))
 
   (use-package modus-themes
     :init
@@ -170,22 +220,18 @@
 * Keyboard
 
 #+begin_src emacs-lisp
+  (electric-pair-mode)
+
   (setq sentence-end-double-space nil)
   (setq indent-tabs-mode nil)
 
-  (use-package which-key
-    :init
-    (setq which-key-idle-delay 0.25)
-    :config
-    (which-key-mode))
-
   (defun sndb-scroll-third-height-up ()
-    "Scrolls text up a third of the window height."
+    "Scroll text up a third of the window height."
     (interactive)
     (scroll-up (/ (window-height) 3)))
 
   (defun sndb-scroll-third-height-down ()
-    "Scrolls text down a third of the window height."
+    "Scroll text down a third of the window height."
     (interactive)
     (scroll-down (/ (window-height) 3)))
 
@@ -210,6 +256,7 @@
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-startup-indented t)
   (setq org-confirm-babel-evaluate nil)
+  (setq org-src-window-setup 'other-window)
   (setq org-capture-templates
         '(("t" "Task" entry (file+headline "" "Tasks")
            "* TODO %?\n%u\n%a\n%i"
@@ -223,10 +270,13 @@
 * Completion
 
 #+begin_src emacs-lisp
-  (setq history-length 32)
+  (setq history-length 1024)
   (savehist-mode)
 
   (use-package vertico
+    :custom
+    (vertico-cycle t)
+    (vertico-count 20)
     :init
     (vertico-mode))
 
@@ -247,25 +297,26 @@
     :bind
     (("C-." . embark-act)
      ("M-." . embark-dwim)
-     ("C-h B" . embark-bindings)))
+     ("C-h B" . embark-bindings))
+    :init
+    (setq prefix-help-command #'embark-prefix-help-command))
 
   (use-package consult
     :bind
-    (("C-c o k" . consult-kmacro)
-     ("C-c o b" . consult-buffer)
+    (("C-c o b" . consult-buffer)
      ("C-c o 4 b" . consult-buffer-other-window)
      ("C-c o 5 b" . consult-buffer-other-frame)
-     ("C-c o y" . consult-yank-pop)
-     ("C-c o e" . consult-compile-error)
-     ("C-c o f" . consult-flymake)
-     ("C-c o o" . consult-outline)
+     ("C-c o f" . consult-find)
+     ("C-c o F" . consult-locate)
+     ("C-c o l" . consult-line)
+     ("C-c o L" . consult-line-multi)
      ("C-c o i" . consult-imenu)
      ("C-c o I" . consult-imenu-multi)
-     ("C-c o d" . consult-find)
-     ("C-c o D" . consult-locate)
-     ("C-c o r" . consult-ripgrep)
-     ("C-c o l" . consult-line)
-     ("C-c o L" . consult-line-multi)))
+     ("C-c o y" . consult-yank-pop)
+     ("C-c o e" . consult-compile-error)
+     ("C-c o d" . consult-flymake)
+     ("C-c o o" . consult-outline)
+     ("C-c o r" . consult-ripgrep)))
 
   (use-package embark-consult
     :after (embark consult)
@@ -276,6 +327,8 @@
   (use-package wgrep)
 
   (use-package corfu
+    :custom
+    (corfu-cycle t)
     :init
     (global-corfu-mode))
 
@@ -283,9 +336,21 @@
     (unless (bound-and-true-p vertico--input)
       (corfu-mode 1)))
   (add-hook 'minibuffer-setup-hook 'corfu-enable-always-in-minibuffer 1)
+
+  (dolist (hook '(python-mode-hook
+                  racket-mode-hook
+                  go-mode-hook
+                  rust-mode-hook))
+    (add-hook hook 'eglot-ensure))
 #+end_src
 
 * Applications
+
+** Magit
+
+#+begin_src emacs-lisp
+  (setq magit-diff-refine-hunk 'all)
+#+end_src
 
 ** Terminal
 
