@@ -146,29 +146,7 @@
 ** Theme
 
 #+begin_src emacs-lisp
-  (defun sndb-part-of-day ()
-    "Compute the current part of the day.
-  Return 'morning, 'day, 'evening, or 'night."
-    (let ((hour (decoded-time-hour (decode-time))))
-      (cond
-       ((< hour 6) 'night)
-       ((< hour 12) 'morning)
-       ((< hour 18) 'day)
-       ((< hour 24) 'evening))))
-
-  (defun sndb-load-theme ()
-    "Load a theme corresponding to the current part of the day.
-  Select the light theme in the morning or afternoon, the dark theme in
-  the evening or at night."
-    (interactive)
-    (let ((part (sndb-part-of-day)))
-      (if (or (eq part 'morning) (eq part 'day))
-          (modus-themes-load-operandi)
-        (modus-themes-load-vivendi))))
-
   (require 'modus-themes)
-
-  (global-set-key (kbd "<f5>") 'modus-themes-toggle)
 
   (setq modus-themes-bold-constructs t
         modus-themes-italic-constructs t
@@ -182,7 +160,16 @@
         modus-themes-headings '((t . (overline background))))
 
   (modus-themes-load-themes)
-  (sndb-load-theme)
+
+  (require 'circadian)
+
+  (setq calendar-latitude 55
+        calendar-longitude 37)
+
+  (setq circadian-themes '((:sunrise . modus-operandi)
+                           (:sunset  . modus-vivendi)))
+
+  (circadian-setup)
 #+end_src
 
 * Editing
