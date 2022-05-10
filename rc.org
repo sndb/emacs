@@ -410,5 +410,6 @@
 
 #+begin_src emacs-lisp
   (setq dired-kill-when-opening-new-dired-buffer t)
+  (setq dired-listing-switches "-lhvFA --group-directories-first")
   (add-hook 'dired-mode-hook 'hl-line-mode)
 #+end_src
