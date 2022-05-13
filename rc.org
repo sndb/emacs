@@ -40,10 +40,10 @@
           racket-mode
           rust-mode
 
+          circadian
           diff-hl
-          olivetti
-
-          modus-themes))
+          modus-themes
+          olivetti))
 
   (defun sndb-install-packages ()
     "Install all the packages from 'sndb-package-list'."
@@ -169,12 +169,6 @@
 #+end_src
 
 * Editing
-
-** Automatic Parens
-
-#+begin_src emacs-lisp
-  (electric-pair-mode)
-#+end_src
 
 ** Scrolling
 
@@ -303,20 +297,24 @@
 #+begin_src emacs-lisp
   (require 'consult)
 
-  (global-set-key (kbd "C-c o b") 'consult-buffer)
-  (global-set-key (kbd "C-c o 4 b") 'consult-buffer-other-window)
-  (global-set-key (kbd "C-c o 5 b") 'consult-buffer-other-frame)
-  (global-set-key (kbd "C-c o f") 'consult-find)
-  (global-set-key (kbd "C-c o F") 'consult-locate)
-  (global-set-key (kbd "C-c o l") 'consult-line)
-  (global-set-key (kbd "C-c o L") 'consult-line-multi)
-  (global-set-key (kbd "C-c o i") 'consult-imenu)
-  (global-set-key (kbd "C-c o I") 'consult-imenu-multi)
-  (global-set-key (kbd "C-c o y") 'consult-yank-pop)
-  (global-set-key (kbd "C-c o e") 'consult-compile-error)
-  (global-set-key (kbd "C-c o d") 'consult-flymake)
-  (global-set-key (kbd "C-c o o") 'consult-outline)
-  (global-set-key (kbd "C-c o r") 'consult-ripgrep)
+  (global-set-key [remap switch-to-buffer] 'consult-buffer)
+  (global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
+  (global-set-key [remap switch-to-buffer-other-frame] 'consult-buffer-other-frame)
+  (global-set-key [remap goto-line] 'consult-goto-line)
+  (global-set-key [remap yank-pop] 'consult-yank-pop)
+
+  (global-set-key (kbd "M-s f") 'consult-find)
+  (global-set-key (kbd "M-s F") 'consult-locate)
+  (global-set-key (kbd "M-s l") 'consult-line)
+  (global-set-key (kbd "M-s L") 'consult-line-multi)
+  (global-set-key (kbd "M-s g") 'consult-ripgrep)
+
+  (global-set-key (kbd "M-g i") 'consult-imenu)
+  (global-set-key (kbd "M-g I") 'consult-imenu-multi)
+  (global-set-key (kbd "M-g e") 'consult-compile-error)
+  (global-set-key (kbd "M-g d") 'consult-flymake)
+  (global-set-key (kbd "M-g o") 'consult-outline)
+  (global-set-key (kbd "M-g m") 'consult-mark)
 #+end_src
 
 ** Embark
