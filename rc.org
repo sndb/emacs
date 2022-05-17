@@ -21,7 +21,8 @@
 
 #+begin_src emacs-lisp
   (setq sndb-package-list
-        '(consult
+        '(avy
+          consult
           corfu
           embark
           embark-consult
@@ -46,7 +47,7 @@
           olivetti))
 
   (defun sndb-install-packages ()
-    "Install all the packages from 'sndb-package-list'."
+    "Install all the packages from `sndb-package-list'."
     (interactive)
     (package-refresh-contents)
     (dolist (package sndb-package-list)
@@ -131,8 +132,8 @@
 ** Fonts
 
 #+begin_src emacs-lisp
-  (setq sndb-mono-font "Iosevka-12")
-  (setq sndb-sans-font "Iosevka Aile-12")
+  (setq sndb-mono-font "Source Code Pro-10.5")
+  (setq sndb-sans-font "Source Sans Pro-12")
 
   (set-face-attribute 'default nil :font sndb-mono-font)
   (set-face-attribute 'fixed-pitch nil :font sndb-mono-font)
@@ -202,6 +203,7 @@
   (global-set-key (kbd "C-c w i") 'sndb-indent-buffer)
 
   (defun sndb-indent-buffer ()
+    "Apply `indent-region' to the whole buffer."
     (interactive)
     (indent-region (point-min) (point-max)))
 #+end_src
@@ -303,16 +305,16 @@
   (global-set-key [remap goto-line] 'consult-goto-line)
   (global-set-key [remap yank-pop] 'consult-yank-pop)
 
-  (global-set-key (kbd "M-s f") 'consult-find)
-  (global-set-key (kbd "M-s F") 'consult-locate)
+  (global-set-key (kbd "M-s d") 'consult-find)
+  (global-set-key (kbd "M-s D") 'consult-locate)
   (global-set-key (kbd "M-s l") 'consult-line)
   (global-set-key (kbd "M-s L") 'consult-line-multi)
-  (global-set-key (kbd "M-s g") 'consult-ripgrep)
+  (global-set-key (kbd "M-s r") 'consult-ripgrep)
 
   (global-set-key (kbd "M-g i") 'consult-imenu)
   (global-set-key (kbd "M-g I") 'consult-imenu-multi)
   (global-set-key (kbd "M-g e") 'consult-compile-error)
-  (global-set-key (kbd "M-g d") 'consult-flymake)
+  (global-set-key (kbd "M-g f") 'consult-flymake)
   (global-set-key (kbd "M-g o") 'consult-outline)
   (global-set-key (kbd "M-g m") 'consult-mark)
 #+end_src
@@ -360,6 +362,12 @@
                   go-mode-hook
                   rust-mode-hook))
     (add-hook hook 'eglot-ensure))
+#+end_src
+
+** Avy
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-;") 'avy-goto-char-timer)
 #+end_src
 
 * Git
