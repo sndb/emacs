@@ -107,7 +107,6 @@
 
 #+begin_src emacs-lisp
   (setq echo-keystrokes 0.25)
-
   (setq display-time-day-and-date t)
 
   (display-time-mode)
@@ -132,6 +131,8 @@
 ** Fonts
 
 #+begin_src emacs-lisp
+  (setq text-scale-mode-step 1.1)
+
   (setq sndb-mono-font "Source Code Pro-10.5")
   (setq sndb-sans-font "Source Sans Pro-12")
 
@@ -162,7 +163,6 @@
 
   (setq calendar-latitude 55
         calendar-longitude 37)
-
   (setq circadian-themes '((:sunrise . modus-operandi)
                            (:sunset  . modus-vivendi)))
 
@@ -174,8 +174,8 @@
 ** Scrolling
 
 #+begin_src emacs-lisp
-  (setq scroll-preserve-screen-position t
-        scroll-conservatively 1)
+  (setq scroll-preserve-screen-position t)
+  (setq scroll-conservatively 1)
 
   (defun sndb-scroll-third-height-up ()
     "Scroll text up a third of the window height."
@@ -195,12 +195,18 @@
 
 #+begin_src emacs-lisp
   (setq sentence-end-double-space nil)
-  (setq indent-tabs-mode nil)
 
   (global-set-key (kbd "C-c w w") 'delete-trailing-whitespace)
   (global-set-key (kbd "C-c w t") 'whitespace-mode)
   (global-set-key (kbd "C-c w f") 'fixup-whitespace)
   (global-set-key (kbd "C-c w i") 'sndb-indent-buffer)
+#+end_src
+
+** Indentation
+
+#+begin_src emacs-lisp
+  (setq indent-tabs-mode nil)
+  (setq tab-always-indent 'complete)
 
   (defun sndb-indent-buffer ()
     "Apply `indent-region' to the whole buffer."
@@ -208,13 +214,23 @@
     (indent-region (point-min) (point-max)))
 #+end_src
 
+** Quotes
+
+#+begin_src emacs-lisp
+  (defun replace-curly-quotes ()
+    "Replace the curly quotes with their ASCII variants."
+    (interactive)
+    (dolist (pair
+             '(("‘" . "'")
+               ("’" . "'")
+               ("“" . "\"")
+               ("”" . "\"")))
+      (replace-string (car pair) (cdr pair) nil (point-min) (point-max))))
+#+end_src
+
 * Org
 
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-c l") 'org-store-link)
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c c") 'org-capture)
-
   (add-hook 'org-mode-hook 'visual-line-mode)
 
   (org-babel-do-load-languages
@@ -237,6 +253,10 @@
 
   (setq org-todo-keywords '((sequence "TODO" "NEXT" "IN PROGRESS" "DONE")))
   (setq org-todo-keyword-faces '(("IN PROGRESS" . '(warning org-todo))))
+
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture)
 #+end_src
 
 * Completion
@@ -289,9 +309,9 @@
 #+begin_src emacs-lisp
   (require 'marginalia)
 
-  (global-set-key (kbd "M-A") 'marginalia-cycle)
-
   (marginalia-mode)
+
+  (global-set-key (kbd "M-A") 'marginalia-cycle)
 #+end_src
 
 ** Consult
@@ -324,11 +344,11 @@
 #+begin_src emacs-lisp
   (require 'embark)
 
+  (setq prefix-help-command #'embark-prefix-help-command)
+
   (global-set-key (kbd "C-.") 'embark-act)
   (global-set-key (kbd "M-.") 'embark-dwim)
   (global-set-key (kbd "C-h B") 'embark-bindings)
-
-  (setq prefix-help-command #'embark-prefix-help-command)
 
   (require 'embark-consult)
 
@@ -367,6 +387,8 @@
 ** Avy
 
 #+begin_src emacs-lisp
+  (setq avy-timeout-seconds 0.25)
+
   (global-set-key (kbd "C-;") 'avy-goto-char-timer)
 #+end_src
 
@@ -380,6 +402,7 @@
   (require 'diff-hl)
 
   (global-diff-hl-mode)
+
   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 #+end_src
@@ -413,5 +436,6 @@
 #+begin_src emacs-lisp
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-listing-switches "-lhvFA --group-directories-first --time-style=long-iso")
+
   (add-hook 'dired-mode-hook 'hl-line-mode)
 #+end_src
