@@ -33,7 +33,9 @@
 
           magit
           nov
+          password-store
           pdf-tools
+          pinentry
           vterm
 
           eglot
@@ -61,6 +63,7 @@
   (setq inhibit-startup-screen t)
   (setq use-short-answers t)
   (server-start)
+  (pinentry-start)
 #+end_src
 
 * Files
