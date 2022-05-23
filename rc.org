@@ -223,12 +223,13 @@
   (defun replace-curly-quotes ()
     "Replace the curly quotes with their ASCII variants."
     (interactive)
-    (dolist (pair
-             '(("‘" . "'")
-               ("’" . "'")
-               ("“" . "\"")
-               ("”" . "\"")))
-      (replace-string (car pair) (cdr pair) nil (point-min) (point-max))))
+    (save-excursion
+      (dolist (pair
+               '(("‘" . "'")
+                 ("’" . "'")
+                 ("“" . "\"")
+                 ("”" . "\"")))
+        (replace-string (car pair) (cdr pair) nil (point-min) (point-max)))))
 #+end_src
 
 * Org
