@@ -66,6 +66,13 @@
   (pinentry-start)
 #+end_src
 
+* Recursion
+
+#+begin_src emacs-lisp
+  (setq max-specpdl-size (* 10 max-specpdl-size))
+  (setq max-lisp-eval-depth (* 10 max-lisp-eval-depth))
+#+end_src
+
 * Files
 
 ** Custom
