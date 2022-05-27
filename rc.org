@@ -398,11 +398,13 @@ Whitespaces, indentation, quotes.
   (global-corfu-mode)
 
   (defun corfu-enable-always-in-minibuffer ()
+    "Enable Corfu in the minibuffer if Vertico is not active."
     (unless (bound-and-true-p vertico--input)
       (corfu-mode 1)))
   (add-hook 'minibuffer-setup-hook 'corfu-enable-always-in-minibuffer 1)
 
   (defun corfu-move-to-minibuffer ()
+    "Transfer the Corfu completion to the minibuffer."
     (interactive)
     (let ((completion-extra-properties corfu--extra)
           completion-cycle-threshold completion-cycling)
