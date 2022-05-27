@@ -201,42 +201,44 @@
   (global-set-key (kbd "C-S-p") 'sndb-scroll-third-height-down)
 #+end_src
 
-** Whitespaces
+** Format
+
+Whitespaces, indentation, quotes.
 
 #+begin_src emacs-lisp
   (setq sentence-end-double-space nil)
-
-  (global-set-key (kbd "C-c w w") 'delete-trailing-whitespace)
-  (global-set-key (kbd "C-c w t") 'whitespace-mode)
-  (global-set-key (kbd "C-c w f") 'fixup-whitespace)
-  (global-set-key (kbd "C-c w i") 'sndb-indent-buffer)
-#+end_src
-
-** Indentation
-
-#+begin_src emacs-lisp
   (setq indent-tabs-mode nil)
   (setq tab-always-indent 'complete)
 
-  (defun sndb-indent-buffer ()
-    "Apply `indent-region' to the whole buffer."
-    (interactive)
-    (indent-region (point-min) (point-max)))
-#+end_src
+  (defun sndb-format-buffer (&optional arg)
+    "Apply `indent-region' to the whole buffer.
+  If Eglot is active, format the buffer and organize imports.
+  With prefix ARG, delete trailing whitespace."
+    (interactive "P")
+    (cond
+     (arg
+      (delete-trailing-whitespace))
+     (eglot--managed-mode
+      (eglot-format)
+      (eglot-code-action-organize-imports (point-min) (point-max)))
+     (t
+      (indent-region (point-min) (point-max)))))
 
-** Quotes
-
-#+begin_src emacs-lisp
-  (defun replace-curly-quotes ()
-    "Replace the curly quotes with their ASCII variants."
+  (defun sndb-replace-untypable-characters ()
+    "Replace the characters that are inconvenient to type."
     (interactive)
     (save-excursion
       (dolist (pair
                '(("‘" . "'")
                  ("’" . "'")
                  ("“" . "\"")
-                 ("”" . "\"")))
+                 ("”" . "\"")
+                 ("—" . " - ")))
         (replace-string (car pair) (cdr pair) nil (point-min) (point-max)))))
+
+  (global-set-key (kbd "M-SPC") 'cycle-spacing)
+  (global-set-key (kbd "C-c w") 'whitespace-mode)
+  (global-set-key (kbd "C-c f") 'sndb-format-buffer)
 #+end_src
 
 * Org
