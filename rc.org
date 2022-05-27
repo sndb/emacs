@@ -21,7 +21,8 @@
 
 #+begin_src emacs-lisp
   (setq sndb-package-list
-        '(avy
+        '(;; completion
+          avy
           consult
           corfu
           embark
@@ -31,6 +32,7 @@
           vertico
           wgrep
 
+          ;; applications
           magit
           nov
           password-store
@@ -38,15 +40,19 @@
           pinentry
           vterm
 
+          ;; languages
           eglot
           go-mode
           racket-mode
           rust-mode
 
+          ;; miscellaneous
           circadian
           diff-hl
           modus-themes
-          olivetti))
+          olivetti
+          pulsar
+          ))
 
   (defun sndb-install-packages ()
     "Install all the packages from `sndb-package-list'."
@@ -64,6 +70,7 @@
   (setq use-short-answers t)
   (server-start)
   (pinentry-start)
+  (winner-mode)
 #+end_src
 
 * Recursion
@@ -143,7 +150,7 @@
 #+begin_src emacs-lisp
   (setq text-scale-mode-step 1.1)
 
-  (setq sndb-mono-font "Source Code Pro-10.5")
+  (setq sndb-mono-font "Hack-10.5")
   (setq sndb-sans-font "Source Sans Pro-12")
 
   (set-face-attribute 'default nil :font sndb-mono-font)
@@ -177,6 +184,17 @@
                            (:sunset  . modus-vivendi)))
 
   (circadian-setup)
+#+end_src
+
+** Pulsar
+
+#+begin_src emacs-lisp :tangle no
+  (require 'pulsar)
+
+  (add-to-list 'pulsar-pulse-functions 'sndb-scroll-third-height-up)
+  (add-to-list 'pulsar-pulse-functions 'sndb-scroll-third-height-down)
+
+  (pulsar-global-mode)
 #+end_src
 
 * Editing
@@ -383,6 +401,13 @@ Whitespaces, indentation, quotes.
     (unless (bound-and-true-p vertico--input)
       (corfu-mode 1)))
   (add-hook 'minibuffer-setup-hook 'corfu-enable-always-in-minibuffer 1)
+
+  (defun corfu-move-to-minibuffer ()
+    (interactive)
+    (let ((completion-extra-properties corfu--extra)
+          completion-cycle-threshold completion-cycling)
+      (apply #'consult-completion-in-region completion-in-region--data)))
+  (define-key corfu-map (kbd "M-m") 'corfu-move-to-minibuffer)
 #+end_src
 
 ** Eglot
