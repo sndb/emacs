@@ -129,15 +129,18 @@
   (setq inhibit-startup-screen t)
   (setq use-short-answers t)
   (setq echo-keystrokes 0.25)
-  (setq display-time-day-and-date t)
-
   (setq show-paren-delay 0.05)
-  (show-paren-mode)
+  (setq display-time-day-and-date t)
+  (setq display-time-24hr-format t)
+  (setq display-time-default-load-average nil)
+  (setq mode-line-compact 'long)
 
-  (display-time-mode)
+  (show-paren-mode)
+  (blink-cursor-mode 0)
+  (display-time-mode 0)
   (line-number-mode)
   (column-number-mode)
-  (size-indication-mode)
+  (size-indication-mode 0)
 
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (add-hook 'prog-mode-hook 'hl-line-mode)
