@@ -2,15 +2,15 @@
 #+author: sndb
 #+email: sndb@sndb.xyz
 
-* Intro
+* Basics
 
 #+begin_src emacs-lisp
   ;; -*- lexical-binding: t -*-
 #+end_src
 
-* Packages
+** Packages
 
-** MELPA
+*** MELPA
 
 #+begin_src emacs-lisp
   (require 'package)
@@ -18,7 +18,7 @@
                '("melpa" . "https://melpa.org/packages/"))
 #+end_src
 
-** Package List
+*** Package list
 
 #+begin_src emacs-lisp
   (setq sndb-package-list
@@ -64,25 +64,13 @@
         (package-install package))))
 #+end_src
 
-* Basics
+** Start server
 
 #+begin_src emacs-lisp
-  (setq inhibit-startup-screen t)
-  (setq use-short-answers t)
   (server-start)
-  (winner-mode)
 #+end_src
 
-* Recursion
-
-#+begin_src emacs-lisp
-  (setq max-specpdl-size (* 10 max-specpdl-size))
-  (setq max-lisp-eval-depth (* 10 max-lisp-eval-depth))
-#+end_src
-
-* Files
-
-** Custom
+** Custom file
 
 #+begin_src emacs-lisp
   (setq custom-file (locate-user-emacs-file "custom.el"))
@@ -90,7 +78,16 @@
     (load custom-file))
 #+end_src
 
-** Temporary
+** Recursion limits
+
+#+begin_src emacs-lisp
+  (setq max-specpdl-size (* 10 max-specpdl-size))
+  (setq max-lisp-eval-depth (* 10 max-lisp-eval-depth))
+#+end_src
+
+* History
+
+** Disable backups
 
 #+begin_src emacs-lisp
   (setq create-lockfiles nil
@@ -98,31 +95,39 @@
         auto-save-default nil)
 #+end_src
 
-** Recently
+** Recently opened files
 
 #+begin_src emacs-lisp
   (setq recentf-max-saved-items 256)
   (recentf-mode)
 #+end_src
 
-** Save Place
+** Save last positions
 
 #+begin_src emacs-lisp
   (setq save-place-limit 256)
   (save-place-mode)
 #+end_src
 
-** Auto Revert
+** Window configuration history
+
+#+begin_src emacs-lisp
+  (winner-mode)
+#+end_src
+
+** Revert on file change
 
 #+begin_src emacs-lisp
   (global-auto-revert-mode)
 #+end_src
 
-* Visuals
+* Interface
 
 ** Indicators
 
 #+begin_src emacs-lisp
+  (setq inhibit-startup-screen t)
+  (setq use-short-answers t)
   (setq echo-keystrokes 0.25)
   (setq display-time-day-and-date t)
 
@@ -138,20 +143,16 @@
   (add-hook 'prog-mode-hook 'hl-line-mode)
 #+end_src
 
-** Frame
+** Windows and frame
 
 #+begin_src emacs-lisp
   (setq frame-resize-pixelwise t)
+  (setq window-resize-pixelwise t)
+  (setq window-combination-resize t)
 
   (menu-bar-mode 0)
   (scroll-bar-mode 0)
   (tool-bar-mode 0)
-#+end_src
-
-** Windows
-
-#+begin_src emacs-lisp
-  (setq window-combination-resize t)
 #+end_src
 
 ** Fonts
@@ -214,6 +215,12 @@
 
 * Editing
 
+** Automatic parens pairing
+
+#+begin_src emacs-lisp
+  (electric-pair-mode)
+#+end_src
+
 ** Scrolling
 
 #+begin_src emacs-lisp
@@ -234,17 +241,13 @@
   (global-set-key (kbd "C-S-p") 'sndb-scroll-third-height-down)
 #+end_src
 
-** Format
-
-Whitespaces, indentation, quotes, parens.
+** Whitespaces and indentation
 
 #+begin_src emacs-lisp
   (setq sentence-end-double-space nil)
   (setq tab-always-indent 'complete)
   (setq tab-first-completion 'word-or-paren-or-punct)
   (setq-default indent-tabs-mode nil)
-
-  (electric-pair-mode)
 
   (defun sndb-format-buffer ()
     "Apply `indent-region' to the whole buffer.
@@ -257,6 +260,15 @@ Whitespaces, indentation, quotes, parens.
       (indent-region (point-min) (point-max)))
     (delete-trailing-whitespace))
 
+  (global-set-key (kbd "M-SPC") 'cycle-spacing)
+  (global-set-key (kbd "C-c w") 'whitespace-mode)
+  (global-set-key (kbd "C-c W") 'delete-trailing-whitespace)
+  (global-set-key (kbd "C-c f") 'sndb-format-buffer)
+#+end_src
+
+** Curly quotes
+
+#+begin_src emacs-lisp
   (defun sndb-replace-untypable-characters ()
     "Replace the characters that are inconvenient to type."
     (interactive)
@@ -268,47 +280,11 @@ Whitespaces, indentation, quotes, parens.
                  ("”" . "\"")
                  ("—" . " - ")))
         (replace-string (car pair) (cdr pair) nil (point-min) (point-max)))))
-
-  (global-set-key (kbd "M-SPC") 'cycle-spacing)
-  (global-set-key (kbd "C-c w") 'whitespace-mode)
-  (global-set-key (kbd "C-c W") 'delete-trailing-whitespace)
-  (global-set-key (kbd "C-c f") 'sndb-format-buffer)
-#+end_src
-
-* Org
-
-#+begin_src emacs-lisp
-  (add-hook 'org-mode-hook 'visual-line-mode)
-
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((python . t)
-     (shell . t)))
-
-  (setq org-default-notes-file (concat org-directory "/notes.org"))
-  (setq org-startup-indented t)
-  (setq org-confirm-babel-evaluate nil)
-  (setq org-src-window-setup 'current-window)
-  (setq org-capture-templates
-        '(("t" "Task" entry (file+headline "" "Tasks")
-           "* TODO %?\n%u\n%a\n%i"
-           :empty-lines 1)
-          ("j" "Journal" entry (file+olp+datetree "journal.org")
-           "* %?"
-           :empty-lines 1
-           :jump-to-captured t)))
-
-  (setq org-todo-keywords '((sequence "TODO" "NEXT" "IN PROGRESS" "DONE")))
-  (setq org-todo-keyword-faces '(("IN PROGRESS" . '(warning org-todo))))
-
-  (global-set-key (kbd "C-c l") 'org-store-link)
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c c") 'org-capture)
 #+end_src
 
 * Completion
 
-** Ignore Case
+** Ignore case
 
 #+begin_src emacs-lisp
   (setq completion-ignore-case t)
@@ -316,7 +292,7 @@ Whitespaces, indentation, quotes, parens.
   (setq read-file-name-completion-ignore-case t)
 #+end_src
 
-** Minibuffer History
+** Minibuffer history
 
 #+begin_src emacs-lisp
   (setq history-length 1024)
@@ -463,7 +439,40 @@ Whitespaces, indentation, quotes, parens.
   (global-set-key (kbd "C-;") 'avy-goto-char-timer)
 #+end_src
 
-* Git
+* Applications
+
+** Org mode
+
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'visual-line-mode)
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (shell . t)))
+
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (setq org-startup-indented t)
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-src-window-setup 'current-window)
+  (setq org-capture-templates
+        '(("t" "Task" entry (file+headline "" "Tasks")
+           "* TODO %?\n%u\n%a\n%i"
+           :empty-lines 1)
+          ("j" "Journal" entry (file+olp+datetree "journal.org")
+           "* %?"
+           :empty-lines 1
+           :jump-to-captured t)))
+
+  (setq org-todo-keywords '((sequence "TODO" "NEXT" "IN PROGRESS" "DONE")))
+  (setq org-todo-keyword-faces '(("IN PROGRESS" . '(warning org-todo))))
+
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture)
+#+end_src
+
+** Git interface
 
 #+begin_src emacs-lisp
   (require 'magit)
@@ -478,13 +487,13 @@ Whitespaces, indentation, quotes, parens.
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 #+end_src
 
-* Terminal
+** Terminal emulator
 
 #+begin_src emacs-lisp
   (require 'vterm)
 #+end_src
 
-* PDF
+** PDF reader
 
 #+begin_src emacs-lisp
   (require 'pdf-tools)
@@ -492,7 +501,7 @@ Whitespaces, indentation, quotes, parens.
   (pdf-tools-install)
 #+end_src
 
-* Epub
+** EPUB reader
 
 #+begin_src emacs-lisp
   (require 'nov)
@@ -502,7 +511,7 @@ Whitespaces, indentation, quotes, parens.
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 #+end_src
 
-* Password Store
+** Password manager
 
 #+begin_src emacs-lisp
   (require 'pinentry)
@@ -514,7 +523,7 @@ Whitespaces, indentation, quotes, parens.
   (global-set-key (kbd "C-c p") 'password-store-copy)
 #+end_src
 
-* Dired
+** Directory editor
 
 #+begin_src emacs-lisp
   (setq dired-kill-when-opening-new-dired-buffer t)
