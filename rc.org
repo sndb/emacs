@@ -1,5 +1,6 @@
-#+title: Emacs Configuration
+#+title: GNU Emacs Configuration
 #+author: sndb
+#+email: sndb@sndb.xyz
 
 * Intro
 
@@ -32,6 +33,12 @@
           vertico
           wgrep
 
+          ;; languages
+          eglot
+          go-mode
+          racket-mode
+          rust-mode
+
           ;; applications
           magit
           nov
@@ -39,12 +46,6 @@
           pdf-tools
           pinentry
           vterm
-
-          ;; languages
-          eglot
-          go-mode
-          racket-mode
-          rust-mode
 
           ;; miscellaneous
           circadian
@@ -69,7 +70,6 @@
   (setq inhibit-startup-screen t)
   (setq use-short-answers t)
   (server-start)
-  (pinentry-start)
   (winner-mode)
 #+end_src
 
@@ -126,6 +126,9 @@
   (setq echo-keystrokes 0.25)
   (setq display-time-day-and-date t)
 
+  (setq show-paren-delay 0.05)
+  (show-paren-mode)
+
   (display-time-mode)
   (line-number-mode)
   (column-number-mode)
@@ -143,6 +146,12 @@
   (menu-bar-mode 0)
   (scroll-bar-mode 0)
   (tool-bar-mode 0)
+#+end_src
+
+** Windows
+
+#+begin_src emacs-lisp
+  (setq window-combination-resize t)
 #+end_src
 
 ** Fonts
@@ -197,6 +206,12 @@
   (pulsar-global-mode)
 #+end_src
 
+** Olivetti
+
+#+begin_src emacs-lisp
+  (require 'olivetti)
+#+end_src
+
 * Editing
 
 ** Scrolling
@@ -221,26 +236,26 @@
 
 ** Format
 
-Whitespaces, indentation, quotes.
+Whitespaces, indentation, quotes, parens.
 
 #+begin_src emacs-lisp
   (setq sentence-end-double-space nil)
-  (setq indent-tabs-mode nil)
   (setq tab-always-indent 'complete)
+  (setq tab-first-completion 'word-or-paren-or-punct)
+  (setq-default indent-tabs-mode nil)
 
-  (defun sndb-format-buffer (&optional arg)
+  (electric-pair-mode)
+
+  (defun sndb-format-buffer ()
     "Apply `indent-region' to the whole buffer.
-  If Eglot is active, format the buffer and organize imports.
-  With prefix ARG, delete trailing whitespace."
-    (interactive "P")
-    (cond
-     (arg
-      (delete-trailing-whitespace))
-     (eglot--managed-mode
-      (eglot-format)
-      (eglot-code-action-organize-imports (point-min) (point-max)))
-     (t
-      (indent-region (point-min) (point-max)))))
+  If Eglot is active, format the buffer and organize imports."
+    (interactive)
+    (if eglot--managed-mode
+        (progn
+          (eglot-format)
+          (eglot-code-action-organize-imports (point-min) (point-max)))
+      (indent-region (point-min) (point-max)))
+    (delete-trailing-whitespace))
 
   (defun sndb-replace-untypable-characters ()
     "Replace the characters that are inconvenient to type."
@@ -256,6 +271,7 @@ Whitespaces, indentation, quotes.
 
   (global-set-key (kbd "M-SPC") 'cycle-spacing)
   (global-set-key (kbd "C-c w") 'whitespace-mode)
+  (global-set-key (kbd "C-c W") 'delete-trailing-whitespace)
   (global-set-key (kbd "C-c f") 'sndb-format-buffer)
 #+end_src
 
@@ -291,6 +307,14 @@ Whitespaces, indentation, quotes.
 #+end_src
 
 * Completion
+
+** Ignore Case
+
+#+begin_src emacs-lisp
+  (setq completion-ignore-case t)
+  (setq read-buffer-completion-ignore-case t)
+  (setq read-file-name-completion-ignore-case t)
+#+end_src
 
 ** Minibuffer History
 
@@ -416,17 +440,24 @@ Whitespaces, indentation, quotes.
 
 #+begin_src emacs-lisp
   (require 'eglot)
+  (require 'go-mode)
+  (require 'racket-mode)
+  (require 'rust-mode)
 
   (dolist (hook '(python-mode-hook
                   racket-mode-hook
                   go-mode-hook
                   rust-mode-hook))
     (add-hook hook 'eglot-ensure))
+
+  (define-key eglot-mode-map (kbd "C-c r") 'eglot-rename)
 #+end_src
 
 ** Avy
 
 #+begin_src emacs-lisp
+  (require 'avy)
+
   (setq avy-timeout-seconds 0.25)
 
   (global-set-key (kbd "C-;") 'avy-goto-char-timer)
@@ -469,6 +500,18 @@ Whitespaces, indentation, quotes.
   (setq nov-text-width fill-column)
 
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+#+end_src
+
+* Password Store
+
+#+begin_src emacs-lisp
+  (require 'pinentry)
+
+  (pinentry-start)
+
+  (require 'password-store)
+
+  (global-set-key (kbd "C-c p") 'password-store-copy)
 #+end_src
 
 * Dired
