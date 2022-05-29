@@ -285,6 +285,13 @@
         (replace-string (car pair) (cdr pair) nil (point-min) (point-max)))))
 #+end_src
 
+** C style
+
+#+begin_src emacs-lisp
+  (setq c-default-style "linux")
+  (add-hook 'c-mode-common-hook 'indent-tabs-mode)
+#+end_src
+
 * Completion
 
 ** Ignore case
