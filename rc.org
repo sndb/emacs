@@ -152,6 +152,9 @@
   (setq frame-resize-pixelwise t)
   (setq window-resize-pixelwise t)
   (setq window-combination-resize t)
+  (setq frame-title-format
+        '(buffer-file-name "%b - %f"
+                           ("%b - " default-directory)))
 
   (menu-bar-mode 0)
   (scroll-bar-mode 0)
