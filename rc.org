@@ -270,6 +270,7 @@
   (global-set-key (kbd "C-c w") 'whitespace-mode)
   (global-set-key (kbd "C-c W") 'delete-trailing-whitespace)
   (global-set-key (kbd "C-c f") 'sndb-format-buffer)
+  (global-set-key (kbd "C-c t") 'indent-tabs-mode)
 #+end_src
 
 ** Curly quotes
