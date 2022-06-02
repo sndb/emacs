@@ -161,6 +161,13 @@
   (tool-bar-mode 0)
 #+end_src
 
+** Tabs
+
+#+begin_src emacs-lisp
+  (setq tab-bar-close-button-show nil)
+  (setq tab-bar-new-button-show nil)
+#+end_src
+
 ** Fonts
 
 #+begin_src emacs-lisp
