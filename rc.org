@@ -519,6 +519,8 @@
 
 #+begin_src emacs-lisp
   (require 'vterm)
+
+  (global-set-key (kbd "C-c v") 'vterm-other-window)
 #+end_src
 
 ** PDF reader
