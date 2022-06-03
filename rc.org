@@ -44,7 +44,6 @@
           nov
           password-store
           pdf-tools
-          pinentry
           vterm
 
           ;; miscellaneous
@@ -543,9 +542,9 @@
 ** Password manager
 
 #+begin_src emacs-lisp
-  (require 'pinentry)
+  (require 'epg)
 
-  (pinentry-start)
+  (setq epg-pinentry-mode 'loopback)
 
   (require 'password-store)
 
