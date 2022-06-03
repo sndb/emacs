@@ -451,7 +451,8 @@
   (dolist (hook '(python-mode-hook
                   racket-mode-hook
                   go-mode-hook
-                  rust-mode-hook))
+                  rust-mode-hook
+                  sh-mode-hook))
     (add-hook hook 'eglot-ensure))
 
   (define-key eglot-mode-map (kbd "C-c r") 'eglot-rename)
