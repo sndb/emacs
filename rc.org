@@ -50,8 +50,6 @@
           circadian
           diff-hl
           modus-themes
-          olivetti
-          pulsar
           ))
 
   (defun sndb-install-packages ()
@@ -112,12 +110,6 @@
 
 #+begin_src emacs-lisp
   (winner-mode)
-#+end_src
-
-** Revert on file change
-
-#+begin_src emacs-lisp
-  (global-auto-revert-mode)
 #+end_src
 
 * Interface
@@ -208,23 +200,6 @@
   (circadian-setup)
 #+end_src
 
-** Pulsar
-
-#+begin_src emacs-lisp :tangle no
-  (require 'pulsar)
-
-  (add-to-list 'pulsar-pulse-functions 'sndb-scroll-third-height-up)
-  (add-to-list 'pulsar-pulse-functions 'sndb-scroll-third-height-down)
-
-  (pulsar-global-mode)
-#+end_src
-
-** Olivetti
-
-#+begin_src emacs-lisp
-  (require 'olivetti)
-#+end_src
-
 * Editing
 
 ** Automatic parens pairing
@@ -239,18 +214,20 @@
   (setq scroll-preserve-screen-position t)
   (setq scroll-conservatively 1)
 
-  (defun sndb-scroll-third-height-up ()
-    "Scroll text up a third of the window height."
-    (interactive)
-    (scroll-up (/ (window-height) 3)))
+  (defun sndb-half-screen () (/ (window-body-height) 2))
 
-  (defun sndb-scroll-third-height-down ()
-    "Scroll text down a third of the window height."
+  (defun sndb-scroll-half-screen-up ()
+    "Scroll half screen up."
     (interactive)
-    (scroll-down (/ (window-height) 3)))
+    (scroll-up (sndb-half-screen)))
 
-  (global-set-key (kbd "C-S-n") 'sndb-scroll-third-height-up)
-  (global-set-key (kbd "C-S-p") 'sndb-scroll-third-height-down)
+  (defun sndb-scroll-half-screen-down ()
+    "Scroll half screen down."
+    (interactive)
+    (scroll-down (sndb-half-screen)))
+
+  (global-set-key (kbd "C-S-n") 'sndb-scroll-half-screen-up)
+  (global-set-key (kbd "C-S-p") 'sndb-scroll-half-screen-down)
 #+end_src
 
 ** Whitespaces and indentation
@@ -300,6 +277,24 @@
 #+begin_src emacs-lisp
   (setq c-default-style "linux")
   (add-hook 'c-mode-common-hook 'indent-tabs-mode)
+#+end_src
+
+** Revert on file change
+
+#+begin_src emacs-lisp
+  (global-auto-revert-mode)
+#+end_src
+
+** Follow symlinks
+
+#+begin_src emacs-lisp
+  (setq vc-follow-symlinks t)
+#+end_src
+
+** Require final newline
+
+#+begin_src emacs-lisp
+  (setq-default require-final-newline t)
 #+end_src
 
 * Completion
