@@ -523,6 +523,8 @@
 #+begin_src emacs-lisp
   (require 'pdf-tools)
 
+  (setq pdf-info-restart-process-p t)
+
   (pdf-tools-install)
 #+end_src
 
