@@ -375,6 +375,8 @@
   (global-set-key [remap switch-to-buffer] 'consult-buffer)
   (global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
   (global-set-key [remap switch-to-buffer-other-frame] 'consult-buffer-other-frame)
+  (global-set-key [remap project-switch-to-buffer] 'consult-project-buffer)
+  (global-set-key [remap bookmark-jump] 'consult-bookmark)
   (global-set-key [remap goto-line] 'consult-goto-line)
   (global-set-key [remap yank-pop] 'consult-yank-pop)
 
@@ -382,6 +384,8 @@
   (global-set-key (kbd "M-s D") 'consult-locate)
   (global-set-key (kbd "M-s l") 'consult-line)
   (global-set-key (kbd "M-s L") 'consult-line-multi)
+  (global-set-key (kbd "M-s g") 'consult-grep)
+  (global-set-key (kbd "M-s G") 'consult-git-grep)
   (global-set-key (kbd "M-s r") 'consult-ripgrep)
 
   (global-set-key (kbd "M-g i") 'consult-imenu)
