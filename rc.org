@@ -511,6 +511,17 @@
   (setq org-todo-keywords '((sequence "TODO" "NEXT" "IN PROGRESS" "DONE")))
   (setq org-todo-keyword-faces '(("IN PROGRESS" . '(warning org-todo))))
 
+  (defun sndb-sort-headings ()
+    "Sorts the contents of all headings on the first level."
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (let ((p (point)))
+        (while (not (= p
+                       (progn (org-forward-heading-same-level 1)
+                              (setq p (point)))))
+          (org-sort-entries nil ?a)))))
+
   (global-set-key (kbd "C-c l") 'org-store-link)
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
