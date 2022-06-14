@@ -389,6 +389,8 @@
 #+begin_src emacs-lisp
   (require 'consult)
 
+  (setq consult-preview-key '(:debounce 0.5 any))
+
   (global-set-key [remap switch-to-buffer] 'consult-buffer)
   (global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
   (global-set-key [remap switch-to-buffer-other-frame] 'consult-buffer-other-frame)
