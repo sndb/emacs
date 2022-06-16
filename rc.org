@@ -316,6 +316,17 @@
 
 * Completion
 
+** Abbrevs
+
+#+begin_src emacs-lisp
+  (setq abbrev-file-name (locate-user-emacs-file "abbrevs"))
+  (setq abbrev-suggest t)
+  (setq dabbrev-case-fold-search nil)
+
+  (dolist (hook '(text-mode-hook prog-mode-hook))
+    (add-hook hook 'abbrev-mode))
+#+end_src
+
 ** Ignore case
 
 #+begin_src emacs-lisp
@@ -391,6 +402,7 @@
 
   (setq consult-preview-key '(:debounce 0.5 any))
 
+  ;; remap
   (global-set-key [remap switch-to-buffer] 'consult-buffer)
   (global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
   (global-set-key [remap switch-to-buffer-other-frame] 'consult-buffer-other-frame)
@@ -399,6 +411,7 @@
   (global-set-key [remap goto-line] 'consult-goto-line)
   (global-set-key [remap yank-pop] 'consult-yank-pop)
 
+  ;; search-map
   (global-set-key (kbd "M-s d") 'consult-find)
   (global-set-key (kbd "M-s D") 'consult-locate)
   (global-set-key (kbd "M-s l") 'consult-line)
@@ -407,12 +420,18 @@
   (global-set-key (kbd "M-s G") 'consult-git-grep)
   (global-set-key (kbd "M-s r") 'consult-ripgrep)
 
+  ;; goto-map
   (global-set-key (kbd "M-g i") 'consult-imenu)
   (global-set-key (kbd "M-g I") 'consult-imenu-multi)
   (global-set-key (kbd "M-g e") 'consult-compile-error)
   (global-set-key (kbd "M-g f") 'consult-flymake)
   (global-set-key (kbd "M-g o") 'consult-outline)
   (global-set-key (kbd "M-g m") 'consult-mark)
+
+  ;; register
+  (global-set-key (kbd "C-M-#") 'consult-register)
+  (global-set-key (kbd "M-#") 'consult-register-load)
+  (global-set-key (kbd "M-'") 'consult-register-store)
 #+end_src
 
 ** Embark
