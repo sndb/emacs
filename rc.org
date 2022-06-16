@@ -133,8 +133,8 @@
   (column-number-mode)
   (size-indication-mode 0)
 
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-  (add-hook 'prog-mode-hook 'hl-line-mode)
+  (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+  (add-hook 'prog-mode-hook #'hl-line-mode)
 #+end_src
 
 ** Windows and frame
@@ -243,8 +243,8 @@
     (interactive)
     (scroll-down (sndb-half-screen)))
 
-  (global-set-key (kbd "C-S-n") 'sndb-scroll-half-screen-up)
-  (global-set-key (kbd "C-S-p") 'sndb-scroll-half-screen-down)
+  (global-set-key (kbd "C-S-n") #'sndb-scroll-half-screen-up)
+  (global-set-key (kbd "C-S-p") #'sndb-scroll-half-screen-down)
 #+end_src
 
 ** Whitespaces and indentation
@@ -266,11 +266,11 @@
       (indent-region (point-min) (point-max)))
     (delete-trailing-whitespace))
 
-  (global-set-key (kbd "M-SPC") 'cycle-spacing)
-  (global-set-key (kbd "C-c w") 'whitespace-mode)
-  (global-set-key (kbd "C-c W") 'delete-trailing-whitespace)
-  (global-set-key (kbd "C-c f") 'sndb-format-buffer)
-  (global-set-key (kbd "C-c t") 'indent-tabs-mode)
+  (global-set-key (kbd "M-SPC") #'cycle-spacing)
+  (global-set-key (kbd "C-c w") #'whitespace-mode)
+  (global-set-key (kbd "C-c W") #'delete-trailing-whitespace)
+  (global-set-key (kbd "C-c f") #'sndb-format-buffer)
+  (global-set-key (kbd "C-c t") #'indent-tabs-mode)
 #+end_src
 
 ** Curly quotes
@@ -293,7 +293,7 @@
 
 #+begin_src emacs-lisp
   (setq c-default-style "linux")
-  (add-hook 'c-mode-common-hook 'indent-tabs-mode)
+  (add-hook 'c-mode-common-hook #'indent-tabs-mode)
 #+end_src
 
 ** Revert on file change
@@ -324,7 +324,7 @@
   (setq dabbrev-case-fold-search nil)
 
   (dolist (hook '(text-mode-hook prog-mode-hook))
-    (add-hook hook 'abbrev-mode))
+    (add-hook hook #'abbrev-mode))
 #+end_src
 
 ** Ignore case
@@ -392,7 +392,7 @@
 
   (marginalia-mode)
 
-  (global-set-key (kbd "M-A") 'marginalia-cycle)
+  (global-set-key (kbd "M-A") #'marginalia-cycle)
 #+end_src
 
 ** Consult
@@ -405,35 +405,35 @@
         register-preview-function #'consult-register-format)
 
   ;; remap
-  (global-set-key [remap switch-to-buffer] 'consult-buffer)
-  (global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
-  (global-set-key [remap switch-to-buffer-other-frame] 'consult-buffer-other-frame)
-  (global-set-key [remap project-switch-to-buffer] 'consult-project-buffer)
-  (global-set-key [remap bookmark-jump] 'consult-bookmark)
-  (global-set-key [remap goto-line] 'consult-goto-line)
-  (global-set-key [remap yank-pop] 'consult-yank-pop)
+  (global-set-key [remap switch-to-buffer] #'consult-buffer)
+  (global-set-key [remap switch-to-buffer-other-window] #'consult-buffer-other-window)
+  (global-set-key [remap switch-to-buffer-other-frame] #'consult-buffer-other-frame)
+  (global-set-key [remap project-switch-to-buffer] #'consult-project-buffer)
+  (global-set-key [remap bookmark-jump] #'consult-bookmark)
+  (global-set-key [remap goto-line] #'consult-goto-line)
+  (global-set-key [remap yank-pop] #'consult-yank-pop)
 
   ;; search-map
-  (global-set-key (kbd "M-s d") 'consult-find)
-  (global-set-key (kbd "M-s D") 'consult-locate)
-  (global-set-key (kbd "M-s l") 'consult-line)
-  (global-set-key (kbd "M-s L") 'consult-line-multi)
-  (global-set-key (kbd "M-s g") 'consult-grep)
-  (global-set-key (kbd "M-s G") 'consult-git-grep)
-  (global-set-key (kbd "M-s r") 'consult-ripgrep)
+  (global-set-key (kbd "M-s d") #'consult-find)
+  (global-set-key (kbd "M-s D") #'consult-locate)
+  (global-set-key (kbd "M-s l") #'consult-line)
+  (global-set-key (kbd "M-s L") #'consult-line-multi)
+  (global-set-key (kbd "M-s g") #'consult-grep)
+  (global-set-key (kbd "M-s G") #'consult-git-grep)
+  (global-set-key (kbd "M-s r") #'consult-ripgrep)
 
   ;; goto-map
-  (global-set-key (kbd "M-g i") 'consult-imenu)
-  (global-set-key (kbd "M-g I") 'consult-imenu-multi)
-  (global-set-key (kbd "M-g e") 'consult-compile-error)
-  (global-set-key (kbd "M-g f") 'consult-flymake)
-  (global-set-key (kbd "M-g o") 'consult-outline)
-  (global-set-key (kbd "M-g m") 'consult-mark)
+  (global-set-key (kbd "M-g i") #'consult-imenu)
+  (global-set-key (kbd "M-g I") #'consult-imenu-multi)
+  (global-set-key (kbd "M-g e") #'consult-compile-error)
+  (global-set-key (kbd "M-g f") #'consult-flymake)
+  (global-set-key (kbd "M-g o") #'consult-outline)
+  (global-set-key (kbd "M-g m") #'consult-mark)
 
   ;; register
-  (global-set-key (kbd "C-M-#") 'consult-register)
-  (global-set-key (kbd "M-#") 'consult-register-load)
-  (global-set-key (kbd "M-'") 'consult-register-store)
+  (global-set-key (kbd "C-M-#") #'consult-register)
+  (global-set-key (kbd "M-#") #'consult-register-load)
+  (global-set-key (kbd "M-'") #'consult-register-store)
 #+end_src
 
 ** Embark
@@ -443,13 +443,13 @@
 
   (setq prefix-help-command #'embark-prefix-help-command)
 
-  (global-set-key (kbd "C-.") 'embark-act)
-  (global-set-key (kbd "M-.") 'embark-dwim)
-  (global-set-key (kbd "C-h B") 'embark-bindings)
+  (global-set-key (kbd "C-.") #'embark-act)
+  (global-set-key (kbd "M-.") #'embark-dwim)
+  (global-set-key (kbd "C-h B") #'embark-bindings)
 
   (require 'embark-consult)
 
-  (add-hook 'embark-collect-mode-hook 'consult-preview-at-point-mode)
+  (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)
 
   (require 'wgrep)
 #+end_src
@@ -466,8 +466,8 @@
   (defun corfu-enable-always-in-minibuffer ()
     "Enable Corfu in the minibuffer if Vertico is not active."
     (unless (bound-and-true-p vertico--input)
-      (corfu-mode 1)))
-  (add-hook 'minibuffer-setup-hook 'corfu-enable-always-in-minibuffer 1)
+      (corfu-mode)))
+  (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
 
   (defun corfu-move-to-minibuffer ()
     "Transfer the Corfu completion to the minibuffer."
@@ -475,7 +475,7 @@
     (let ((completion-extra-properties corfu--extra)
           completion-cycle-threshold completion-cycling)
       (apply #'consult-completion-in-region completion-in-region--data)))
-  (define-key corfu-map (kbd "M-m") 'corfu-move-to-minibuffer)
+  (define-key corfu-map (kbd "M-m") #'corfu-move-to-minibuffer)
 #+end_src
 
 ** Eglot
@@ -491,9 +491,9 @@
                   go-mode-hook
                   rust-mode-hook
                   sh-mode-hook))
-    (add-hook hook 'eglot-ensure))
+    (add-hook hook #'eglot-ensure))
 
-  (define-key eglot-mode-map (kbd "C-c r") 'eglot-rename)
+  (define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
 #+end_src
 
 ** Avy
@@ -503,7 +503,7 @@
 
   (setq avy-timeout-seconds 0.25)
 
-  (global-set-key (kbd "C-;") 'avy-goto-char-timer)
+  (global-set-key (kbd "C-;") #'avy-goto-char-timer)
 #+end_src
 
 * Applications
@@ -511,7 +511,7 @@
 ** Org mode
 
 #+begin_src emacs-lisp
-  (add-hook 'org-mode-hook 'visual-line-mode)
+  (add-hook 'org-mode-hook #'visual-line-mode)
 
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -545,9 +545,9 @@
                               (setq p (point)))))
           (org-sort-entries nil ?a)))))
 
-  (global-set-key (kbd "C-c l") 'org-store-link)
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c c") 'org-capture)
+  (global-set-key (kbd "C-c l") #'org-store-link)
+  (global-set-key (kbd "C-c a") #'org-agenda)
+  (global-set-key (kbd "C-c c") #'org-capture)
 #+end_src
 
 ** Git interface
@@ -561,8 +561,8 @@
 
   (global-diff-hl-mode)
 
-  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
+  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
 #+end_src
 
 ** Terminal emulator
@@ -570,7 +570,7 @@
 #+begin_src emacs-lisp
   (require 'vterm)
 
-  (global-set-key (kbd "C-c v") 'vterm-other-window)
+  (global-set-key (kbd "C-c v") #'vterm-other-window)
 #+end_src
 
 ** PDF reader
@@ -602,7 +602,7 @@
 
   (require 'password-store)
 
-  (global-set-key (kbd "C-c p") 'password-store-copy)
+  (global-set-key (kbd "C-c p") #'password-store-copy)
 #+end_src
 
 ** Directory editor
@@ -611,5 +611,5 @@
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-listing-switches "-lhvFA --group-directories-first --time-style=long-iso")
 
-  (add-hook 'dired-mode-hook 'hl-line-mode)
+  (add-hook 'dired-mode-hook #'hl-line-mode)
 #+end_src
