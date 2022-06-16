@@ -401,6 +401,8 @@
   (require 'consult)
 
   (setq consult-preview-key '(:debounce 0.5 any))
+  (setq register-preview-delay 0.5
+        register-preview-function #'consult-register-format)
 
   ;; remap
   (global-set-key [remap switch-to-buffer] 'consult-buffer)
