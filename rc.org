@@ -49,8 +49,7 @@
           ;; miscellaneous
           circadian
           diff-hl
-          modus-themes
-          ))
+          modus-themes))
 
   (defun sndb-install-packages ()
     "Install all the packages from `sndb-package-list'."
@@ -96,6 +95,22 @@
 
 #+begin_src emacs-lisp
   (setq recentf-max-saved-items 256)
+  (setq recentf-exclude
+        '(;; tramp
+          "^/ssh:"
+          "^/sudo:"
+
+          ;; images
+          "\\.jpe?g$"
+          "\\.png$"
+          "\\.gif$"
+          "\\.webp$"
+
+          ;; archives
+          "\\.zip$"
+          "\\.gz$"
+          "\\.xz$"
+          "\\.zst$"))
   (recentf-mode)
 #+end_src
 
@@ -531,8 +546,8 @@
            :empty-lines 1
            :jump-to-captured t)))
 
-  (setq org-todo-keywords '((sequence "TODO" "NEXT" "IN PROGRESS" "DONE")))
-  (setq org-todo-keyword-faces '(("IN PROGRESS" . '(warning org-todo))))
+  (setq org-todo-keywords '((sequence "TODO" "NOW" "DONE")))
+  (setq org-todo-keyword-faces '(("NOW" . '(warning org-todo))))
 
   (defun sndb-sort-headings ()
     "Sorts the contents of all headings on the first level."
