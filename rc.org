@@ -158,9 +158,10 @@
   (setq frame-resize-pixelwise t)
   (setq window-resize-pixelwise t)
   (setq window-combination-resize t)
+  ;; if buffer-file-name is non-nil, use buffer name and file name as a
+  ;; frame title; otherwise, use buffer name and default-directory
   (setq frame-title-format
-        '(buffer-file-name "%b - %f"
-                           ("%b - " default-directory)))
+        '(buffer-file-name "%b - %f" ("%b - " default-directory)))
 
   (menu-bar-mode 0)
   (scroll-bar-mode 0)
@@ -185,9 +186,8 @@
           "Hack-10.5"
           "Iosevka-12"
           "JetBrains Mono-10.5"))
-
-  (setq sndb-mono-font (car sndb-favorite-mono-fonts)
-        sndb-sans-font "Source Sans Pro-12")
+  (setq sndb-mono-font (car sndb-favorite-mono-fonts))
+  (setq sndb-sans-font "Source Sans Pro-12")
 
   (set-face-attribute 'default nil :font sndb-mono-font)
   (set-face-attribute 'fixed-pitch nil :font sndb-mono-font)
@@ -201,14 +201,14 @@
             (append (cdr sndb-favorite-mono-fonts)
                     (list next)))
       (set-face-attribute 'default nil :font next)
-      (set-face-attribute 'fixed-pitch nil :font next)))
+      (set-face-attribute 'fixed-pitch nil :font next)
+      (message "Font: %s" next)))
 #+end_src
 
 ** Theme
 
 #+begin_src emacs-lisp
   (require 'modus-themes)
-
   (setq modus-themes-bold-constructs t
         modus-themes-italic-constructs t
         modus-themes-syntax '(yellow-comments green-strings)
@@ -219,16 +219,12 @@
         modus-themes-region '(accented bg-only)
         modus-themes-org-blocks 'gray-background
         modus-themes-headings '((t . (background))))
-
   (modus-themes-load-themes)
 
   (require 'circadian)
-
-  (setq calendar-latitude 55
-        calendar-longitude 37)
-  (setq circadian-themes '((:sunrise . modus-operandi)
-                           (:sunset  . modus-vivendi)))
-
+  (setq calendar-latitude 55)
+  (setq calendar-longitude 37)
+  (setq circadian-themes '((:sunrise . modus-operandi) (:sunset  . modus-vivendi)))
   (circadian-setup)
 #+end_src
 
@@ -246,7 +242,9 @@
   (setq scroll-preserve-screen-position t)
   (setq scroll-conservatively 1)
 
-  (defun sndb-half-screen () (/ (window-body-height) 2))
+  (defun sndb-half-screen ()
+    "Return the half of the selected window's height."
+    (/ (window-body-height) 2))
 
   (defun sndb-scroll-half-screen-up ()
     "Scroll half screen up."
@@ -368,10 +366,8 @@
 
 #+begin_src emacs-lisp
   (require 'vertico)
-
   (setq vertico-cycle t)
   (setq vertico-count 20)
-
   (vertico-mode)
 #+end_src
 
@@ -381,10 +377,8 @@
   (require 'orderless)
 
   (setq completion-styles '(orderless basic))
-  (setq completion-category-overrides
-        '((file (styles basic partial-completion))))
-  (setq orderless-matching-styles
-        '(orderless-flex orderless-regexp))
+  (setq completion-category-overrides '((file (styles basic partial-completion))))
+  (setq orderless-matching-styles '(orderless-flex orderless-regexp))
   (setq orderless-style-dispatchers
         '(sndb-orderless-literal-dispatcher
           sndb-orderless-initialism-dispatcher))
@@ -404,9 +398,7 @@
 
 #+begin_src emacs-lisp
   (require 'marginalia)
-
   (marginalia-mode)
-
   (global-set-key (kbd "M-A") #'marginalia-cycle)
 #+end_src
 
@@ -416,8 +408,8 @@
   (require 'consult)
 
   (setq consult-preview-key '(:debounce 0.5 any))
-  (setq register-preview-delay 0.5
-        register-preview-function #'consult-register-format)
+  (setq register-preview-delay 0.5)
+  (setq register-preview-function #'consult-register-format)
 
   ;; remap
   (global-set-key [remap switch-to-buffer] #'consult-buffer)
@@ -455,27 +447,22 @@
 
 #+begin_src emacs-lisp
   (require 'embark)
+  (require 'embark-consult)
+  (require 'wgrep)
 
   (setq prefix-help-command #'embark-prefix-help-command)
+  (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)
 
   (global-set-key (kbd "C-.") #'embark-act)
   (global-set-key (kbd "M-.") #'embark-dwim)
   (global-set-key (kbd "C-h B") #'embark-bindings)
-
-  (require 'embark-consult)
-
-  (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)
-
-  (require 'wgrep)
 #+end_src
 
 ** Corfu
 
 #+begin_src emacs-lisp
   (require 'corfu)
-
   (setq corfu-cycle t)
-
   (global-corfu-mode)
 
   (defun corfu-enable-always-in-minibuffer ()
@@ -515,9 +502,7 @@
 
 #+begin_src emacs-lisp
   (require 'avy)
-
   (setq avy-timeout-seconds 0.25)
-
   (global-set-key (kbd "C-;") #'avy-goto-char-timer)
 #+end_src
 
@@ -545,7 +530,6 @@
            "* %?"
            :empty-lines 1
            :jump-to-captured t)))
-
   (setq org-todo-keywords '((sequence "TODO" "NOW" "DONE")))
   (setq org-todo-keyword-faces '(("NOW" . '(warning org-todo))))
 
@@ -569,13 +553,10 @@
 
 #+begin_src emacs-lisp
   (require 'magit)
-
   (setq magit-diff-refine-hunk 'all)
 
   (require 'diff-hl)
-
   (global-diff-hl-mode)
-
   (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
 #+end_src
@@ -584,7 +565,6 @@
 
 #+begin_src emacs-lisp
   (require 'vterm)
-
   (global-set-key (kbd "C-c v") #'vterm-other-window)
 #+end_src
 
@@ -592,9 +572,7 @@
 
 #+begin_src emacs-lisp
   (require 'pdf-tools)
-
   (setq pdf-info-restart-process-p t)
-
   (pdf-tools-install)
 #+end_src
 
@@ -602,9 +580,7 @@
 
 #+begin_src emacs-lisp
   (require 'nov)
-
   (setq nov-text-width fill-column)
-
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 #+end_src
 
@@ -612,11 +588,9 @@
 
 #+begin_src emacs-lisp
   (require 'epg)
-
   (setq epg-pinentry-mode 'loopback)
 
   (require 'password-store)
-
   (global-set-key (kbd "C-c p") #'password-store-copy)
 #+end_src
 
@@ -625,6 +599,14 @@
 #+begin_src emacs-lisp
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-listing-switches "-lhvFA --group-directories-first --time-style=long-iso")
-
   (add-hook 'dired-mode-hook #'hl-line-mode)
+#+end_src
+
+** Emms
+
+#+begin_src emacs-lisp
+  (require 'emms-setup)
+  (emms-all)
+  (emms-default-players)
+  (setq emms-source-file-default-directory "~/music/")
 #+end_src
