@@ -61,29 +61,25 @@
         (package-install package))))
 #+end_src
 
-** Start server
+** Server
 
 #+begin_src emacs-lisp
   (server-start)
 #+end_src
 
-** Custom file
+** Files
 
 #+begin_src emacs-lisp
   (setq custom-file (locate-user-emacs-file "custom.el"))
   (when (file-exists-p custom-file)
     (load-file custom-file))
-#+end_src
 
-** Private file
-
-#+begin_src emacs-lisp
   (setq sndb-private-file (locate-user-emacs-file "private.el"))
   (when (file-exists-p sndb-private-file)
     (load-file sndb-private-file))
 #+end_src
 
-** Recursion limits
+** Recursion resources
 
 #+begin_src emacs-lisp
   (setq max-specpdl-size (* 10 max-specpdl-size))
@@ -104,7 +100,7 @@
   (setq auto-save-default nil)
 #+end_src
 
-** Recently opened files
+** Recent files
 
 #+begin_src emacs-lisp
   (setq recentf-max-saved-items 256)
@@ -127,17 +123,24 @@
   (recentf-mode 1)
 #+end_src
 
-** Save last positions
+** Save place
 
 #+begin_src emacs-lisp
   (setq save-place-limit 256)
   (save-place-mode 1)
 #+end_src
 
-** Window configuration history
+** Window configuration
 
 #+begin_src emacs-lisp
   (winner-mode 1)
+#+end_src
+
+** Minibuffer
+
+#+begin_src emacs-lisp
+  (setq history-length 1024)
+  (savehist-mode 1)
 #+end_src
 
 * Interface
@@ -257,7 +260,7 @@
 
 * Editing
 
-** Automatic parens pairing
+** Parens
 
 #+begin_src emacs-lisp
   (electric-pair-mode 1)
@@ -287,7 +290,7 @@
   (global-set-key (kbd "C-S-p") #'sndb-scroll-half-screen-down)
 #+end_src
 
-** Whitespaces and indentation
+** Format
 
 #+begin_src emacs-lisp
   (setq sentence-end-double-space nil)
@@ -307,16 +310,6 @@
       (indent-region (point-min) (point-max)))
     (delete-trailing-whitespace))
 
-  (global-set-key (kbd "M-SPC") #'cycle-spacing)
-  (global-set-key (kbd "C-c w") #'whitespace-mode)
-  (global-set-key (kbd "C-c W") #'delete-trailing-whitespace)
-  (global-set-key (kbd "C-c f") #'sndb-format-buffer)
-  (global-set-key (kbd "C-c t") #'indent-tabs-mode)
-#+end_src
-
-** Curly quotes
-
-#+begin_src emacs-lisp
   (defun sndb-replace-untypable-characters ()
     "Replace the characters that are inconvenient to type."
     (interactive)
@@ -328,6 +321,12 @@
                  ("”" . "\"")
                  ("—" . " - ")))
         (replace-string (car pair) (cdr pair) nil (point-min) (point-max)))))
+
+  (global-set-key (kbd "M-SPC") #'cycle-spacing)
+  (global-set-key (kbd "C-c w") #'whitespace-mode)
+  (global-set-key (kbd "C-c W") #'delete-trailing-whitespace)
+  (global-set-key (kbd "C-c f") #'sndb-format-buffer)
+  (global-set-key (kbd "C-c t") #'indent-tabs-mode)
 #+end_src
 
 ** C style
@@ -337,16 +336,10 @@
   (add-hook 'c-mode-common-hook #'indent-tabs-mode)
 #+end_src
 
-** Revert on file change
+** Auto-Revert
 
 #+begin_src emacs-lisp
   (global-auto-revert-mode 1)
-#+end_src
-
-** Follow symlinks
-
-#+begin_src emacs-lisp
-  (setq vc-follow-symlinks t)
 #+end_src
 
 ** Zap up to char
@@ -376,13 +369,6 @@
   (setq completion-ignore-case t)
   (setq read-buffer-completion-ignore-case t)
   (setq read-file-name-completion-ignore-case t)
-#+end_src
-
-** Minibuffer history
-
-#+begin_src emacs-lisp
-  (setq history-length 1024)
-  (savehist-mode 1)
 #+end_src
 
 ** ElDoc
@@ -582,6 +568,8 @@
 ** Git interface
 
 #+begin_src emacs-lisp
+  (setq vc-follow-symlinks t)
+
   (require 'magit)
   (setq magit-diff-refine-hunk 'all)
 
