@@ -14,8 +14,7 @@
 
 #+begin_src emacs-lisp
   (require 'package)
-  (add-to-list 'package-archives
-               '("melpa" . "https://melpa.org/packages/"))
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 #+end_src
 
 *** Package list
@@ -40,6 +39,8 @@
           rust-mode
 
           ;; applications
+          elfeed
+          emms
           magit
           nov
           password-store
@@ -71,7 +72,15 @@
 #+begin_src emacs-lisp
   (setq custom-file (locate-user-emacs-file "custom.el"))
   (when (file-exists-p custom-file)
-    (load custom-file))
+    (load-file custom-file))
+#+end_src
+
+** Private file
+
+#+begin_src emacs-lisp
+  (setq sndb-private-file (locate-user-emacs-file "private.el"))
+  (when (file-exists-p sndb-private-file)
+    (load-file sndb-private-file))
 #+end_src
 
 ** Recursion limits
@@ -83,12 +92,16 @@
 
 * History
 
-** Disable backups
+** Backups
 
 #+begin_src emacs-lisp
-  (setq create-lockfiles nil
-        make-backup-files nil
-        auto-save-default nil)
+  (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backup/"))))
+  (setq backup-by-copying t)
+  (setq version-control t)
+  (setq delete-old-versions t)
+  (setq kept-new-versions 4)
+  (setq create-lockfiles nil)
+  (setq auto-save-default nil)
 #+end_src
 
 ** Recently opened files
@@ -111,20 +124,20 @@
           "\\.gz$"
           "\\.xz$"
           "\\.zst$"))
-  (recentf-mode)
+  (recentf-mode 1)
 #+end_src
 
 ** Save last positions
 
 #+begin_src emacs-lisp
   (setq save-place-limit 256)
-  (save-place-mode)
+  (save-place-mode 1)
 #+end_src
 
 ** Window configuration history
 
 #+begin_src emacs-lisp
-  (winner-mode)
+  (winner-mode 1)
 #+end_src
 
 * Interface
@@ -140,13 +153,14 @@
   (setq display-time-24hr-format t)
   (setq display-time-default-load-average nil)
   (setq mode-line-compact 'long)
+  (setq visible-bell t)
 
-  (show-paren-mode)
-  (blink-cursor-mode 0)
-  (display-time-mode 0)
-  (line-number-mode)
-  (column-number-mode)
-  (size-indication-mode 0)
+  (show-paren-mode 1)
+  (blink-cursor-mode -1)
+  (display-time-mode -1)
+  (line-number-mode 1)
+  (column-number-mode 1)
+  (size-indication-mode -1)
 
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (add-hook 'prog-mode-hook #'hl-line-mode)
@@ -163,9 +177,16 @@
   (setq frame-title-format
         '(buffer-file-name "%b - %f" ("%b - " default-directory)))
 
-  (menu-bar-mode 0)
-  (scroll-bar-mode 0)
-  (tool-bar-mode 0)
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (horizontal-scroll-bar-mode -1)
+#+end_src
+
+** Buffers
+
+#+begin_src emacs-lisp
+  (global-set-key [remap list-buffers] #'ibuffer)
 #+end_src
 
 ** Tabs
@@ -173,6 +194,12 @@
 #+begin_src emacs-lisp
   (setq tab-bar-close-button-show nil)
   (setq tab-bar-new-button-show nil)
+#+end_src
+
+** Clipboard
+
+#+begin_src emacs-lisp
+  (setq save-interprogram-paste-before-kill t)
 #+end_src
 
 ** Fonts
@@ -233,7 +260,7 @@
 ** Automatic parens pairing
 
 #+begin_src emacs-lisp
-  (electric-pair-mode)
+  (electric-pair-mode 1)
 #+end_src
 
 ** Scrolling
@@ -267,6 +294,7 @@
   (setq tab-always-indent 'complete)
   (setq tab-first-completion 'word-or-paren-or-punct)
   (setq-default indent-tabs-mode nil)
+  (setq require-final-newline t)
 
   (defun sndb-format-buffer ()
     "Apply `indent-region' to the whole buffer.
@@ -312,7 +340,7 @@
 ** Revert on file change
 
 #+begin_src emacs-lisp
-  (global-auto-revert-mode)
+  (global-auto-revert-mode 1)
 #+end_src
 
 ** Follow symlinks
@@ -321,10 +349,10 @@
   (setq vc-follow-symlinks t)
 #+end_src
 
-** Require final newline
+** Zap up to char
 
 #+begin_src emacs-lisp
-  (setq-default require-final-newline t)
+  (global-set-key [remap zap-to-char] #'zap-up-to-char)
 #+end_src
 
 * Completion
@@ -332,12 +360,14 @@
 ** Abbrevs
 
 #+begin_src emacs-lisp
-  (setq abbrev-file-name (locate-user-emacs-file "abbrevs"))
+  (setq abbrev-file-name (locate-user-emacs-file "abbrevs.el"))
   (setq abbrev-suggest t)
   (setq dabbrev-case-fold-search nil)
 
   (dolist (hook '(text-mode-hook prog-mode-hook))
     (add-hook hook #'abbrev-mode))
+
+  (global-set-key [remap dabbrev-expand] #'hippie-expand)
 #+end_src
 
 ** Ignore case
@@ -352,7 +382,7 @@
 
 #+begin_src emacs-lisp
   (setq history-length 1024)
-  (savehist-mode)
+  (savehist-mode 1)
 #+end_src
 
 ** ElDoc
@@ -368,7 +398,7 @@
   (require 'vertico)
   (setq vertico-cycle t)
   (setq vertico-count 20)
-  (vertico-mode)
+  (vertico-mode 1)
 #+end_src
 
 ** Orderless
@@ -398,7 +428,7 @@
 
 #+begin_src emacs-lisp
   (require 'marginalia)
-  (marginalia-mode)
+  (marginalia-mode 1)
   (global-set-key (kbd "M-A") #'marginalia-cycle)
 #+end_src
 
@@ -463,12 +493,12 @@
 #+begin_src emacs-lisp
   (require 'corfu)
   (setq corfu-cycle t)
-  (global-corfu-mode)
+  (global-corfu-mode 1)
 
   (defun corfu-enable-always-in-minibuffer ()
     "Enable Corfu in the minibuffer if Vertico is not active."
     (unless (bound-and-true-p vertico--input)
-      (corfu-mode)))
+      (corfu-mode 1)))
   (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
 
   (defun corfu-move-to-minibuffer ()
@@ -556,7 +586,7 @@
   (setq magit-diff-refine-hunk 'all)
 
   (require 'diff-hl)
-  (global-diff-hl-mode)
+  (global-diff-hl-mode 1)
   (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
 #+end_src
@@ -609,4 +639,24 @@
   (emms-all)
   (emms-default-players)
   (setq emms-source-file-default-directory "~/music/")
+#+end_src
+
+** Elfeed
+
+#+begin_src emacs-lisp
+  (setq sndb-feeds-file (locate-user-emacs-file "feeds.el"))
+  (when (file-exists-p sndb-feeds-file)
+    (load-file sndb-feeds-file))
+
+  (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
+  (setq-default elfeed-search-filter "@2-weeks-ago +unread ")
+
+  (global-set-key (kbd "C-x w") #'elfeed)
+#+end_src
+
+** Mail
+
+#+begin_src emacs-lisp
+  (require 'notmuch)
+  (global-set-key (kbd "C-c m") #'notmuch)
 #+end_src
