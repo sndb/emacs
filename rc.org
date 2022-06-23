@@ -212,6 +212,7 @@
 
   (setq sndb-favorite-mono-fonts
         '("Fira Mono-10.5"
+          "Monoid-9"
           "Victor Mono-11.5"
           "Hack-10.5"
           "Iosevka-12"
