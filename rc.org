@@ -349,6 +349,17 @@
   (global-set-key [remap zap-to-char] #'zap-up-to-char)
 #+end_src
 
+** Scratch buffer
+
+#+begin_src emacs-lisp
+  (defun sndb-scratch-buffer ()
+    "Switch to the *scratch* buffer."
+    (interactive)
+    (pop-to-buffer "*scratch*"))
+
+  (global-set-key (kbd "C-c s") #'sndb-scratch-buffer)
+#+end_src
+
 * Completion
 
 ** Abbrevs
@@ -537,6 +548,8 @@
 
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-startup-indented t)
+  (setq org-startup-with-inline-images t)
+  (setq org-image-actual-width '(640))
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-window-setup 'current-window)
   (setq org-capture-templates
@@ -610,13 +623,21 @@
   (setq epg-pinentry-mode 'loopback)
 
   (require 'password-store)
+
+  (defun sndb-password-store-copy-login (entry)
+    "Add login for ENTRY into the kill ring."
+    (interactive (list (password-store--completing-read)))
+    (password-store-copy-field entry "login"))
+
   (global-set-key (kbd "C-c p") #'password-store-copy)
+  (global-set-key (kbd "C-c P") #'sndb-password-store-copy-login)
 #+end_src
 
 ** Directory editor
 
 #+begin_src emacs-lisp
   (setq dired-kill-when-opening-new-dired-buffer t)
+  (setq dired-dwim-target t)
   (setq dired-listing-switches "-lhvFA --group-directories-first --time-style=long-iso")
   (add-hook 'dired-mode-hook #'hl-line-mode)
 #+end_src
@@ -625,9 +646,24 @@
 
 #+begin_src emacs-lisp
   (require 'emms-setup)
+  (require 'emms-info-exiftool)
+  (require 'emms-history)
+
   (emms-all)
+
   (setq emms-player-list '(emms-player-mpv))
+  (setq emms-info-functions '(emms-info-exiftool))
+  (setq emms-browser-covers #'emms-browser-cache-thumbnail-async)
   (setq emms-source-file-default-directory "~/music/")
+
+  (emms-history-load)
+
+  (global-set-key (kbd "<f5>") #'emms)
+  (global-set-key (kbd "<f6>") #'emms-browser)
+  (global-set-key (kbd "<XF86AudioPrev>") #'emms-previous)
+  (global-set-key (kbd "<XF86AudioNext>") #'emms-next)
+  (global-set-key (kbd "<XF86AudioPlay>") #'emms-pause)
+  (global-set-key (kbd "<XF86AudioStop>") #'emms-stop)
 #+end_src
 
 ** Elfeed
@@ -638,7 +674,7 @@
     (load-file sndb-feeds-file))
 
   (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
-  (setq-default elfeed-search-filter "@2-weeks-ago +unread ")
+  (setq-default elfeed-search-filter "@2-weeks-ago +unread -spam ")
 
   (global-set-key (kbd "C-x w") #'elfeed)
 #+end_src
@@ -647,5 +683,5 @@
 
 #+begin_src emacs-lisp
   (require 'notmuch)
-  (global-set-key (kbd "C-c m") #'notmuch)
+  (global-set-key (kbd "<XF86Mail>") #'notmuch)
 #+end_src
