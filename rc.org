@@ -554,8 +554,11 @@
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-window-setup 'current-window)
   (setq org-capture-templates
-        '(("t" "Task" entry (file+headline "" "Tasks")
+        '(("a" "Task/Annotation" entry (file+headline "" "Tasks")
            "* TODO %?\n%u\n%a\n%i"
+           :empty-lines 1)
+          ("t" "Task" entry (file+headline "" "Tasks")
+           "* TODO %?\n%u\n%i"
            :empty-lines 1)
           ("j" "Journal" entry (file+olp+datetree "journal.org")
            "* %?"
