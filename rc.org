@@ -157,6 +157,7 @@
   (setq display-time-default-load-average nil)
   (setq mode-line-compact 'long)
   (setq visible-bell t)
+  (setq-default indicate-empty-lines t)
 
   (show-paren-mode 1)
   (blink-cursor-mode -1)
