@@ -50,6 +50,7 @@
           ;; miscellaneous
           circadian
           diff-hl
+          hl-todo
           modus-themes))
 
   (defun sndb-install-packages ()
@@ -64,6 +65,7 @@
 ** Server
 
 #+begin_src emacs-lisp
+  (require 'server)
   (server-start)
 #+end_src
 
@@ -103,6 +105,8 @@
 ** Recent files
 
 #+begin_src emacs-lisp
+  (require 'recentf)
+
   (setq recentf-max-saved-items 256)
   (setq recentf-exclude
         '(;; tramp
@@ -120,12 +124,14 @@
           "\\.gz$"
           "\\.xz$"
           "\\.zst$"))
+
   (recentf-mode 1)
 #+end_src
 
 ** Save place
 
 #+begin_src emacs-lisp
+  (require 'saveplace)
   (setq save-place-limit 256)
   (save-place-mode 1)
 #+end_src
@@ -133,12 +139,14 @@
 ** Window configuration
 
 #+begin_src emacs-lisp
+  (require 'winner)
   (winner-mode 1)
 #+end_src
 
 ** Minibuffer
 
 #+begin_src emacs-lisp
+  (require 'savehist)
   (setq history-length 1024)
   (savehist-mode 1)
 #+end_src
@@ -170,6 +178,13 @@
   (add-hook 'prog-mode-hook #'hl-line-mode)
 #+end_src
 
+** Highlight keywords
+
+#+begin_src emacs-lisp
+  (require 'hl-todo)
+  (global-hl-todo-mode 1)
+#+end_src
+
 ** Windows and frame
 
 #+begin_src emacs-lisp
@@ -190,12 +205,14 @@
 ** Buffers
 
 #+begin_src emacs-lisp
+  (require 'ibuffer)
   (global-set-key [remap list-buffers] #'ibuffer)
 #+end_src
 
 ** Tabs
 
 #+begin_src emacs-lisp
+  (require 'tab-bar)
   (setq tab-bar-close-button-show nil)
   (setq tab-bar-new-button-show nil)
 #+end_src
@@ -265,6 +282,7 @@
 ** Parens
 
 #+begin_src emacs-lisp
+  (require 'elec-pair)
   (electric-pair-mode 1)
 #+end_src
 
@@ -341,6 +359,7 @@
 ** Auto-Revert
 
 #+begin_src emacs-lisp
+  (require 'autorevert)
   (global-auto-revert-mode 1)
 #+end_src
 
@@ -366,6 +385,10 @@
 ** Abbrevs
 
 #+begin_src emacs-lisp
+  (require 'abbrev)
+  (require 'dabbrev)
+  (require 'hippie-exp)
+
   (setq abbrev-file-name (locate-user-emacs-file "abbrevs.el"))
   (setq abbrev-suggest t)
   (setq dabbrev-case-fold-search nil)
@@ -387,6 +410,7 @@
 ** ElDoc
 
 #+begin_src emacs-lisp
+  (require 'eldoc)
   (setq eldoc-echo-area-prefer-doc-buffer t)
   (setq eldoc-idle-delay 0.1)
 #+end_src
@@ -540,6 +564,8 @@
 ** Org mode
 
 #+begin_src emacs-lisp
+  (require 'org)
+
   (add-hook 'org-mode-hook #'visual-line-mode)
 
   (org-babel-do-load-languages
@@ -590,6 +616,9 @@
 
   (require 'magit)
   (setq magit-diff-refine-hunk 'all)
+  (setq magit-repository-directories '(("~" . 3)))
+  (add-to-list 'magit-repolist-columns '("Flag" 4 magit-repolist-column-flag (:right-align t)))
+  (global-set-key (kbd "H-r") #'magit-list-repositories)
 
   (require 'diff-hl)
   (global-diff-hl-mode 1)
@@ -640,6 +669,7 @@
 ** Directory editor
 
 #+begin_src emacs-lisp
+  (require 'dired)
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-dwim-target t)
   (setq dired-listing-switches "-lhvFA --group-directories-first --time-style=long-iso")
@@ -673,6 +703,8 @@
 ** Elfeed
 
 #+begin_src emacs-lisp
+  (require 'elfeed)
+
   (setq sndb-feeds-file (locate-user-emacs-file "feeds.el"))
   (when (file-exists-p sndb-feeds-file)
     (load-file sndb-feeds-file))
