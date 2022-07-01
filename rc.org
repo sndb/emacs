@@ -42,6 +42,7 @@
           elfeed
           emms
           magit
+          magit-todos
           nov
           password-store
           pdf-tools
@@ -619,6 +620,9 @@
   (setq magit-repository-directories '(("~" . 3)))
   (add-to-list 'magit-repolist-columns '("Flag" 4 magit-repolist-column-flag (:right-align t)))
   (global-set-key (kbd "H-r") #'magit-list-repositories)
+
+  (require 'magit-todos)
+  (magit-todos-mode 1)
 
   (require 'diff-hl)
   (global-diff-hl-mode 1)
