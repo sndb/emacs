@@ -208,6 +208,9 @@
 #+begin_src emacs-lisp
   (require 'ibuffer)
   (global-set-key [remap list-buffers] #'ibuffer)
+
+  (require 'uniquify)
+  (setq uniquify-buffer-name-style 'forward)
 #+end_src
 
 ** Tabs
