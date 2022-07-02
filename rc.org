@@ -206,8 +206,7 @@
 ** Buffers
 
 #+begin_src emacs-lisp
-  (require 'ibuffer)
-  (global-set-key [remap list-buffers] #'ibuffer)
+  (setq view-read-only t)
 
   (require 'uniquify)
   (setq uniquify-buffer-name-style 'forward)
@@ -283,6 +282,21 @@
 
 * Editing
 
+** Languages
+
+*** C
+
+#+begin_src emacs-lisp
+  (setq c-default-style "linux")
+  (add-hook 'c-mode-common-hook #'indent-tabs-mode)
+#+end_src
+
+*** Go
+
+#+begin_src emacs-lisp
+  (add-hook 'go-mode-hook (lambda () (setq fill-column 80)))
+#+end_src
+
 ** Parens
 
 #+begin_src emacs-lisp
@@ -353,13 +367,6 @@
   (global-set-key (kbd "C-c t") #'indent-tabs-mode)
 #+end_src
 
-** C style
-
-#+begin_src emacs-lisp
-  (setq c-default-style "linux")
-  (add-hook 'c-mode-common-hook #'indent-tabs-mode)
-#+end_src
-
 ** Auto-Revert
 
 #+begin_src emacs-lisp
@@ -367,10 +374,14 @@
   (global-auto-revert-mode 1)
 #+end_src
 
-** Zap up to char
+** Better defaults
 
 #+begin_src emacs-lisp
+  (global-set-key [remap list-buffers] #'ibuffer)
   (global-set-key [remap zap-to-char] #'zap-up-to-char)
+  (global-set-key [remap upcase-word] #'upcase-dwim)
+  (global-set-key [remap downcase-word] #'downcase-dwim)
+  (global-set-key [remap capitalize-word] #'capitalize-dwim)
 #+end_src
 
 ** Scratch buffer
