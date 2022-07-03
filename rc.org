@@ -736,6 +736,15 @@
 ** Mail
 
 #+begin_src emacs-lisp
+  (setq user-full-name "sndb")
+  (setq user-mail-address "sndb@sndb.xyz")
+
   (require 'notmuch)
   (global-set-key (kbd "<XF86Mail>") #'notmuch)
+
+  (require 'smtpmail)
+  (setq smtpmail-smtp-server "smtp.mailbox.org")
+  (setq smtpmail-smtp-service 587)
+  (setq smtpmail-stream-type 'starttls)
+  (setq send-mail-function 'smtpmail-send-it)
 #+end_src
