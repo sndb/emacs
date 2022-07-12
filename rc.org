@@ -68,6 +68,8 @@
 #+begin_src emacs-lisp
   (require 'server)
   (server-start)
+
+  (global-set-key (kbd "H-<escape>") #'save-buffers-kill-emacs)
 #+end_src
 
 ** Files
@@ -233,6 +235,7 @@
 
   (setq sndb-favorite-mono-fonts
         '("Source Code Pro-10.5"
+          "Go Mono-10.5"
           "Hack-10.5"
           "Fira Mono-10.5"))
   (setq sndb-mono-font (cadr sndb-favorite-mono-fonts))
@@ -293,13 +296,6 @@
 
 #+begin_src emacs-lisp
   (add-hook 'go-mode-hook (lambda () (setq fill-column 80)))
-#+end_src
-
-** Parens
-
-#+begin_src emacs-lisp
-  (require 'elec-pair)
-  (electric-pair-mode 1)
 #+end_src
 
 ** Scrolling
