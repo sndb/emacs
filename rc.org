@@ -233,12 +233,28 @@
 #+begin_src emacs-lisp
   (setq text-scale-mode-step 1.1)
 
+  (setq sndb-random-font-on-startup nil)
+
+  (defun sndb-random-font ()
+    "Returns a random font from `sndb-favorite-mono-fonts'"
+    (let ((fonts sndb-favorite-mono-fonts))
+      (nth (random (length fonts)) fonts)))
+
   (setq sndb-favorite-mono-fonts
-        '("Source Code Pro-10.5"
-          "Go Mono-10.5"
+        '("Go Mono-10.5"
+          "Fantasque Sans Mono-12"
+          "UW Ttyp0-12"
+          "Iosevka-12"
+          "JetBrains Mono-10.5"
+          "Source Code Pro-10.5"
           "Hack-10.5"
           "Fira Mono-10.5"))
-  (setq sndb-mono-font (cadr sndb-favorite-mono-fonts))
+
+  (setq sndb-mono-font
+        (if sndb-random-font-on-startup
+            (sndb-random-font)
+          (car (reverse sndb-favorite-mono-fonts))))
+
   (setq sndb-sans-font "Source Sans Pro-12")
 
   (set-face-attribute 'default nil :font sndb-mono-font)
@@ -255,6 +271,8 @@
       (set-face-attribute 'default nil :font next)
       (set-face-attribute 'fixed-pitch nil :font next)
       (message "Font: %s" next)))
+
+  (global-set-key (kbd "H-f") #'sndb-rotate-fonts)
 #+end_src
 
 ** Theme
