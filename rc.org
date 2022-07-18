@@ -22,7 +22,6 @@
 #+begin_src emacs-lisp
   (setq sndb-package-list
         '(;; completion
-          avy
           consult
           corfu
           embark
@@ -203,15 +202,24 @@
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
   (horizontal-scroll-bar-mode -1)
+
+  (global-set-key [remap balance-windows] #'balance-windows-area)
+  (global-set-key (kbd "C-x !") #'delete-other-windows-vertically)
 #+end_src
 
 ** Buffers
 
 #+begin_src emacs-lisp
   (setq view-read-only t)
-
-  (require 'uniquify)
   (setq uniquify-buffer-name-style 'forward)
+
+  (defun sndb-scratch-buffer ()
+    "Switch to the *scratch* buffer."
+    (interactive)
+    (pop-to-buffer "*scratch*"))
+
+  (global-set-key (kbd "C-c s") #'sndb-scratch-buffer)
+  (global-set-key [remap list-buffers] #'ibuffer)
 #+end_src
 
 ** Tabs
@@ -226,6 +234,13 @@
 
 #+begin_src emacs-lisp
   (setq save-interprogram-paste-before-kill t)
+#+end_src
+
+** Repeating
+
+#+begin_src emacs-lisp
+  (setq set-mark-command-repeat-pop t)
+  (repeat-mode 1)
 #+end_src
 
 ** Fonts
@@ -389,22 +404,10 @@
 ** Better defaults
 
 #+begin_src emacs-lisp
-  (global-set-key [remap list-buffers] #'ibuffer)
   (global-set-key [remap zap-to-char] #'zap-up-to-char)
   (global-set-key [remap upcase-word] #'upcase-dwim)
   (global-set-key [remap downcase-word] #'downcase-dwim)
   (global-set-key [remap capitalize-word] #'capitalize-dwim)
-#+end_src
-
-** Scratch buffer
-
-#+begin_src emacs-lisp
-  (defun sndb-scratch-buffer ()
-    "Switch to the *scratch* buffer."
-    (interactive)
-    (pop-to-buffer "*scratch*"))
-
-  (global-set-key (kbd "C-c s") #'sndb-scratch-buffer)
 #+end_src
 
 * Completion
@@ -576,14 +579,6 @@
     (add-hook hook #'eglot-ensure))
 
   (define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
-#+end_src
-
-** Avy
-
-#+begin_src emacs-lisp
-  (require 'avy)
-  (setq avy-timeout-seconds 0.25)
-  (global-set-key (kbd "C-;") #'avy-goto-char-timer)
 #+end_src
 
 * Applications
