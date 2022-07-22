@@ -714,7 +714,6 @@
 
   (setq emms-player-list '(emms-player-mpv))
   (setq emms-info-functions '(emms-info-exiftool))
-  (setq emms-browser-covers #'emms-browser-cache-thumbnail-async)
   (setq emms-source-file-default-directory "~/music/")
 
   (emms-history-load)
