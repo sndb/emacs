@@ -718,8 +718,8 @@
 
   (emms-history-load)
 
-  (global-set-key (kbd "<f5>") #'emms)
-  (global-set-key (kbd "<f6>") #'emms-browser)
+  (global-set-key (kbd "<XF86Tools>") #'emms)
+  (global-set-key (kbd "C-<XF86Tools>") #'emms-browser)
   (global-set-key (kbd "<XF86AudioPrev>") #'emms-previous)
   (global-set-key (kbd "<XF86AudioNext>") #'emms-next)
   (global-set-key (kbd "<XF86AudioPlay>") #'emms-pause)
@@ -738,7 +738,7 @@
   (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
   (setq-default elfeed-search-filter "@2-weeks-ago +unread -spam ")
 
-  (global-set-key (kbd "C-x w") #'elfeed)
+  (global-set-key (kbd "<XF86HomePage>") #'elfeed)
 #+end_src
 
 ** Mail
@@ -755,4 +755,10 @@
   (setq smtpmail-smtp-service 587)
   (setq smtpmail-stream-type 'starttls)
   (setq send-mail-function 'smtpmail-send-it)
+#+end_src
+
+** Calculator
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<XF86Calculator>") #'calc)
 #+end_src
