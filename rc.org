@@ -243,6 +243,13 @@
   (repeat-mode 1)
 #+end_src
 
+** Disabled commands
+
+#+begin_src emacs-lisp
+  (dolist (cmd '(narrow-to-page narrow-to-region downcase-region upcase-region))
+    (put cmd 'disabled nil))
+#+end_src
+
 ** Fonts
 
 #+begin_src emacs-lisp
@@ -329,6 +336,7 @@
 
 #+begin_src emacs-lisp
   (add-hook 'go-mode-hook (lambda () (setq fill-column 80)))
+  (add-hook 'before-save-hook 'gofmt-before-save)
 #+end_src
 
 ** Scrolling
