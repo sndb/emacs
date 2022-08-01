@@ -615,11 +615,7 @@
            :empty-lines 1)
           ("t" "Task" entry (file+headline "" "Tasks")
            "* TODO %?\n%u\n%i"
-           :empty-lines 1)
-          ("j" "Journal" entry (file+olp+datetree "journal.org")
-           "* %?"
-           :empty-lines 1
-           :jump-to-captured t)))
+           :empty-lines 1)))
   (setq org-todo-keywords '((sequence "TODO" "NOW" "DONE")))
   (setq org-todo-keyword-faces '(("NOW" . '(warning org-todo))))
 
@@ -634,9 +630,15 @@
                               (setq p (point)))))
           (org-sort-entries nil ?a)))))
 
+  (defun sndb-open-notes ()
+    "Open `org-default-notes-file'."
+    (interactive)
+    (find-file org-default-notes-file))
+
   (global-set-key (kbd "C-c l") #'org-store-link)
   (global-set-key (kbd "C-c a") #'org-agenda)
   (global-set-key (kbd "C-c c") #'org-capture)
+  (global-set-key (kbd "C-c o") #'sndb-open-notes)
 #+end_src
 
 ** Git interface
