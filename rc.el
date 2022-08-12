@@ -620,7 +620,7 @@ If Eglot is active, format the buffer and organize imports."
 (global-set-key (kbd "<XF86HomePage>") #'elfeed)
 
 ;;;; Mail
-(setq user-full-name "sndb")
+(setq user-full-name "Daniil Sobolev")
 (setq user-mail-address "sndb@sndb.xyz")
 
 (require 'notmuch)
