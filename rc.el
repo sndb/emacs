@@ -306,6 +306,7 @@
 (setq tab-first-completion 'word-or-paren-or-punct)
 (setq-default indent-tabs-mode nil)
 (setq require-final-newline t)
+(setq default-input-method "TeX")
 
 (defun sndb-format-buffer ()
   "Apply `indent-region' to the whole buffer.
