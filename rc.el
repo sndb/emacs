@@ -282,6 +282,7 @@
 ;;;; Scrolling
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 1)
+(setq mouse-wheel-progressive-speed nil)
 
 (defun sndb-half-screen ()
   "Return the half of the selected window's height."
