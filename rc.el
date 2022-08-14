@@ -217,14 +217,14 @@
     (nth (random (length fonts)) fonts)))
 
 (setq sndb-favorite-mono-fonts
-      '("Go Mono-10.5"
-        "Fantasque Sans Mono-12"
+      '("Fantasque Sans Mono-12"
         "UW Ttyp0-12"
         "Iosevka-12"
         "JetBrains Mono-10.5"
         "Source Code Pro-10.5"
         "Hack-10.5"
-        "Fira Mono-10.5"))
+        "Fira Mono-10.5"
+        "Go Mono-10.5"))
 
 (setq sndb-mono-font
       (if sndb-random-font-on-startup
@@ -509,8 +509,11 @@ If Eglot is active, format the buffer and organize imports."
         ("t" "Task" entry (file+headline "" "Tasks")
          "* TODO %?\n%u\n%i"
          :empty-lines 1)))
-(setq org-todo-keywords '((sequence "TODO" "NOW" "DONE")))
-(setq org-todo-keyword-faces '(("NOW" . '(warning org-todo))))
+
+;; refile
+(setq org-refile-targets '((nil . (:maxlevel . 4))))
+(setq org-refile-use-outline-path t)
+(setq org-outline-path-complete-in-steps nil)
 
 (defun sndb-sort-headings ()
   "Sorts the contents of all headings on the first level."
