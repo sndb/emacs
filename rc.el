@@ -33,7 +33,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 (setq sndb-package-list
-      '(;; completion
+      '(;; Completion
         consult
         corfu
         embark
@@ -43,13 +43,13 @@
         vertico
         wgrep
 
-        ;; languages
+        ;; Languages
         eglot
         go-mode
         racket-mode
         rust-mode
 
-        ;; applications
+        ;; Applications
         elfeed
         emms
         magit
@@ -59,7 +59,7 @@
         pdf-tools
         vterm
 
-        ;; miscellaneous
+        ;; Miscellaneous
         circadian
         diff-hl
         hl-todo
@@ -76,7 +76,7 @@
 ;;;; Server
 (require 'server)
 (server-start)
-(global-set-key (kbd "H-<escape>") #'save-buffers-kill-emacs)
+(global-set-key (kbd "C-c k") #'save-buffers-kill-emacs)
 
 ;;;; Files
 (setq custom-file (locate-user-emacs-file "custom.el"))
@@ -104,17 +104,17 @@
 (require 'recentf)
 (setq recentf-max-saved-items 256)
 (setq recentf-exclude
-      '(;; tramp
+      '(;; Tramp
         "^/ssh:"
         "^/sudo:"
 
-        ;; images
+        ;; Images
         "\\.jpe?g$"
         "\\.png$"
         "\\.gif$"
         "\\.webp$"
 
-        ;; archives
+        ;; Archives
         "\\.zip$"
         "\\.gz$"
         "\\.xz$"
@@ -248,8 +248,6 @@
     (set-face-attribute 'fixed-pitch nil :font next)
     (message "Font: %s" next)))
 
-(global-set-key (kbd "H-f") #'sndb-rotate-fonts)
-
 ;;;; Theme
 (require 'modus-themes)
 (setq modus-themes-bold-constructs t
@@ -334,7 +332,6 @@ If Eglot is active, format the buffer and organize imports."
 
 (global-set-key (kbd "M-SPC") #'cycle-spacing)
 (global-set-key (kbd "C-c w") #'whitespace-mode)
-(global-set-key (kbd "C-c W") #'delete-trailing-whitespace)
 (global-set-key (kbd "C-c f") #'sndb-format-buffer)
 (global-set-key (kbd "C-c t") #'indent-tabs-mode)
 
@@ -511,7 +508,7 @@ If Eglot is active, format the buffer and organize imports."
          "* TODO %?\n%u\n%i"
          :empty-lines 1)))
 
-;; refile
+;; Refiling
 (setq org-refile-targets '((nil . (:maxlevel . 4))))
 (setq org-refile-use-outline-path t)
 (setq org-outline-path-complete-in-steps nil)
@@ -544,7 +541,7 @@ If Eglot is active, format the buffer and organize imports."
 (setq magit-diff-refine-hunk 'all)
 (setq magit-repository-directories '(("~" . 3)))
 (add-to-list 'magit-repolist-columns '("Flag" 4 magit-repolist-column-flag (:right-align t)))
-(global-set-key (kbd "H-r") #'magit-list-repositories)
+(global-set-key (kbd "C-c r") #'magit-list-repositories)
 
 (require 'magit-todos)
 (magit-todos-mode 1)
@@ -581,8 +578,8 @@ If Eglot is active, format the buffer and organize imports."
   (interactive (list (password-store--completing-read)))
   (password-store-copy-field entry "login"))
 
-(global-set-key (kbd "C-c p") #'password-store-copy)
-(global-set-key (kbd "C-c P") #'sndb-password-store-copy-login)
+(global-set-key (kbd "C-c p p") #'password-store-copy)
+(global-set-key (kbd "C-c p l") #'sndb-password-store-copy-login)
 
 ;;;; Directory editor
 (require 'dired)
@@ -591,7 +588,7 @@ If Eglot is active, format the buffer and organize imports."
 (setq dired-listing-switches "-lhvFA --group-directories-first --time-style=long-iso")
 (add-hook 'dired-mode-hook #'hl-line-mode)
 
-;;;; Emms
+;;;; Multimedia system
 (require 'emms-setup)
 (require 'emms-info-exiftool)
 (require 'emms-history)
@@ -604,14 +601,17 @@ If Eglot is active, format the buffer and organize imports."
 
 (emms-history-load)
 
-(global-set-key (kbd "<XF86Tools>") #'emms)
-(global-set-key (kbd "C-<XF86Tools>") #'emms-browser)
-(global-set-key (kbd "<XF86AudioPrev>") #'emms-previous)
-(global-set-key (kbd "<XF86AudioNext>") #'emms-next)
-(global-set-key (kbd "<XF86AudioPlay>") #'emms-pause)
-(global-set-key (kbd "<XF86AudioStop>") #'emms-stop)
+(global-set-key (kbd "C-c e e") #'emms)
+(global-set-key (kbd "C-c e b") #'emms-browser)
+(global-set-key (kbd "C-c e p") #'emms-previous)
+(global-set-key (kbd "C-c e n") #'emms-next)
+(global-set-key (kbd "C-c e P") #'emms-pause)
+(global-set-key (kbd "C-c e s") #'emms-stop)
+(global-set-key (kbd "C-c e r") #'emms-random)
+(global-set-key (kbd "C-c e >") #'emms-seek-forward)
+(global-set-key (kbd "C-c e <") #'emms-seek-backward)
 
-;;;; Elfeed
+;;;; Feed reader
 (require 'elfeed)
 
 (setq sndb-feeds-file (locate-user-emacs-file "feeds.el"))
@@ -635,8 +635,5 @@ If Eglot is active, format the buffer and organize imports."
 (setq smtpmail-smtp-service 587)
 (setq smtpmail-stream-type 'starttls)
 (setq send-mail-function 'smtpmail-send-it)
-
-;;;; Calculator
-(global-set-key (kbd "<XF86Calculator>") #'calc)
 
 ;;; rc.el ends here
