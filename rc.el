@@ -87,9 +87,11 @@
 (when (file-exists-p sndb-private-file)
   (load-file sndb-private-file))
 
-;;;; Recursion resources
+;;;; Resources
 (setq max-specpdl-size (* 10 max-specpdl-size))
 (setq max-lisp-eval-depth (* 10 max-lisp-eval-depth))
+(setq gc-cons-threshold (* 16 (expt 2 20)))
+(setq confirm-kill-processes nil)
 
 ;;;; Backups
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backup/"))))
@@ -121,16 +123,16 @@
         "\\.zst$"))
 (recentf-mode 1)
 
-;;;; Save place
+;;;; Point history
 (require 'saveplace)
 (setq save-place-limit 256)
 (save-place-mode 1)
 
-;;;; Window configuration
+;;;; Window history
 (require 'winner)
 (winner-mode 1)
 
-;;;; Minibuffer
+;;;; Minibuffer history
 (require 'savehist)
 (setq history-length 1024)
 (savehist-mode 1)
@@ -181,13 +183,11 @@
 ;;;; Buffers
 (setq view-read-only t)
 (setq uniquify-buffer-name-style 'forward)
+(setq initial-scratch-message nil)
+(setq initial-buffer-choice #'remember-notes)
+(setq remember-notes-bury-on-kill nil)
 
-(defun sndb-scratch-buffer ()
-  "Switch to the *scratch* buffer."
-  (interactive)
-  (pop-to-buffer "*scratch*"))
-
-(global-set-key (kbd "C-c s") #'sndb-scratch-buffer)
+(global-set-key (kbd "C-c n") #'remember-notes)
 (global-set-key [remap list-buffers] #'ibuffer)
 
 ;;;; Tabs
@@ -201,10 +201,6 @@
 ;;;; Repeating
 (setq set-mark-command-repeat-pop t)
 (repeat-mode 1)
-
-;;;; Disabled commands
-(dolist (cmd '(narrow-to-page narrow-to-region downcase-region upcase-region))
-  (put cmd 'disabled nil))
 
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
@@ -249,6 +245,9 @@
     (message "Font: %s" next)))
 
 ;;;; Theme
+(setq custom-safe-themes t)
+(setq x-gtk-use-system-tooltips nil)
+
 (require 'modus-themes)
 (setq modus-themes-bold-constructs t
       modus-themes-italic-constructs t
@@ -261,26 +260,38 @@
       modus-themes-org-blocks 'gray-background
       modus-themes-headings '((t . (background)))
       modus-themes-fringes 'subtle)
-(modus-themes-load-themes)
 
 (require 'circadian)
-(setq calendar-latitude 55)
-(setq calendar-longitude 37)
-(setq circadian-themes '((:sunrise . modus-operandi) (:sunset  . modus-vivendi)))
+(setq circadian-themes '((:sunrise . modus-operandi)
+                         (:sunset  . modus-vivendi)))
 (circadian-setup)
 
-;;;; C
+;;;; Programming
+
+;; C
 (setq c-default-style "linux")
 (add-hook 'c-mode-common-hook #'indent-tabs-mode)
 
-;;;; Go
+;; Go
 (add-hook 'go-mode-hook (lambda () (setq fill-column 80)))
 (add-hook 'before-save-hook 'gofmt-before-save)
+
+;; SQL
+(setq sql-product 'sqlite)
+
+;; CSS
+(setq css-indent-offset 2)
+
+;; JS
+(setq js-indent-level 2)
+
+;;;; Mouse
+(setq mouse-wheel-progressive-speed nil)
+(setq mouse-yank-at-point t)
 
 ;;;; Scrolling
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 1)
-(setq mouse-wheel-progressive-speed nil)
 
 (defun sndb-half-screen ()
   "Return the half of the selected window's height."
@@ -306,6 +317,7 @@
 (setq-default indent-tabs-mode nil)
 (setq require-final-newline t)
 (setq default-input-method "TeX")
+(setq display-raw-bytes-as-hex t)
 
 (defun sndb-format-buffer ()
   "Apply `indent-region' to the whole buffer.
@@ -339,7 +351,9 @@ If Eglot is active, format the buffer and organize imports."
 (require 'autorevert)
 (global-auto-revert-mode 1)
 
-;;;; Better defaults
+;;;; Commands
+(setq disabled-command-function nil)
+
 (global-set-key [remap zap-to-char] #'zap-up-to-char)
 (global-set-key [remap upcase-word] #'upcase-dwim)
 (global-set-key [remap downcase-word] #'downcase-dwim)
@@ -367,6 +381,7 @@ If Eglot is active, format the buffer and organize imports."
 ;;;; ElDoc
 (require 'eldoc)
 (setq eldoc-echo-area-prefer-doc-buffer t)
+(setq eldoc-echo-area-use-multiline-p nil)
 (setq eldoc-idle-delay 0.1)
 
 ;;;; Vertico
@@ -489,17 +504,28 @@ If Eglot is active, format the buffer and organize imports."
 
 (add-hook 'org-mode-hook #'visual-line-mode)
 
+;; Babel
+(setq org-confirm-babel-evaluate nil)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
    (shell . t)))
 
+;; UI
+(setq org-catch-invisible-edits 'error)
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-startup-indented t)
+(setq org-return-follows-link t)
+(setq org-M-RET-may-split-line nil)
+(setq org-src-window-setup 'current-window)
+(setq org-src-preserve-indentation t)
 (setq org-startup-with-inline-images t)
 (setq org-image-actual-width '(640))
-(setq org-confirm-babel-evaluate nil)
-(setq org-src-window-setup 'current-window)
+
+;; TODO
+(setq org-enforce-todo-dependencies t)
+(setq org-enforce-todo-checkbox-dependencies t)
+(setq org-agenda-todo-ignore-scheduled 'future)
 (setq org-capture-templates
       '(("a" "Task/Annotation" entry (file+headline "" "Tasks")
          "* TODO %?\n%u\n%a\n%i"
@@ -541,7 +567,7 @@ If Eglot is active, format the buffer and organize imports."
 (setq magit-diff-refine-hunk 'all)
 (setq magit-repository-directories '(("~" . 3)))
 (add-to-list 'magit-repolist-columns '("Flag" 4 magit-repolist-column-flag (:right-align t)))
-(global-set-key (kbd "C-c r") #'magit-list-repositories)
+(global-set-key (kbd "C-c g") #'magit-list-repositories)
 
 (require 'magit-todos)
 (magit-todos-mode 1)
