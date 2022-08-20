@@ -30,7 +30,7 @@
 
 ;;;; Packages
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (setq sndb-package-list
       '(;; Completion
@@ -137,11 +137,14 @@
 (setq history-length 1024)
 (savehist-mode 1)
 
-;;;; Indicators
+;;;; Startup
 (setq inhibit-startup-screen t)
+(defun display-startup-echo-area-message ()
+  (message (emacs-init-time)))
+
+;;;; Indicators
 (setq use-short-answers t)
-(setq echo-keystrokes 0.25)
-(setq show-paren-delay 0.1)
+(setq echo-keystrokes 0.1)
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
 (setq display-time-default-load-average nil)
@@ -149,7 +152,6 @@
 (setq visible-bell t)
 (setq-default indicate-empty-lines t)
 
-(show-paren-mode 1)
 (blink-cursor-mode -1)
 (display-time-mode -1)
 (line-number-mode 1)
@@ -158,6 +160,11 @@
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'prog-mode-hook #'hl-line-mode)
+
+;;;; Parentheses
+(setq show-paren-delay 0)
+(setq show-paren-style 'mixed)
+(show-paren-mode 1)
 
 ;;;; Highlight keywords
 (require 'hl-todo)
@@ -219,8 +226,8 @@
         "JetBrains Mono-10.5"
         "Source Code Pro-10.5"
         "Hack-10.5"
-        "Fira Mono-10.5"
-        "Go Mono-10.5"))
+        "Go Mono-10.5"
+        "Fira Mono-10.5"))
 
 (setq sndb-mono-font
       (if sndb-random-font-on-startup
@@ -249,13 +256,10 @@
 (setq x-gtk-use-system-tooltips nil)
 
 (require 'modus-themes)
-(setq modus-themes-bold-constructs t
-      modus-themes-italic-constructs t
-      modus-themes-syntax '(yellow-comments green-strings)
+(setq modus-themes-syntax '(yellow-comments green-strings)
       modus-themes-mixed-fonts t
       modus-themes-prompts '(bold)
       modus-themes-mode-line '(accented borderless)
-      modus-themes-paren-match '(bold intense)
       modus-themes-region '(accented bg-only)
       modus-themes-org-blocks 'gray-background
       modus-themes-headings '((t . (background)))
@@ -520,7 +524,8 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-src-window-setup 'current-window)
 (setq org-src-preserve-indentation t)
 (setq org-startup-with-inline-images t)
-(setq org-image-actual-width '(640))
+(setq org-image-actual-width 640)
+(setq org-list-allow-alphabetical t)
 
 ;; TODO
 (setq org-enforce-todo-dependencies t)
@@ -650,8 +655,8 @@ If Eglot is active, format the buffer and organize imports."
 (global-set-key (kbd "<XF86HomePage>") #'elfeed)
 
 ;;;; Mail
-(setq user-full-name "Daniil Sobolev")
-(setq user-mail-address "sndb@sndb.xyz")
+(setq user-full-name "Daniil Sobolev"
+      user-mail-address "sndb@sndb.xyz")
 
 (require 'notmuch)
 (global-set-key (kbd "<XF86Mail>") #'notmuch)
