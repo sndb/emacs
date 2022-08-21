@@ -73,6 +73,17 @@
     (unless (package-installed-p package)
       (package-install package))))
 
+;; Hooks
+(defun sndb-add-funcs-to-hook (hook &rest functions)
+  "Add FUNCTIONS to HOOK."
+  (dolist (function functions)
+    (add-hook hook function)))
+
+(defun sndb-add-func-to-hooks (function &rest hooks)
+  "Add FUNCTION to HOOKS."
+  (dolist (hook hooks)
+    (add-hook hook function)))
+
 ;;;; Server
 (require 'server)
 (server-start)
@@ -158,8 +169,9 @@
 (column-number-mode 1)
 (size-indication-mode -1)
 
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
-(add-hook 'prog-mode-hook #'hl-line-mode)
+(sndb-add-funcs-to-hook 'prog-mode-hook
+                        #'display-line-numbers-mode
+                        #'hl-line-mode)
 
 ;;;; Parentheses
 (setq show-paren-delay 0)
@@ -278,7 +290,7 @@
 
 ;; Go
 (add-hook 'go-mode-hook (lambda () (setq fill-column 80)))
-(add-hook 'before-save-hook 'gofmt-before-save)
+(add-hook 'before-save-hook #'gofmt-before-save)
 
 ;; SQL
 (setq sql-product 'sqlite)
@@ -372,8 +384,9 @@ If Eglot is active, format the buffer and organize imports."
 (setq abbrev-suggest t)
 (setq dabbrev-case-fold-search nil)
 
-(dolist (hook '(text-mode-hook prog-mode-hook))
-  (add-hook hook #'abbrev-mode))
+(sndb-add-func-to-hooks #'abbrev-mode
+                        'text-mode-hook
+                        'prog-mode-hook)
 
 (global-set-key [remap dabbrev-expand] #'hippie-expand)
 
@@ -494,21 +507,21 @@ If Eglot is active, format the buffer and organize imports."
 (require 'racket-mode)
 (require 'rust-mode)
 
-(dolist (hook '(python-mode-hook
-                racket-mode-hook
-                go-mode-hook
-                rust-mode-hook
-                sh-mode-hook))
-  (add-hook hook #'eglot-ensure))
+(sndb-add-func-to-hooks #'eglot-ensure
+                        'python-mode-hook
+                        'racket-mode-hook
+                        'go-mode-hook
+                        'rust-mode-hook
+                        'sh-mode-hook)
 
 (define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
 
 ;;;; Org mode
 (require 'org)
 
-(add-hook 'org-mode-hook #'visual-line-mode)
-
-;; Babel
+;; Source
+(setq org-src-window-setup 'current-window)
+(setq org-src-preserve-indentation t)
 (setq org-confirm-babel-evaluate nil)
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -521,11 +534,20 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-startup-indented t)
 (setq org-return-follows-link t)
 (setq org-M-RET-may-split-line nil)
-(setq org-src-window-setup 'current-window)
-(setq org-src-preserve-indentation t)
+(setq org-list-allow-alphabetical t)
+
+(sndb-add-funcs-to-hook 'org-mode-hook
+                        #'visual-line-mode
+                        #'org-fragtog-mode)
+
+;; Images
 (setq org-startup-with-inline-images t)
 (setq org-image-actual-width 640)
-(setq org-list-allow-alphabetical t)
+
+;; LaTeX
+(setq org-highlight-latex-and-related '(latex))
+(setq org-startup-with-latex-preview t)
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 
 ;; TODO
 (setq org-enforce-todo-dependencies t)
