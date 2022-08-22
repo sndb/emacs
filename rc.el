@@ -102,7 +102,6 @@
 (setq max-specpdl-size (* 10 max-specpdl-size))
 (setq max-lisp-eval-depth (* 10 max-lisp-eval-depth))
 (setq gc-cons-threshold (* 16 (expt 2 20)))
-(setq confirm-kill-processes nil)
 
 ;;;; Backups
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backup/"))))
@@ -155,6 +154,8 @@
 
 ;;;; Indicators
 (setq use-short-answers t)
+(setq confirm-kill-emacs #'yes-or-no-p)
+(setq confirm-kill-processes nil)
 (setq echo-keystrokes 0.1)
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
@@ -203,10 +204,7 @@
 (setq view-read-only t)
 (setq uniquify-buffer-name-style 'forward)
 (setq initial-scratch-message nil)
-(setq initial-buffer-choice #'remember-notes)
-(setq remember-notes-bury-on-kill nil)
 
-(global-set-key (kbd "C-c n") #'remember-notes)
 (global-set-key [remap list-buffers] #'ibuffer)
 
 ;;;; Tabs
@@ -518,6 +516,7 @@ If Eglot is active, format the buffer and organize imports."
 
 ;;;; Org mode
 (require 'org)
+(setq org-modules '(org-habit org-id ol-info))
 
 ;; Source
 (setq org-src-window-setup 'current-window)
@@ -533,6 +532,7 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-startup-indented t)
 (setq org-return-follows-link t)
+(setq org-id-link-to-org-use-id 'create-if-interactive)
 (setq org-M-RET-may-split-line nil)
 (setq org-list-allow-alphabetical t)
 
@@ -553,16 +553,35 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-enforce-todo-dependencies t)
 (setq org-enforce-todo-checkbox-dependencies t)
 (setq org-agenda-todo-ignore-scheduled 'future)
+(setq org-log-done 'time)
+(setq org-log-into-drawer t)
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
+(setq org-use-fast-todo-selection 'expert)
+
+;; Clock
+(setq org-clock-persist t)
+(setq org-clock-in-resume t)
+(setq org-clock-out-remove-zero-time-clocks t)
+(setq org-clock-persist-query-resume nil)
+(setq org-clock-report-include-clocking-task t)
+(org-clock-persistence-insinuate)
+
+;; Capture
+(setq sndb-bookmarks-file (concat org-directory "/bookmarks.org"))
 (setq org-capture-templates
-      '(("a" "Task/Annotation" entry (file+headline "" "Tasks")
-         "* TODO %?\n%u\n%a\n%i"
-         :empty-lines 1)
-        ("t" "Task" entry (file+headline "" "Tasks")
+      '(("t" "Task" entry
+         (file+headline "" "Tasks")
          "* TODO %?\n%u\n%i"
-         :empty-lines 1)))
+         :empty-lines 1)
+        ("b" "Bookmark" item
+         (file+headline sndb-bookmarks-file "New")
+         "- [[%c][%?]]")))
 
 ;; Refiling
-(setq org-refile-targets '((nil . (:maxlevel . 4))))
+(setq org-refile-targets
+      '((org-agenda-files . (:maxlevel . 3))
+        (nil . (:maxlevel . 3))))
 (setq org-refile-use-outline-path t)
 (setq org-outline-path-complete-in-steps nil)
 
@@ -585,7 +604,7 @@ If Eglot is active, format the buffer and organize imports."
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
-(global-set-key (kbd "C-c o") #'sndb-open-notes)
+(global-set-key (kbd "C-c n") #'sndb-open-notes)
 
 ;;;; Git interface
 (setq vc-follow-symlinks t)
