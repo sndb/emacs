@@ -548,7 +548,7 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-startup-with-latex-preview t)
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 
-;; TODO
+;; Tasks
 (setq org-enforce-todo-dependencies t)
 (setq org-enforce-todo-checkbox-dependencies t)
 (setq org-log-done 'time)
@@ -566,8 +566,9 @@ If Eglot is active, format the buffer and organize imports."
 (org-clock-persistence-insinuate)
 
 ;; Agenda
-(setq org-agenda-dim-blocked-tasks 'invisible)
+(setq org-agenda-dim-blocked-tasks t)
 (setq org-agenda-todo-ignore-scheduled 'future)
+(setq org-agenda-start-on-weekday nil)
 (setq org-habit-graph-column 88)
 
 ;; Capture
@@ -579,7 +580,11 @@ If Eglot is active, format the buffer and organize imports."
          :empty-lines 1)
         ("b" "Bookmark" item
          (file+headline sndb-bookmarks-file "New")
-         "- [[%c][%?]]")))
+         "- [[%c][%?]]")
+        ("c" "Current" entry
+         (clock)
+         "* %?\n%U\n%i"
+         :empty-lines 1)))
 
 ;; Refiling
 (setq org-refile-targets
