@@ -170,9 +170,7 @@
 (column-number-mode 1)
 (size-indication-mode -1)
 
-(sndb-add-funcs-to-hook 'prog-mode-hook
-                        #'display-line-numbers-mode
-                        #'hl-line-mode)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 ;;;; Parentheses
 (setq show-paren-delay 0)
@@ -272,7 +270,6 @@
       modus-themes-mode-line '(accented borderless)
       modus-themes-region '(accented bg-only)
       modus-themes-org-blocks 'gray-background
-      modus-themes-headings '((t . (background)))
       modus-themes-fringes 'subtle)
 
 (require 'circadian)
@@ -332,6 +329,8 @@
 (setq require-final-newline t)
 (setq default-input-method "TeX")
 (setq display-raw-bytes-as-hex t)
+(setq-default show-trailing-whitespace t)
+(setq delete-trailing-lines nil)
 
 (defun sndb-format-buffer ()
   "Apply `indent-region' to the whole buffer.
@@ -530,11 +529,11 @@ If Eglot is active, format the buffer and organize imports."
 ;; UI
 (setq org-catch-invisible-edits 'error)
 (setq org-default-notes-file (concat org-directory "/notes.org"))
-(setq org-startup-indented t)
 (setq org-return-follows-link t)
 (setq org-id-link-to-org-use-id 'create-if-interactive)
 (setq org-M-RET-may-split-line nil)
 (setq org-list-allow-alphabetical t)
+(setq org-ellipsis "…")
 
 (sndb-add-funcs-to-hook 'org-mode-hook
                         #'visual-line-mode
@@ -552,7 +551,6 @@ If Eglot is active, format the buffer and organize imports."
 ;; TODO
 (setq org-enforce-todo-dependencies t)
 (setq org-enforce-todo-checkbox-dependencies t)
-(setq org-agenda-todo-ignore-scheduled 'future)
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
 (setq org-todo-keywords
@@ -566,6 +564,11 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-clock-persist-query-resume nil)
 (setq org-clock-report-include-clocking-task t)
 (org-clock-persistence-insinuate)
+
+;; Agenda
+(setq org-agenda-dim-blocked-tasks 'invisible)
+(setq org-agenda-todo-ignore-scheduled 'future)
+(setq org-habit-graph-column 88)
 
 ;; Capture
 (setq sndb-bookmarks-file (concat org-directory "/bookmarks.org"))
@@ -658,7 +661,6 @@ If Eglot is active, format the buffer and organize imports."
 (setq dired-kill-when-opening-new-dired-buffer t)
 (setq dired-dwim-target t)
 (setq dired-listing-switches "-lhvFA --group-directories-first --time-style=long-iso")
-(add-hook 'dired-mode-hook #'hl-line-mode)
 
 ;;;; Multimedia system
 (require 'emms-setup)
