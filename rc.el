@@ -591,7 +591,7 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-refile-targets
       '((org-agenda-files . (:maxlevel . 3))
         (nil . (:maxlevel . 3))))
-(setq org-refile-use-outline-path t)
+(setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
 
 (defun sndb-sort-headings ()
