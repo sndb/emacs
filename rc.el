@@ -546,6 +546,7 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-highlight-latex-and-related '(latex))
 (setq org-startup-with-latex-preview t)
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+(setq org-latex-preview-ltxpng-directory (concat user-emacs-directory "ltximg/"))
 
 ;; Tasks
 (setq org-enforce-todo-dependencies t)
