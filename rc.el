@@ -531,7 +531,6 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-return-follows-link t)
 (setq org-id-link-to-org-use-id 'create-if-interactive)
-(setq org-M-RET-may-split-line nil)
 (setq org-list-allow-alphabetical t)
 (setq org-ellipsis "…")
 
@@ -572,19 +571,20 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-habit-graph-column 88)
 
 ;; Capture
+(setq sndb-task-template "* TODO %?\n%U\n%i")
 (setq sndb-bookmarks-file (concat org-directory "/bookmarks.org"))
 (setq org-capture-templates
-      '(("t" "Task" entry
+      `(("t" "Task" entry
          (file+headline "" "Tasks")
-         "* TODO %?\n%u\n%i"
+         ,sndb-task-template
          :empty-lines 1)
-        ("b" "Bookmark" item
-         (file+headline sndb-bookmarks-file "New")
-         "- [[%c][%?]]")
         ("c" "Current" entry
          (clock)
-         "* %?\n%U\n%i"
-         :empty-lines 1)))
+         ,sndb-task-template
+         :empty-lines 1)
+        ("b" "Bookmark" item
+         (file+headline ,sndb-bookmarks-file "New")
+         "- [[%c][%?]]")))
 
 ;; Refiling
 (setq org-refile-targets
