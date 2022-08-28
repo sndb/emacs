@@ -170,6 +170,8 @@
 (column-number-mode 1)
 (size-indication-mode -1)
 
+(setq-default display-line-numbers-widen t)
+(setq display-line-numbers-width-start t)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 ;;;; Parentheses
@@ -566,6 +568,7 @@ If Eglot is active, format the buffer and organize imports."
 (org-clock-persistence-insinuate)
 
 ;; Agenda
+(setq org-agenda-files `(,org-directory))
 (setq org-agenda-dim-blocked-tasks t)
 (setq org-agenda-todo-ignore-scheduled 'future)
 (setq org-agenda-start-on-weekday nil)
