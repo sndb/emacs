@@ -511,7 +511,8 @@ If Eglot is active, format the buffer and organize imports."
                         'racket-mode-hook
                         'go-mode-hook
                         'rust-mode-hook
-                        'sh-mode-hook)
+                        'sh-mode-hook
+                        'c-mode-hook)
 
 (define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
 
@@ -551,6 +552,7 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-latex-preview-ltxpng-directory (concat user-emacs-directory "ltximg/"))
 
 ;; Tasks
+(setq org-archive-location (concat org-directory "/archive.org::"))
 (setq org-enforce-todo-dependencies t)
 (setq org-enforce-todo-checkbox-dependencies t)
 (setq org-log-done 'time)
