@@ -325,8 +325,6 @@
 
 ;;;; Format
 (setq sentence-end-double-space nil)
-(setq tab-always-indent 'complete)
-(setq tab-first-completion 'word-or-paren-or-punct)
 (setq-default indent-tabs-mode nil)
 (setq require-final-newline t)
 (setq default-input-method "TeX")
@@ -374,20 +372,17 @@ If Eglot is active, format the buffer and organize imports."
 (global-set-key [remap downcase-word] #'downcase-dwim)
 (global-set-key [remap capitalize-word] #'capitalize-dwim)
 
-;;;; Abbrevs
-(require 'abbrev)
+;;;; Dabbrev
 (require 'dabbrev)
-(require 'hippie-exp)
-
-(setq abbrev-file-name (locate-user-emacs-file "abbrevs.el"))
-(setq abbrev-suggest t)
 (setq dabbrev-case-fold-search nil)
 
+;;;; Abbrevs
+(require 'abbrev)
+(setq abbrev-file-name (locate-user-emacs-file "abbrevs.el"))
+(setq abbrev-suggest t)
 (sndb-add-func-to-hooks #'abbrev-mode
                         'text-mode-hook
                         'prog-mode-hook)
-
-(global-set-key [remap dabbrev-expand] #'hippie-expand)
 
 ;;;; Ignore case
 (setq completion-ignore-case t)
@@ -402,14 +397,15 @@ If Eglot is active, format the buffer and organize imports."
 
 ;;;; Vertico
 (require 'vertico)
-(setq vertico-cycle t)
 (setq vertico-count 20)
+(setq vertico-scroll-margin 0)
 (vertico-mode 1)
 
 ;;;; Orderless
 (require 'orderless)
 
 (setq completion-styles '(orderless basic))
+(setq completion-category-defaults nil)
 (setq completion-category-overrides '((file (styles basic partial-completion))))
 (setq orderless-matching-styles '(orderless-flex orderless-regexp))
 (setq orderless-style-dispatchers
@@ -429,7 +425,6 @@ If Eglot is active, format the buffer and organize imports."
 ;;;; Marginalia
 (require 'marginalia)
 (marginalia-mode 1)
-(global-set-key (kbd "M-A") #'marginalia-cycle)
 
 ;;;; Consult
 (require 'consult)
@@ -454,7 +449,6 @@ If Eglot is active, format the buffer and organize imports."
 (global-set-key (kbd "M-s L") #'consult-line-multi)
 (global-set-key (kbd "M-s g") #'consult-grep)
 (global-set-key (kbd "M-s G") #'consult-git-grep)
-(global-set-key (kbd "M-s r") #'consult-ripgrep)
 
 ;; goto-map
 (global-set-key (kbd "M-g i") #'consult-imenu)
@@ -483,7 +477,7 @@ If Eglot is active, format the buffer and organize imports."
 
 ;;;; Corfu
 (require 'corfu)
-(setq corfu-cycle t)
+(setq corfu-scroll-margin 0)
 (global-corfu-mode 1)
 
 (defun corfu-enable-always-in-minibuffer ()
@@ -492,13 +486,10 @@ If Eglot is active, format the buffer and organize imports."
     (corfu-mode 1)))
 (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
 
-(defun corfu-move-to-minibuffer ()
-  "Transfer the Corfu completion to the minibuffer."
-  (interactive)
-  (let ((completion-extra-properties corfu--extra)
-        completion-cycle-threshold completion-cycling)
-    (apply #'consult-completion-in-region completion-in-region--data)))
-(define-key corfu-map (kbd "M-m") #'corfu-move-to-minibuffer)
+;;;; Cape
+(require 'cape)
+(dolist (capf '(cape-dabbrev cape-file cape-keyword cape-symbol cape-line cape-tex))
+  (add-to-list 'completion-at-point-functions capf))
 
 ;;;; Eglot
 (require 'eglot)
@@ -575,9 +566,12 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-agenda-todo-ignore-scheduled 'future)
 (setq org-agenda-start-on-weekday nil)
 (setq org-habit-graph-column 88)
+(setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
+(setq org-agenda-skip-scheduled-if-done t)
+(setq org-extend-today-until 3)
 
 ;; Capture
-(setq sndb-task-template "* TODO %?\n%U\n%i")
+(setq sndb-task-template "* TODO %?\n%u\n%i")
 (setq sndb-bookmarks-file (concat org-directory "/bookmarks.org"))
 (setq org-capture-templates
       `(("t" "Task" entry
