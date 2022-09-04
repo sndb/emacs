@@ -329,8 +329,10 @@
 (setq require-final-newline t)
 (setq default-input-method "TeX")
 (setq display-raw-bytes-as-hex t)
-(setq-default show-trailing-whitespace t)
 (setq delete-trailing-lines nil)
+(sndb-add-func-to-hooks (lambda () (setq show-trailing-whitespace t))
+                        'text-mode-hook
+                        'prog-mode-hook)
 
 (defun sndb-format-buffer ()
   "Apply `indent-region' to the whole buffer.
@@ -380,9 +382,7 @@ If Eglot is active, format the buffer and organize imports."
 (require 'abbrev)
 (setq abbrev-file-name (locate-user-emacs-file "abbrevs.el"))
 (setq abbrev-suggest t)
-(sndb-add-func-to-hooks #'abbrev-mode
-                        'text-mode-hook
-                        'prog-mode-hook)
+(add-hook 'prog-mode-hook #'abbrev-mode)
 
 ;;;; Ignore case
 (setq completion-ignore-case t)
