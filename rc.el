@@ -509,6 +509,7 @@ If Eglot is active, format the buffer and organize imports."
 
 ;;;; Org mode
 (require 'org)
+(require 'org-agenda)
 (setq org-modules '(org-habit org-id ol-info))
 
 ;; Source
