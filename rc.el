@@ -568,7 +568,8 @@ If Eglot is active, format the buffer and organize imports."
 (setq org-habit-graph-column 88)
 (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
 (setq org-agenda-skip-scheduled-if-done t)
-(setq org-extend-today-until 3)
+(define-key org-mode-map (kbd "C-c y") #'org-todo-yesterday)
+(define-key org-agenda-mode-map (kbd "C-c y") #'org-agenda-todo-yesterday)
 
 ;; Capture
 (setq sndb-task-template "* TODO %?\n%u\n%i")
