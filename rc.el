@@ -34,6 +34,7 @@
 
 (setq sndb-package-list
       '(;; Completion
+        cape
         consult
         corfu
         embark
@@ -45,7 +46,9 @@
 
         ;; Languages
         eglot
+        gdscript-mode
         go-mode
+        org-fragtog
         racket-mode
         rust-mode
 
@@ -62,6 +65,7 @@
         ;; Miscellaneous
         circadian
         diff-hl
+        ef-themes
         hl-todo
         modus-themes))
 
