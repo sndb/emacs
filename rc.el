@@ -46,6 +46,7 @@
 
         ;; Languages
         eglot
+        elixir-mode
         gdscript-mode
         go-mode
         org-fragtog
@@ -497,17 +498,21 @@ If Eglot is active, format the buffer and organize imports."
 
 ;;;; Eglot
 (require 'eglot)
+(require 'elixir-mode)
 (require 'go-mode)
 (require 'racket-mode)
 (require 'rust-mode)
 
+(add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls"))
+
 (sndb-add-func-to-hooks #'eglot-ensure
+                        'c-mode-hook
+                        'elixir-mode-hook
+                        'go-mode-hook
                         'python-mode-hook
                         'racket-mode-hook
-                        'go-mode-hook
                         'rust-mode-hook
-                        'sh-mode-hook
-                        'c-mode-hook)
+                        'sh-mode-hook)
 
 (define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
 
