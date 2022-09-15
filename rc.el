@@ -671,6 +671,7 @@ If Eglot is active, format the buffer and organize imports."
   (password-store-copy-field entry "login"))
 
 (global-set-key (kbd "C-c p p") #'password-store-copy)
+(global-set-key (kbd "C-c p e") #'password-store-edit)
 (global-set-key (kbd "C-c p l") #'sndb-password-store-copy-login)
 
 ;;;; Directory editor
