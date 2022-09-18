@@ -284,8 +284,8 @@
 (require 'circadian)
 (setq circadian-themes '((:sunrise . modus-operandi)
                          (:sunset  . modus-vivendi)))
-(setq calendar-latitude 55)
-(setq calendar-longitude 37)
+(if (not calendar-latitude) (setq calendar-latitude 55))
+(if (not calendar-longitude) (setq calendar-longitude 37))
 (circadian-setup)
 
 ;;;; Programming
