@@ -47,6 +47,7 @@
         ;; Languages
         eglot
         elixir-mode
+        format-all
         gdscript-mode
         go-mode
         org-fragtog
@@ -283,6 +284,8 @@
 (require 'circadian)
 (setq circadian-themes '((:sunrise . modus-operandi)
                          (:sunset  . modus-vivendi)))
+(setq calendar-latitude 55)
+(setq calendar-longitude 37)
 (circadian-setup)
 
 ;;;; Programming
