@@ -300,6 +300,9 @@
 
 ;; SQL
 (setq sql-product 'sqlite)
+(add-hook 'sql-mode-hook
+          (lambda () (setq format-all-formatters
+                           '(("SQL" (pgformatter "-f" "2" "-u" "2" "-U" "2"))))))
 
 ;; CSS
 (setq css-indent-offset 2)
@@ -333,6 +336,8 @@
 (global-set-key (kbd "C-S-p") #'sndb-scroll-half-screen-down)
 
 ;;;; Format
+(require 'format-all)
+
 (setq sentence-end-double-space nil)
 (setq-default indent-tabs-mode nil)
 (setq require-final-newline t)
@@ -369,6 +374,7 @@ If Eglot is active, format the buffer and organize imports."
 (global-set-key (kbd "M-SPC") #'cycle-spacing)
 (global-set-key (kbd "C-c w") #'whitespace-mode)
 (global-set-key (kbd "C-c f") #'sndb-format-buffer)
+(global-set-key (kbd "C-c F") #'format-all-buffer)
 (global-set-key (kbd "C-c t") #'indent-tabs-mode)
 
 ;;;; Auto-Revert
