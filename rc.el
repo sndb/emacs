@@ -302,7 +302,12 @@
 (setq sql-product 'sqlite)
 (add-hook 'sql-mode-hook
           (lambda () (setq format-all-formatters
-                           '(("SQL" (pgformatter "-f" "2" "-u" "2" "-U" "2"))))))
+                           '(("SQL" (pgformatter
+                                     "--function-case" "2"
+                                     "--keyword-case" "2"
+                                     "--type-case" "2"
+                                     "--no-extra-line"
+                                     "--tabs"))))))
 
 ;; CSS
 (setq css-indent-offset 2)
