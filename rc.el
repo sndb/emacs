@@ -354,14 +354,16 @@
                         'prog-mode-hook)
 
 (defun sndb-format-buffer ()
-  "Apply `indent-region' to the whole buffer.
-If Eglot is active, format the buffer and organize imports."
+  "Auto-format the source code in the current buffer."
   (interactive)
-  (if eglot--managed-mode
-      (progn
-        (eglot-format)
-        (eglot-code-action-organize-imports (point-min) (point-max)))
-    (indent-region (point-min) (point-max)))
+  (if (eglot-managed-p)
+      (eglot-format)
+    (format-all-buffer t)))
+
+(defun sndb-indent-buffer ()
+  "Indent the current buffer and delete trailing whitespace."
+  (interactive)
+  (indent-region (point-min) (point-max))
   (delete-trailing-whitespace))
 
 (defun sndb-replace-untypable-characters ()
@@ -379,8 +381,7 @@ If Eglot is active, format the buffer and organize imports."
 (global-set-key (kbd "M-SPC") #'cycle-spacing)
 (global-set-key (kbd "C-c w") #'whitespace-mode)
 (global-set-key (kbd "C-c f") #'sndb-format-buffer)
-(global-set-key (kbd "C-c F") #'format-all-buffer)
-(global-set-key (kbd "C-c t") #'indent-tabs-mode)
+(global-set-key (kbd "C-c i") #'sndb-indent-buffer)
 
 ;;;; Auto-Revert
 (require 'autorevert)
@@ -530,6 +531,7 @@ If Eglot is active, format the buffer and organize imports."
                         'sh-mode-hook)
 
 (define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
+(define-key eglot-mode-map (kbd "C-c t") #'eglot-code-actions)
 
 ;;;; Org mode
 (require 'org)
