@@ -289,6 +289,15 @@
 (if (not calendar-longitude) (setq calendar-longitude 37))
 (circadian-setup)
 
+(defun sndb-disable-themes ()
+  "Disable all enabled themes."
+  (interactive)
+  (mapc #'disable-theme custom-enabled-themes))
+
+(global-set-key (kbd "<f5> <f5>") #'sndb-disable-themes)
+(global-set-key (kbd "<f5> m") #'modus-themes-toggle)
+(global-set-key (kbd "<f5> e") #'ef-themes-select)
+
 ;;;; Programming
 
 ;; C
