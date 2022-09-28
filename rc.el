@@ -218,6 +218,7 @@
 (require 'tab-bar)
 (setq tab-bar-close-button-show nil)
 (setq tab-bar-new-button-show nil)
+(setq tab-bar-close-last-tab-choice 'tab-bar-mode-disable)
 
 ;;;; Clipboard
 (setq save-interprogram-paste-before-kill t)
