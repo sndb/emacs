@@ -385,7 +385,10 @@
                ("’" . "'")
                ("“" . "\"")
                ("”" . "\"")
-               ("—" . " - ")))
+               ("—" . " - ")
+               ("ﬃ" . "ffi")
+               ("ﬁ" . "fi")
+               ("ﬀ" . "ff")))
       (replace-string (car pair) (cdr pair) nil (point-min) (point-max)))))
 
 (global-set-key (kbd "M-SPC") #'cycle-spacing)
