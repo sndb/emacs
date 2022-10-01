@@ -717,7 +717,6 @@
 (emms-all)
 
 (setq emms-player-list '(emms-player-mpv))
-(setq emms-info-functions '(emms-info-exiftool))
 (setq emms-source-file-default-directory "~/music/")
 
 (emms-history-load)
