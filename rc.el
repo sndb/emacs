@@ -269,6 +269,8 @@
     (set-face-attribute 'fixed-pitch nil :font next)
     (message "Font: %s" next)))
 
+(global-set-key (kbd "<f5> f") #'sndb-rotate-fonts)
+
 ;;;; Theme
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
@@ -726,11 +728,11 @@
 (global-set-key (kbd "C-c e b") #'emms-browser)
 (global-set-key (kbd "C-c e p") #'emms-previous)
 (global-set-key (kbd "C-c e n") #'emms-next)
-(global-set-key (kbd "C-c e P") #'emms-pause)
 (global-set-key (kbd "C-c e s") #'emms-stop)
 (global-set-key (kbd "C-c e r") #'emms-random)
 (global-set-key (kbd "C-c e >") #'emms-seek-forward)
 (global-set-key (kbd "C-c e <") #'emms-seek-backward)
+(global-set-key (kbd "C-c e SPC") #'emms-pause)
 
 ;;;; Feed reader
 (require 'elfeed)
