@@ -28,6 +28,11 @@
 
 ;;; Code:
 
+;;;; Auxiliary
+(defun sndb-random-element (list)
+  "Returns a random element from LIST."
+  (nth (random (length list)) list))
+
 ;;;; Packages
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -79,7 +84,7 @@
     (unless (package-installed-p package)
       (package-install package))))
 
-;; Hooks
+;;;; Hooks
 (defun sndb-add-funcs-to-hook (hook &rest functions)
   "Add FUNCTIONS to HOOK."
   (dolist (function functions)
@@ -179,7 +184,6 @@
 
 (setq-default display-line-numbers-widen t)
 (setq display-line-numbers-width-start t)
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 ;;;; Parentheses
 (setq show-paren-delay 0)
@@ -230,44 +234,30 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 
-(setq sndb-random-font-on-startup nil)
-
-(defun sndb-random-font ()
-  "Returns a random font from `sndb-favorite-mono-fonts'."
-  (let ((fonts sndb-favorite-mono-fonts))
-    (nth (random (length fonts)) fonts)))
-
 (setq sndb-favorite-mono-fonts
-      '("Fantasque Sans Mono-12"
-        "UW Ttyp0-12"
-        "Iosevka-12"
-        "JetBrains Mono-10.5"
-        "Source Code Pro-10.5"
-        "Hack-10.5"
-        "Go Mono-10.5"
-        "Fira Mono-10.5"))
-
-(setq sndb-mono-font
-      (if sndb-random-font-on-startup
-          (sndb-random-font)
-        (car (reverse sndb-favorite-mono-fonts))))
-
+      '("Source Code Pro-11.5"
+        "Hack-11.5"
+        "Fira Mono-11.5"))
+(setq sndb-mono-font (car sndb-favorite-mono-fonts))
 (setq sndb-sans-font "Source Sans Pro-12")
 
 (set-face-attribute 'default nil :font sndb-mono-font)
 (set-face-attribute 'fixed-pitch nil :font sndb-mono-font)
 (set-face-attribute 'variable-pitch nil :font sndb-sans-font)
 
+(defun sndb-set-mono-font (font)
+  "Set FONT."
+  (set-face-attribute 'default nil :font font)
+  (set-face-attribute 'fixed-pitch nil :font font)
+  (message "Font: %s" font))
+
 (defun sndb-rotate-fonts ()
   "Rotates the list of favorite monospaced fonts."
   (interactive)
-  (let ((next (car sndb-favorite-mono-fonts)))
-    (setq sndb-favorite-mono-fonts
-          (append (cdr sndb-favorite-mono-fonts)
-                  (list next)))
-    (set-face-attribute 'default nil :font next)
-    (set-face-attribute 'fixed-pitch nil :font next)
-    (message "Font: %s" next)))
+  (setq sndb-favorite-mono-fonts
+        (append (cdr sndb-favorite-mono-fonts)
+                (list (car sndb-favorite-mono-fonts))))
+  (sndb-set-mono-font (car sndb-favorite-mono-fonts)))
 
 (global-set-key (kbd "<f5> f") #'sndb-rotate-fonts)
 
