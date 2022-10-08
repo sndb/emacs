@@ -234,10 +234,7 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 
-(setq sndb-favorite-mono-fonts
-      '("Source Code Pro-11.5"
-        "Hack-11.5"
-        "Fira Mono-11.5"))
+(setq sndb-favorite-mono-fonts '("Source Code Pro-11.5" "Hack-11.5"))
 (setq sndb-mono-font (car sndb-favorite-mono-fonts))
 (setq sndb-sans-font "Source Sans Pro-12")
 
