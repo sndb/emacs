@@ -234,7 +234,7 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 
-(setq sndb-favorite-mono-fonts '("Source Code Pro-11.5" "Hack-11.5"))
+(setq sndb-favorite-mono-fonts '("Consolas-13" "Hack-11.5"))
 (setq sndb-mono-font (car sndb-favorite-mono-fonts))
 (setq sndb-sans-font "Source Sans Pro-12")
 
@@ -590,6 +590,7 @@
 (org-clock-persistence-insinuate)
 
 ;; Agenda
+(setq org-agenda-window-setup 'other-tab)
 (setq org-agenda-files `(,org-directory))
 (setq org-agenda-dim-blocked-tasks t)
 (setq org-agenda-todo-ignore-scheduled 'future)
