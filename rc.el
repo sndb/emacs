@@ -234,7 +234,7 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 
-(setq sndb-favorite-mono-fonts '("Consolas-13" "Hack-11.5"))
+(setq sndb-favorite-mono-fonts '("Fira Mono-10.5" "Go Mono-10.5" "Cozette"))
 (setq sndb-mono-font (car sndb-favorite-mono-fonts))
 (setq sndb-sans-font "Source Sans Pro-12")
 
@@ -292,6 +292,7 @@
 ;; C
 (setq c-default-style "linux")
 (add-hook 'c-mode-common-hook #'indent-tabs-mode)
+(setq comment-style 'extra-line)
 
 ;; Go
 (add-hook 'go-mode-hook (lambda () (setq fill-column 80)))
