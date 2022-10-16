@@ -234,7 +234,7 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 
-(setq sndb-favorite-mono-fonts '("Fira Mono-10.5" "Go Mono-10.5" "Cozette"))
+(setq sndb-favorite-mono-fonts '("Fira Mono-10.5" "Cascadia Mono-10.5" "Go Mono-10.5" "Cozette"))
 (setq sndb-mono-font (car sndb-favorite-mono-fonts))
 (setq sndb-sans-font "Source Sans Pro-12")
 
