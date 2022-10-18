@@ -265,9 +265,7 @@
 (require 'modus-themes)
 (setq modus-themes-syntax '(yellow-comments green-strings)
       modus-themes-mixed-fonts t
-      modus-themes-prompts '(bold)
-      modus-themes-mode-line '(accented borderless)
-      modus-themes-region '(accented bg-only)
+      modus-themes-mode-line '(3d)
       modus-themes-org-blocks 'gray-background
       modus-themes-fringes 'subtle)
 
