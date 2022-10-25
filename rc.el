@@ -110,11 +110,6 @@
 (when (file-exists-p sndb-private-file)
   (load-file sndb-private-file))
 
-;;;; Resources
-(setq max-specpdl-size (* 10 max-specpdl-size))
-(setq max-lisp-eval-depth (* 10 max-lisp-eval-depth))
-(setq gc-cons-threshold (* 16 (expt 2 20)))
-
 ;;;; Backups
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backup/"))))
 (setq backup-by-copying t)
@@ -199,19 +194,9 @@
 (require 'hl-todo)
 (global-hl-todo-mode 1)
 
-;;;; Windows and frame
-(setq frame-resize-pixelwise t)
+;;;; Windows
 (setq window-resize-pixelwise t)
 (setq window-combination-resize t)
-;; If buffer-file-name is non-nil, use buffer name and file name as a
-;; frame title; otherwise, use buffer name and default-directory.
-(setq frame-title-format
-      '(buffer-file-name "%b - %f" ("%b - " default-directory)))
-
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(horizontal-scroll-bar-mode -1)
 
 (global-set-key [remap balance-windows] #'balance-windows-area)
 (global-set-key (kbd "C-x !") #'delete-other-windows-vertically)
