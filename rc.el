@@ -548,7 +548,10 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
-   (shell . t)))
+   (shell . t)
+   (emacs-lisp . t)
+   (C . t)
+   (latex . t)))
 
 ;; UI
 (setq org-catch-invisible-edits 'error)
