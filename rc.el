@@ -175,6 +175,7 @@
 (setq visible-bell t)
 (setq-default indicate-empty-lines t)
 (setq use-dialog-box nil)
+(setq-default cursor-type 'bar)
 
 (blink-cursor-mode -1)
 (display-time-mode -1)
