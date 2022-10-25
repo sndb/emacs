@@ -176,6 +176,8 @@
 (setq visible-bell t)
 (setq-default indicate-empty-lines t)
 (setq use-dialog-box nil)
+(setq-default display-line-numbers-widen t)
+(setq display-line-numbers-width-start t)
 (setq-default cursor-type 'bar)
 
 (blink-cursor-mode -1)
@@ -184,8 +186,9 @@
 (column-number-mode 1)
 (size-indication-mode -1)
 
-(setq-default display-line-numbers-widen t)
-(setq display-line-numbers-width-start t)
+(sndb-add-func-to-hooks (lambda () (setq show-trailing-whitespace t))
+                        'text-mode-hook
+                        'prog-mode-hook)
 
 ;;;; Parentheses
 (setq show-paren-delay 0)
@@ -349,9 +352,6 @@
 (setq default-input-method "TeX")
 (setq display-raw-bytes-as-hex t)
 (setq delete-trailing-lines nil)
-(sndb-add-func-to-hooks (lambda () (setq show-trailing-whitespace t))
-                        'text-mode-hook
-                        'prog-mode-hook)
 
 (defun sndb-format-buffer ()
   "Auto-format the source code in the current buffer."
