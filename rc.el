@@ -68,6 +68,7 @@
         password-store
         pdf-tools
         vterm
+        vterm-toggle
 
         ;; Miscellaneous
         circadian
@@ -666,7 +667,12 @@
 
 ;;;; Terminal emulator
 (require 'vterm)
-(global-set-key (kbd "C-c v") #'vterm-other-window)
+(require 'vterm-toggle)
+(global-set-key (kbd "C-c v") #'vterm-toggle)
+(global-set-key (kbd "C-c V") #'vterm-toggle-cd)
+(define-key vterm-mode-map (kbd "C-<return>") #'vterm-toggle-insert-cd)
+(define-key vterm-mode-map (kbd "C-S-n") #'vterm-toggle-forward)
+(define-key vterm-mode-map (kbd "C-S-p") #'vterm-toggle-backward)
 
 ;;;; PDF reader
 (require 'pdf-tools)
