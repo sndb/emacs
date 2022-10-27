@@ -692,7 +692,7 @@
 (require 'dired)
 (setq dired-kill-when-opening-new-dired-buffer t)
 (setq dired-dwim-target t)
-(setq dired-listing-switches "-lhvFA --group-directories-first --time-style=long-iso")
+(setq dired-listing-switches "-lhFA")
 
 ;;;; Multimedia system
 (require 'emms-setup)
@@ -729,7 +729,8 @@
 (global-set-key (kbd "<XF86HomePage>") #'elfeed)
 
 ;;;; Mail
-(setq user-full-name "Daniil Sobolev"
+(setq auth-sources '("~/.authinfo.gpg")
+      user-full-name "Daniil Sobolev"
       user-mail-address "sndb@sndb.xyz")
 
 (require 'notmuch)
