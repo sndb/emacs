@@ -173,7 +173,6 @@
 (setq use-dialog-box nil)
 (setq-default display-line-numbers-widen t)
 (setq display-line-numbers-width-start t)
-(setq-default cursor-type 'bar)
 
 (blink-cursor-mode -1)
 (display-time-mode -1)
