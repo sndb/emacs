@@ -110,6 +110,8 @@
 (when (file-exists-p sndb-private-file)
   (load-file sndb-private-file))
 
+(setq large-file-warning-threshold (* 50 (expt 2 20)))
+
 ;;;; Backups
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backup/"))))
 (setq backup-by-copying t)
