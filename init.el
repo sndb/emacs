@@ -55,7 +55,6 @@
         format-all
         gdscript-mode
         go-mode
-        org-fragtog
         racket-mode
         rust-mode
 
@@ -547,9 +546,7 @@
 (setq org-list-allow-alphabetical t)
 (setq org-ellipsis "…")
 
-(sndb-add-funcs-to-hook 'org-mode-hook
-                        #'visual-line-mode
-                        #'org-fragtog-mode)
+(add-hook 'org-mode-hook #'visual-line-mode)
 
 ;; Images
 (setq org-startup-with-inline-images t)
