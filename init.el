@@ -654,6 +654,7 @@
 ;;;; Terminal emulator
 (require 'vterm)
 (require 'vterm-toggle)
+(setq vterm-max-scrollback (expt 2 14))
 (global-set-key (kbd "C-c v") #'vterm-toggle)
 (global-set-key (kbd "C-c V") #'vterm-toggle-cd)
 (define-key vterm-mode-map (kbd "C-<return>") #'vterm-toggle-insert-cd)
