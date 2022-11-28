@@ -224,27 +224,26 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 
-(setq sndb-favorite-mono-fonts '("Fira Mono-10.5" "Cascadia Mono-10.5" "Go Mono-10.5" "Cozette"))
-(setq sndb-mono-font (car sndb-favorite-mono-fonts))
-(setq sndb-sans-font "Source Sans Pro-12")
+(setq sndb-favorite-fonts '("Fira Mono-10.5" "Cascadia Mono-10.5" "Go Mono-10.5" "Cozette"))
+(setq sndb-default-font (car sndb-favorite-fonts))
 
-(set-face-attribute 'default nil :font sndb-mono-font)
-(set-face-attribute 'fixed-pitch nil :font sndb-mono-font)
-(set-face-attribute 'variable-pitch nil :font sndb-sans-font)
+(set-face-attribute 'default nil :font sndb-default-font)
+(set-face-attribute 'fixed-pitch nil :font sndb-default-font)
+(set-face-attribute 'variable-pitch nil :font "Crimson Pro-14")
 
-(defun sndb-set-mono-font (font)
+(defun sndb-set-font (font)
   "Set FONT."
   (set-face-attribute 'default nil :font font)
   (set-face-attribute 'fixed-pitch nil :font font)
   (message "Font: %s" font))
 
 (defun sndb-rotate-fonts ()
-  "Rotates the list of favorite monospaced fonts."
+  "Rotates the list of favorite fonts."
   (interactive)
-  (setq sndb-favorite-mono-fonts
-        (append (cdr sndb-favorite-mono-fonts)
-                (list (car sndb-favorite-mono-fonts))))
-  (sndb-set-mono-font (car sndb-favorite-mono-fonts)))
+  (setq sndb-favorite-fonts
+        (append (cdr sndb-favorite-fonts)
+                (list (car sndb-favorite-fonts))))
+  (sndb-set-font (car sndb-favorite-fonts)))
 
 (global-set-key (kbd "<f5> f") #'sndb-rotate-fonts)
 
