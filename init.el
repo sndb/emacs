@@ -254,7 +254,7 @@
 (require 'modus-themes)
 (setq modus-themes-syntax '(yellow-comments green-strings)
       modus-themes-mixed-fonts t
-      modus-themes-mode-line '(3d)
+      modus-themes-mode-line '(3d accented)
       modus-themes-org-blocks 'gray-background
       modus-themes-fringes 'subtle)
 
