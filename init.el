@@ -70,11 +70,11 @@
         vterm-toggle
 
         ;; Miscellaneous
-        circadian
         diff-hl
         ef-themes
         hl-todo
-        modus-themes))
+        modus-themes
+        standard-themes))
 
 (defun sndb-install-packages ()
   "Install all the packages from `sndb-package-list'."
@@ -258,12 +258,8 @@
       modus-themes-org-blocks 'gray-background
       modus-themes-fringes 'subtle)
 
-(require 'circadian)
-(setq circadian-themes '((:sunrise . modus-operandi)
-                         (:sunset  . modus-vivendi)))
-(if (not calendar-latitude) (setq calendar-latitude 55))
-(if (not calendar-longitude) (setq calendar-longitude 37))
-(circadian-setup)
+(require 'ef-themes)
+(require 'standard-themes)
 
 (defun sndb-disable-themes ()
   "Disable all enabled themes."
@@ -271,8 +267,13 @@
   (mapc #'disable-theme custom-enabled-themes))
 
 (global-set-key (kbd "<f5> <f5>") #'sndb-disable-themes)
-(global-set-key (kbd "<f5> m") #'modus-themes-toggle)
 (global-set-key (kbd "<f5> e") #'ef-themes-select)
+(global-set-key (kbd "<f5> r") #'ef-themes-load-random)
+(global-set-key (kbd "<f5> m") #'modus-themes-toggle)
+(global-set-key (kbd "<f5> s") #'standard-themes-toggle)
+
+(sndb-disable-themes)
+(load-theme 'standard-dark)
 
 ;;;; Programming
 
