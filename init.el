@@ -272,8 +272,8 @@
 (global-set-key (kbd "<f5> m") #'modus-themes-toggle)
 (global-set-key (kbd "<f5> s") #'standard-themes-toggle)
 
-(sndb-disable-themes)
-(load-theme 'standard-dark)
+(modus-themes-load-themes)
+(modus-themes-load-vivendi)
 
 ;;;; Programming
 
