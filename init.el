@@ -692,6 +692,7 @@
 (setq dired-kill-when-opening-new-dired-buffer t)
 (setq dired-dwim-target t)
 (setq dired-listing-switches "-lhFA")
+(setq dired-switches-in-mode-line 'as-is)
 
 ;;;; Multimedia system
 (require 'emms-setup)
