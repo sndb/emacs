@@ -251,15 +251,17 @@
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
 
-(require 'modus-themes)
-(setq modus-themes-syntax '(yellow-comments green-strings)
-      modus-themes-mixed-fonts t
-      modus-themes-mode-line '(3d accented)
-      modus-themes-org-blocks 'gray-background
-      modus-themes-fringes 'subtle)
-
 (require 'ef-themes)
+(require 'modus-themes)
 (require 'standard-themes)
+
+(setq modus-themes-common-palette-overrides
+      '((string green-cooler)
+        (comment yellow-cooler)
+        (bg-mode-line-active bg-blue-subtle)
+        (border-mode-line-active bg-blue-subtle)
+        (bg-mode-line-inactive bg-blue-nuanced)
+        (border-mode-line-inactive bg-blue-nuanced)))
 
 (defun sndb-disable-themes ()
   "Disable all enabled themes."
@@ -272,8 +274,7 @@
 (global-set-key (kbd "<f5> m") #'modus-themes-toggle)
 (global-set-key (kbd "<f5> s") #'standard-themes-toggle)
 
-(modus-themes-load-themes)
-(modus-themes-load-vivendi)
+(load-theme 'modus-vivendi)
 
 ;;;; Programming
 
