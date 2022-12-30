@@ -255,13 +255,17 @@
 (require 'modus-themes)
 (require 'standard-themes)
 
+(setq modus-themes-region '(bg-only))
+(setq modus-themes-italic-constructs t)
+(setq modus-themes-mixed-fonts t)
 (setq modus-themes-common-palette-overrides
       '((string green-cooler)
-        (comment yellow-cooler)
-        (bg-mode-line-active bg-blue-subtle)
-        (border-mode-line-active bg-blue-subtle)
-        (bg-mode-line-inactive bg-blue-nuanced)
-        (border-mode-line-inactive bg-blue-nuanced)))
+        (comment yellow-faint)
+        (bg-paren-match bg-magenta-intense)
+        (border-mode-line-active unspecified)
+        (border-mode-line-inactive unspecified)
+        (bg-mode-line-active bg-yellow-subtle)
+        (bg-mode-line-inactive bg-yellow-nuanced)))
 
 (defun sndb-disable-themes ()
   "Disable all enabled themes."
