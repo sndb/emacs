@@ -264,8 +264,8 @@
         (bg-paren-match bg-magenta-intense)
         (border-mode-line-active unspecified)
         (border-mode-line-inactive unspecified)
-        (bg-mode-line-active bg-yellow-subtle)
-        (bg-mode-line-inactive bg-yellow-nuanced)))
+        (bg-mode-line-active bg-blue-subtle)
+        (bg-mode-line-inactive bg-blue-nuanced)))
 
 (defun sndb-disable-themes ()
   "Disable all enabled themes."
