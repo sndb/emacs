@@ -2,6 +2,7 @@
 (setq max-lisp-eval-depth (* 4 max-lisp-eval-depth))
 (setq gc-cons-threshold (expt 2 26))
 (setq load-prefer-newer t)
+(setq native-comp-async-report-warnings-errors 'silent)
 
 (setq frame-title-format '(buffer-file-name "%b - %f" ("%b - " default-directory)))
 (setq frame-resize-pixelwise t)
