@@ -461,6 +461,7 @@
 (global-set-key (kbd "M-s D") #'consult-locate)
 (global-set-key (kbd "M-s l") #'consult-line)
 (global-set-key (kbd "M-s L") #'consult-line-multi)
+(global-set-key (kbd "M-s r") #'consult-ripgrep)
 (global-set-key (kbd "M-s g") #'consult-grep)
 (global-set-key (kbd "M-s G") #'consult-git-grep)
 
