@@ -316,19 +316,15 @@
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 1)
 
-(defun sndb-half-screen ()
-  "Return the half of the selected window's height."
-  (/ (window-body-height) 2))
-
 (defun sndb-scroll-half-screen-up ()
   "Scroll half screen up."
   (interactive)
-  (scroll-up (sndb-half-screen)))
+  (scroll-up 4))
 
 (defun sndb-scroll-half-screen-down ()
   "Scroll half screen down."
   (interactive)
-  (scroll-down (sndb-half-screen)))
+  (scroll-down 4))
 
 (global-set-key (kbd "C-S-n") #'sndb-scroll-half-screen-up)
 (global-set-key (kbd "C-S-p") #'sndb-scroll-half-screen-down)
