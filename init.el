@@ -260,7 +260,7 @@
 (setq modus-themes-mixed-fonts t)
 (setq modus-themes-common-palette-overrides
       '((string green-cooler)
-        (comment yellow-faint)
+        (comment yellow-cooler)
         (bg-paren-match bg-magenta-intense)
         (border-mode-line-active unspecified)
         (border-mode-line-inactive unspecified)
