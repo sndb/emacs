@@ -39,6 +39,7 @@
 
 (setq sndb-package-list
       '(;; Completion
+        affe
         cape
         consult
         corfu
@@ -51,9 +52,7 @@
 
         ;; Languages
         eglot
-        elixir-mode
         format-all
-        gdscript-mode
         go-mode
         racket-mode
         rust-mode
@@ -453,13 +452,9 @@
 (global-set-key [remap yank-pop] #'consult-yank-pop)
 
 ;; search-map
-(global-set-key (kbd "M-s d") #'consult-find)
 (global-set-key (kbd "M-s D") #'consult-locate)
 (global-set-key (kbd "M-s l") #'consult-line)
 (global-set-key (kbd "M-s L") #'consult-line-multi)
-(global-set-key (kbd "M-s r") #'consult-ripgrep)
-(global-set-key (kbd "M-s g") #'consult-grep)
-(global-set-key (kbd "M-s G") #'consult-git-grep)
 
 ;; goto-map
 (global-set-key (kbd "M-g i") #'consult-imenu)
@@ -473,6 +468,17 @@
 (global-set-key (kbd "C-M-#") #'consult-register)
 (global-set-key (kbd "M-#") #'consult-register-load)
 (global-set-key (kbd "M-'") #'consult-register-store)
+
+;;;; Affe
+(require 'affe)
+
+(defun affe-orderless-regexp-compiler (input _type _ignorecase)
+  (setq input (orderless-pattern-compiler input))
+  (cons input (lambda (str) (orderless--highlight input str))))
+(setq affe-regexp-compiler #'affe-orderless-regexp-compiler)
+
+(global-set-key (kbd "M-s d") #'affe-find)
+(global-set-key (kbd "M-s g") #'affe-grep)
 
 ;;;; Embark
 (require 'embark)
@@ -504,16 +510,12 @@
 
 ;;;; Eglot
 (require 'eglot)
-(require 'elixir-mode)
 (require 'go-mode)
 (require 'racket-mode)
 (require 'rust-mode)
 
-(add-to-list 'eglot-server-programs '(elixir-mode "elixir-ls"))
-
 (sndb-add-func-to-hooks #'eglot-ensure
                         'c-mode-hook
-                        'elixir-mode-hook
                         'go-mode-hook
                         'python-mode-hook
                         'racket-mode-hook
