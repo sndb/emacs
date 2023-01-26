@@ -69,10 +69,8 @@
 
         ;; Miscellaneous
         diff-hl
-        ef-themes
         hl-todo
-        modus-themes
-        standard-themes))
+        modus-themes))
 
 (defun sndb-install-packages ()
   "Install all the packages from `sndb-package-list'."
@@ -84,12 +82,12 @@
 
 ;;;; Hooks
 (defun sndb-add-funcs-to-hook (hook &rest functions)
-  "Add FUNCTIONS to HOOK."
+  "Add several FUNCTIONS to HOOK."
   (dolist (function functions)
     (add-hook hook function)))
 
 (defun sndb-add-func-to-hooks (function &rest hooks)
-  "Add FUNCTION to HOOKS."
+  "Add FUNCTION to several HOOKS."
   (dolist (hook hooks)
     (add-hook hook function)))
 
@@ -107,7 +105,7 @@
 (when (file-exists-p sndb-private-file)
   (load-file sndb-private-file))
 
-(setq large-file-warning-threshold (* 50 (expt 2 20)))
+(setq large-file-warning-threshold 52428800) ; 50 MB
 
 ;;;; Backups
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backup/"))))
@@ -120,7 +118,7 @@
 
 ;;;; Recent files
 (require 'recentf)
-(setq recentf-max-saved-items 256)
+(setq recentf-max-saved-items 200)
 (setq recentf-exclude
       '(;; Tramp
         "^/ssh:"
@@ -141,7 +139,6 @@
 
 ;;;; Point history
 (require 'saveplace)
-(setq save-place-limit 256)
 (save-place-mode 1)
 
 ;;;; Window history
@@ -150,7 +147,8 @@
 
 ;;;; Minibuffer history
 (require 'savehist)
-(setq history-length 1024)
+(setq history-delete-duplicates t)
+(setq history-length 1000)
 (savehist-mode 1)
 
 ;;;; Startup
@@ -210,7 +208,9 @@
 (require 'tab-bar)
 (setq tab-bar-close-button-show nil)
 (setq tab-bar-new-button-show nil)
-(setq tab-bar-close-last-tab-choice 'tab-bar-mode-disable)
+;; Tabs are a good way to manage multiple workflows.
+;; The enabled tab bar is a reminder to use this feature.
+(tab-bar-mode 1)
 
 ;;;; Clipboard
 (setq save-interprogram-paste-before-kill t)
@@ -222,37 +222,15 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 
-(setq sndb-favorite-fonts '("Go Mono-10.5" "Fira Mono-10.5" "Cozette"))
-(setq sndb-default-font (car sndb-favorite-fonts))
-
-(set-face-attribute 'default nil :font sndb-default-font)
-(set-face-attribute 'fixed-pitch nil :font sndb-default-font)
+(set-face-attribute 'default nil :font "Go Mono-10.5")
+(set-face-attribute 'fixed-pitch nil :font "Go Mono-10.5")
 (set-face-attribute 'variable-pitch nil :font "Crimson Pro-14")
-
-(defun sndb-set-font (font)
-  "Set FONT."
-  (set-face-attribute 'default nil :font font)
-  (set-face-attribute 'fixed-pitch nil :font font)
-  (message "Font: %s" font))
-
-(defun sndb-rotate-fonts ()
-  "Rotates the list of favorite fonts."
-  (interactive)
-  (setq sndb-favorite-fonts
-        (append (cdr sndb-favorite-fonts)
-                (list (car sndb-favorite-fonts))))
-  (sndb-set-font (car sndb-favorite-fonts)))
-
-(global-set-key (kbd "<f5> f") #'sndb-rotate-fonts)
 
 ;;;; Theme
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
 
-(require 'ef-themes)
 (require 'modus-themes)
-(require 'standard-themes)
-
 (setq modus-themes-region '(bg-only))
 (setq modus-themes-italic-constructs t)
 (setq modus-themes-mixed-fonts t)
@@ -265,16 +243,7 @@
         (bg-mode-line-active bg-blue-subtle)
         (bg-mode-line-inactive bg-blue-nuanced)))
 
-(defun sndb-disable-themes ()
-  "Disable all enabled themes."
-  (interactive)
-  (mapc #'disable-theme custom-enabled-themes))
-
-(global-set-key (kbd "<f5> <f5>") #'sndb-disable-themes)
-(global-set-key (kbd "<f5> e") #'ef-themes-select)
-(global-set-key (kbd "<f5> r") #'ef-themes-load-random)
-(global-set-key (kbd "<f5> m") #'modus-themes-toggle)
-(global-set-key (kbd "<f5> s") #'standard-themes-toggle)
+(global-set-key (kbd "<f5>") #'modus-themes-toggle)
 
 (load-theme 'modus-vivendi)
 
@@ -282,28 +251,26 @@
 
 ;; C
 (setq c-default-style "linux")
-(add-hook 'c-mode-common-hook #'indent-tabs-mode)
 (setq comment-style 'extra-line)
+(add-hook 'c-mode-common-hook #'indent-tabs-mode)
 
 ;; Go
-(add-hook 'go-mode-hook (lambda () (setq fill-column 80)))
 (add-hook 'before-save-hook #'gofmt-before-save)
 
 ;; SQL
 (setq sql-product 'sqlite)
 (add-hook 'sql-mode-hook
-          (lambda () (setq format-all-formatters
-                           '(("SQL" (pgformatter
-                                     "--function-case" "2"
-                                     "--keyword-case" "2"
-                                     "--type-case" "2"
-                                     "--no-extra-line"
-                                     "--tabs"))))))
+          (lambda ()
+            (setq format-all-formatters
+                  '(("SQL" (pgformatter
+                            "--function-case" "2"
+                            "--keyword-case" "2"
+                            "--type-case" "2"
+                            "--no-extra-line"
+                            "--tabs"))))))
 
-;; CSS
+;; Web
 (setq css-indent-offset 2)
-
-;; JS
 (setq js-indent-level 2)
 
 ;;;; Mouse
@@ -314,28 +281,28 @@
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 1)
 
-(defun sndb-scroll-half-screen-up ()
-  "Scroll half screen up."
+(defun sndb-scroll-up ()
+  "Scroll a few lines up."
   (interactive)
   (scroll-up 4))
 
-(defun sndb-scroll-half-screen-down ()
-  "Scroll half screen down."
+(defun sndb-scroll-down ()
+  "Scroll a few lines down."
   (interactive)
   (scroll-down 4))
 
-(global-set-key (kbd "C-S-n") #'sndb-scroll-half-screen-up)
-(global-set-key (kbd "C-S-p") #'sndb-scroll-half-screen-down)
+(global-set-key (kbd "C-S-n") #'sndb-scroll-up)
+(global-set-key (kbd "C-S-p") #'sndb-scroll-down)
 
 ;;;; Format
 (require 'format-all)
 
+(setq default-input-method "TeX")
+(setq delete-trailing-lines nil)
+(setq display-raw-bytes-as-hex t)
+(setq require-final-newline t)
 (setq sentence-end-double-space nil)
 (setq-default indent-tabs-mode nil)
-(setq require-final-newline t)
-(setq default-input-method "TeX")
-(setq display-raw-bytes-as-hex t)
-(setq delete-trailing-lines nil)
 
 (defun sndb-format-buffer ()
   "Auto-format the source code in the current buffer."
@@ -405,8 +372,8 @@
 
 ;;;; Vertico
 (require 'vertico)
-(setq vertico-count 20)
 (setq vertico-scroll-margin 0)
+(setq vertico-cycle t)
 (vertico-mode 1)
 
 ;;;; Orderless
@@ -415,7 +382,11 @@
 (setq completion-styles '(orderless basic))
 (setq completion-category-defaults nil)
 (setq completion-category-overrides '((file (styles basic partial-completion))))
-(setq orderless-matching-styles '(orderless-flex orderless-regexp))
+
+(setq orderless-matching-styles
+      '(orderless-flex
+        orderless-regexp))
+
 (setq orderless-style-dispatchers
       '(sndb-orderless-literal-dispatcher
         sndb-orderless-initialism-dispatcher))
@@ -657,7 +628,7 @@
 ;;;; Terminal emulator
 (require 'vterm)
 (global-set-key (kbd "C-c v") #'vterm)
-(setq vterm-max-scrollback (expt 2 14))
+(setq vterm-max-scrollback 16384)
 
 ;;;; PDF reader
 (require 'pdf-tools)
