@@ -66,7 +66,6 @@
         password-store
         pdf-tools
         vterm
-        vterm-toggle
 
         ;; Miscellaneous
         diff-hl
@@ -657,13 +656,8 @@
 
 ;;;; Terminal emulator
 (require 'vterm)
-(require 'vterm-toggle)
+(global-set-key (kbd "C-c v") #'vterm)
 (setq vterm-max-scrollback (expt 2 14))
-(global-set-key (kbd "C-c v") #'vterm-toggle)
-(global-set-key (kbd "C-c V") #'vterm-toggle-cd)
-(define-key vterm-mode-map (kbd "C-<return>") #'vterm-toggle-insert-cd)
-(define-key vterm-mode-map (kbd "C-S-n") #'vterm-toggle-forward)
-(define-key vterm-mode-map (kbd "C-S-p") #'vterm-toggle-backward)
 
 ;;;; PDF reader
 (require 'pdf-tools)
