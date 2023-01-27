@@ -80,6 +80,12 @@
     (unless (package-installed-p package)
       (package-install package))))
 
+;;;; Hotkeys
+(global-unset-key (kbd "<insert>"))
+(global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-x C-c"))
+(global-set-key (kbd "C-x C-c C-c") #'save-buffers-kill-emacs)
+
 ;;;; Hooks
 (defun sndb-add-funcs-to-hook (hook &rest functions)
   "Add several FUNCTIONS to HOOK."
@@ -158,7 +164,6 @@
 
 ;;;; Indicators
 (setq use-short-answers t)
-(setq confirm-kill-emacs #'yes-or-no-p)
 (setq confirm-kill-processes nil)
 (setq echo-keystrokes 0.1)
 (setq display-time-day-and-date t)
