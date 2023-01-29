@@ -54,8 +54,6 @@
         eglot
         format-all
         go-mode
-        racket-mode
-        rust-mode
 
         ;; Applications
         elfeed
@@ -486,15 +484,11 @@
 ;;;; Eglot
 (require 'eglot)
 (require 'go-mode)
-(require 'racket-mode)
-(require 'rust-mode)
 
 (sndb-add-func-to-hooks #'eglot-ensure
                         'c-mode-hook
                         'go-mode-hook
                         'python-mode-hook
-                        'racket-mode-hook
-                        'rust-mode-hook
                         'sh-mode-hook)
 
 (define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
