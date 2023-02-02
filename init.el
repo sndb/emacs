@@ -234,7 +234,6 @@
 (setq x-gtk-use-system-tooltips nil)
 
 (require 'modus-themes)
-(setq modus-themes-region '(bg-only))
 (setq modus-themes-italic-constructs t)
 (setq modus-themes-mixed-fonts t)
 (setq modus-themes-common-palette-overrides
