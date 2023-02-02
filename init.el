@@ -518,6 +518,7 @@
 (setq org-id-link-to-org-use-id 'create-if-interactive)
 (setq org-list-allow-alphabetical t)
 (setq org-ellipsis "…")
+(setq org-export-with-author nil)
 
 (add-hook 'org-mode-hook #'visual-line-mode)
 
