@@ -52,6 +52,7 @@
 
         ;; Languages
         eglot
+        eldoc-box
         format-all
         go-mode
 
@@ -368,9 +369,11 @@
 
 ;;;; ElDoc
 (require 'eldoc)
+(require 'eldoc-box)
+
 (setq eldoc-echo-area-prefer-doc-buffer t)
 (setq eldoc-echo-area-use-multiline-p nil)
-(setq eldoc-idle-delay 0.1)
+(setq eldoc-idle-delay 0)
 
 ;;;; Vertico
 (require 'vertico)
@@ -492,6 +495,7 @@
 
 (define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
 (define-key eglot-mode-map (kbd "C-c t") #'eglot-code-actions)
+(define-key eglot-mode-map (kbd "C-h .") #'eldoc-box-eglot-help-at-point)
 
 ;;;; Org mode
 (require 'org)
