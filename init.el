@@ -99,7 +99,6 @@
 ;;;; Server
 (require 'server)
 (server-start)
-(global-set-key (kbd "C-c k") #'save-buffers-kill-emacs)
 
 ;;;; Files
 (setq custom-file (locate-user-emacs-file "custom.el"))
