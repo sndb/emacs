@@ -39,8 +39,6 @@
 
 (setq sndb-package-list
       '(;; Completion
-        affe
-        cape
         consult
         corfu
         embark
@@ -225,8 +223,8 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 
-(set-face-attribute 'default nil :font "Go Mono-10.5")
-(set-face-attribute 'fixed-pitch nil :font "Go Mono-10.5")
+(set-face-attribute 'default nil :font "Hack-10.5")
+(set-face-attribute 'fixed-pitch nil :font "Hack-10.5")
 (set-face-attribute 'variable-pitch nil :font "Crimson Pro-14")
 
 ;;;; Theme
@@ -236,7 +234,9 @@
 (require 'modus-themes)
 (setq modus-themes-italic-constructs t)
 (setq modus-themes-mixed-fonts t)
-(setq modus-themes-common-palette-overrides
+(setq modus-operandi-palette-overrides
+      modus-themes-preset-overrides-faint)
+(setq modus-vivendi-palette-overrides
       '((string green-cooler)
         (comment yellow-cooler)
         (bg-paren-match bg-magenta-intense)
@@ -426,6 +426,9 @@
 (global-set-key [remap yank-pop] #'consult-yank-pop)
 
 ;; search-map
+(global-set-key (kbd "M-s d") #'consult-find)
+(global-set-key (kbd "M-s g") #'consult-grep)
+(global-set-key (kbd "M-s G") #'consult-git-grep)
 (global-set-key (kbd "M-s D") #'consult-locate)
 (global-set-key (kbd "M-s l") #'consult-line)
 (global-set-key (kbd "M-s L") #'consult-line-multi)
@@ -442,17 +445,6 @@
 (global-set-key (kbd "C-M-#") #'consult-register)
 (global-set-key (kbd "M-#") #'consult-register-load)
 (global-set-key (kbd "M-'") #'consult-register-store)
-
-;;;; Affe
-(require 'affe)
-
-(defun affe-orderless-regexp-compiler (input _type _ignorecase)
-  (setq input (orderless-pattern-compiler input))
-  (cons input (lambda (str) (orderless--highlight input str))))
-(setq affe-regexp-compiler #'affe-orderless-regexp-compiler)
-
-(global-set-key (kbd "M-s d") #'affe-find)
-(global-set-key (kbd "M-s g") #'affe-grep)
 
 ;;;; Embark
 (require 'embark)
@@ -476,11 +468,6 @@
   (unless (bound-and-true-p vertico--input)
     (corfu-mode 1)))
 (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
-
-;;;; Cape
-(require 'cape)
-(dolist (capf '(cape-dabbrev cape-file cape-keyword cape-symbol cape-line cape-tex))
-  (add-to-list 'completion-at-point-functions capf))
 
 ;;;; Eglot
 (require 'eglot)
