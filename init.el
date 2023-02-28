@@ -223,8 +223,8 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 
-(set-face-attribute 'default nil :font "Hack-10.5")
-(set-face-attribute 'fixed-pitch nil :font "Hack-10.5")
+(set-face-attribute 'default nil :font "JetBrains Mono-10.5")
+(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono-10.5")
 (set-face-attribute 'variable-pitch nil :font "Crimson Pro-14")
 
 ;;;; Theme
@@ -232,7 +232,6 @@
 (setq x-gtk-use-system-tooltips nil)
 
 (require 'modus-themes)
-(setq modus-themes-italic-constructs t)
 (setq modus-themes-mixed-fonts t)
 (setq modus-operandi-palette-overrides
       modus-themes-preset-overrides-faint)
