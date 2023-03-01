@@ -233,9 +233,7 @@
 
 (require 'modus-themes)
 (setq modus-themes-mixed-fonts t)
-(setq modus-operandi-palette-overrides
-      modus-themes-preset-overrides-faint)
-(setq modus-vivendi-palette-overrides
+(setq modus-themes-common-palette-overrides
       '((string green-cooler)
         (comment yellow-cooler)
         (bg-paren-match bg-magenta-intense)
