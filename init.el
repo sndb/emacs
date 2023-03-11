@@ -272,6 +272,10 @@
 (setq css-indent-offset 2)
 (setq js-indent-level 2)
 
+;; Scheme
+(setq geiser-repl-history-filename
+      (concat user-emacs-directory "geiser-history"))
+
 ;;;; Mouse
 (setq mouse-wheel-progressive-speed nil)
 (setq mouse-yank-at-point t)
