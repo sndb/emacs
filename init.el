@@ -52,7 +52,10 @@
         eglot
         eldoc-box
         format-all
+        geiser
+        geiser-guile
         go-mode
+        paredit
 
         ;; Applications
         elfeed
