@@ -279,6 +279,11 @@
 (setq geiser-repl-history-filename
       (concat user-emacs-directory "geiser-history"))
 
+;; Paredit
+(sndb-add-func-to-hooks #'enable-paredit-mode
+                        'emacs-lisp-mode-hook
+                        'scheme-mode-hook)
+
 ;;;; Mouse
 (setq mouse-wheel-progressive-speed nil)
 (setq mouse-yank-at-point t)
