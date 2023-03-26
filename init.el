@@ -80,6 +80,23 @@
     (unless (package-installed-p package)
       (package-install package))))
 
+;;;; Theme
+(setq custom-safe-themes t)
+(setq x-gtk-use-system-tooltips nil)
+
+(require 'modus-themes)
+(setq modus-themes-mixed-fonts t)
+(setq modus-themes-common-palette-overrides
+      '((string green-cooler)
+        (comment yellow-cooler)
+        (border-mode-line-active unspecified)
+        (border-mode-line-inactive unspecified)
+        (bg-mode-line-active bg-blue-subtle)))
+
+(global-set-key (kbd "<f5>") #'modus-themes-toggle)
+
+(load-theme 'modus-vivendi)
+
 ;;;; Hotkeys
 (global-unset-key (kbd "<insert>"))
 (global-unset-key (kbd "C-z"))
@@ -195,11 +212,18 @@
 (global-hl-todo-mode 1)
 
 ;;;; Windows
+(defun prev-window ()
+  "Select the previous window."
+  (interactive)
+  (other-window -1))
+
 (setq window-resize-pixelwise t)
 (setq window-combination-resize t)
 
 (global-set-key [remap balance-windows] #'balance-windows-area)
 (global-set-key (kbd "C-x !") #'delete-other-windows-vertically)
+(global-set-key (kbd "C-;") #'other-window)
+(global-set-key (kbd "C-'") #'prev-window)
 
 ;;;; Buffers
 (setq view-read-only t)
@@ -229,25 +253,6 @@
 (set-face-attribute 'default nil :font "JetBrains Mono-10.5")
 (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono-10.5")
 (set-face-attribute 'variable-pitch nil :font "Crimson Pro-14")
-
-;;;; Theme
-(setq custom-safe-themes t)
-(setq x-gtk-use-system-tooltips nil)
-
-(require 'modus-themes)
-(setq modus-themes-mixed-fonts t)
-(setq modus-themes-common-palette-overrides
-      '((string green-cooler)
-        (comment yellow-cooler)
-        (bg-paren-match bg-magenta-intense)
-        (border-mode-line-active unspecified)
-        (border-mode-line-inactive unspecified)
-        (bg-mode-line-active bg-blue-subtle)
-        (bg-mode-line-inactive bg-blue-nuanced)))
-
-(global-set-key (kbd "<f5>") #'modus-themes-toggle)
-
-(load-theme 'modus-vivendi)
 
 ;;;; Programming
 
