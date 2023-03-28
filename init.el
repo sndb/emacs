@@ -224,6 +224,7 @@
 (global-set-key (kbd "C-x !") #'delete-other-windows-vertically)
 (global-set-key (kbd "C-;") #'other-window)
 (global-set-key (kbd "C-'") #'prev-window)
+(global-unset-key (kbd "C-x o"))
 
 ;;;; Buffers
 (setq view-read-only t)
@@ -281,6 +282,27 @@
 (setq js-indent-level 2)
 
 ;; Scheme
+(defun scheme-add-keywords (face-name keyword-rules)
+  (let* ((keyword-list
+          (mapcar (lambda (x)
+                    (symbol-name (cdr x)))
+                  keyword-rules))
+         (keyword-regexp
+          (concat "(" (regexp-opt keyword-list t) "\\>")))
+    (font-lock-add-keywords
+     'scheme-mode
+     `((,keyword-regexp 1 ',face-name))))
+  (mapc (lambda (x)
+          (put (cdr x)
+               'scheme-indent-function
+               (car x)))
+        keyword-rules))
+
+(scheme-add-keywords
+ 'font-lock-keyword-face
+ '((1 . letcc)
+   (1 . try)))
+
 (setq geiser-repl-history-filename
       (concat user-emacs-directory "geiser-history"))
 
