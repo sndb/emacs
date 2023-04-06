@@ -56,6 +56,7 @@
         geiser-guile
         go-mode
         paredit
+        racket-mode
 
         ;; Applications
         elfeed
@@ -211,6 +212,9 @@
 (require 'hl-todo)
 (global-hl-todo-mode 1)
 
+;;;; Long lines
+(global-so-long-mode 1)
+
 ;;;; Windows
 (defun prev-window ()
   "Select the previous window."
@@ -303,12 +307,15 @@
  '((1 . letcc)
    (1 . try)))
 
-(setq geiser-repl-history-filename
-      (concat user-emacs-directory "geiser-history"))
+(setq geiser-repl-history-filename (concat user-emacs-directory "geiser-history"))
+
+;; Racket
+(add-hook 'racket-before-run-hook #'racket-repl-clear)
 
 ;; Paredit
 (sndb-add-func-to-hooks #'enable-paredit-mode
                         'emacs-lisp-mode-hook
+                        'racket-mode-hook
                         'scheme-mode-hook)
 
 ;;;; Mouse
@@ -513,6 +520,7 @@
                         'c-mode-hook
                         'go-mode-hook
                         'python-mode-hook
+                        'racket-mode-hook
                         'sh-mode-hook)
 
 (define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
