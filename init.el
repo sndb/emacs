@@ -95,6 +95,7 @@
         (bg-mode-line-active bg-blue-subtle)))
 
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
+(global-set-key (kbd "C-<f5>") #'ef-themes-select)
 
 (load-theme 'modus-vivendi)
 
@@ -255,8 +256,8 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 
-(set-face-attribute 'default nil :font "JetBrains Mono-10.5")
-(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono-10.5")
+(set-face-attribute 'default nil :font "JetBrains Mono-11")
+(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono-11")
 (set-face-attribute 'variable-pitch nil :font "Crimson Pro-14")
 
 ;;;; Programming
@@ -660,7 +661,8 @@
 
 ;;;; Terminal emulator
 (require 'vterm)
-(global-set-key (kbd "C-c v") #'vterm)
+(global-set-key (kbd "<f2>") #'vterm)
+(global-set-key (kbd "C-<f2>") #'vterm-other-window)
 (setq vterm-max-scrollback 16384)
 
 ;;;; PDF reader
