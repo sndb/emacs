@@ -49,6 +49,8 @@
         wgrep
 
         ;; Languages
+        cider
+        clojure-mode
         eglot
         eldoc-box
         format-all
@@ -68,9 +70,10 @@
         pdf-tools
         vterm
 
-        ;; Miscellaneous
+        ;; Look
         diff-hl
         hl-todo
+        ef-themes
         modus-themes))
 
 (defun sndb-install-packages ()
@@ -315,6 +318,7 @@
 
 ;; Paredit
 (sndb-add-func-to-hooks #'enable-paredit-mode
+                        'clojure-mode-hook
                         'emacs-lisp-mode-hook
                         'racket-mode-hook
                         'scheme-mode-hook)
