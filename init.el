@@ -258,10 +258,8 @@
 
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
-
-(set-face-attribute 'default nil :font "JetBrains Mono-11")
-(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono-11")
-(set-face-attribute 'variable-pitch nil :font "Crimson Pro-14")
+(mapc (lambda (face) (set-face-attribute face nil :font "JetBrains Mono-11"))
+      '(default fixed-pitch))
 
 ;;;; Programming
 
@@ -523,6 +521,7 @@
 
 (sndb-add-func-to-hooks #'eglot-ensure
                         'c-mode-hook
+                        'clojure-mode-hook
                         'go-mode-hook
                         'python-mode-hook
                         'racket-mode-hook
