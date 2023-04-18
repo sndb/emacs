@@ -80,13 +80,13 @@
 
 (add-to-list 'load-path (locate-user-emacs-file "sndb-modules"))
 
-(require 'sndb-appearance)
-(require 'sndb-application)
-(require 'sndb-completion)
-(require 'sndb-control)
 (require 'sndb-essential)
-(require 'sndb-git)
-(require 'sndb-org)
+(require 'sndb-appearance)
+(require 'sndb-control)
 (require 'sndb-programming)
+(require 'sndb-completion)
+(require 'sndb-org)
+(require 'sndb-git)
+(require 'sndb-application)
 
 ;;; rc.el ends here
