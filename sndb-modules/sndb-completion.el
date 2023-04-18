@@ -1,11 +1,6 @@
-;;;; Dabbrev
-(require 'dabbrev)
+;;;; Abbrev
 (setq dabbrev-case-fold-search nil)
-
-;;;; Abbrevs
-(require 'abbrev)
 (setq abbrev-file-name (locate-user-emacs-file "abbrevs.el"))
-(setq abbrev-suggest t)
 (add-hook 'prog-mode-hook #'abbrev-mode)
 
 ;;;; Ignore case
@@ -96,7 +91,6 @@
 ;;;; Embark
 (require 'embark)
 (require 'embark-consult)
-(require 'wgrep)
 
 (setq prefix-help-command #'embark-prefix-help-command)
 (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)
@@ -115,5 +109,8 @@
   (unless (bound-and-true-p vertico--input)
     (corfu-mode 1)))
 (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
+
+;;;; Wgrep
+(require 'wgrep)
 
 (provide 'sndb-completion)

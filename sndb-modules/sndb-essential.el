@@ -1,5 +1,4 @@
 ;;;; Server
-(require 'server)
 (server-start)
 
 ;;;; Files
@@ -22,9 +21,9 @@
 (setq create-lockfiles nil)
 (setq auto-save-default nil)
 
-;;;; Recent
-(require 'recentf)
-
+;;;; History
+(setq history-delete-duplicates t)
+(setq history-length 1000)
 (setq recentf-max-saved-items 200)
 (setq recentf-exclude
       '(;; Tramp
@@ -44,21 +43,8 @@
         "\\.zst$"))
 
 (recentf-mode 1)
-
-;;;; History
-
-;; Point
-(require 'saveplace)
 (save-place-mode 1)
-
-;; Window
-(require 'winner)
 (winner-mode 1)
-
-;; Minibuffer
-(require 'savehist)
-(setq history-delete-duplicates t)
-(setq history-length 1000)
 (savehist-mode 1)
 
 (provide 'sndb-essential)

@@ -4,7 +4,6 @@
 
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
-
 (setq modus-themes-mixed-fonts t)
 (setq modus-themes-common-palette-overrides
       '((string green-cooler)
@@ -61,7 +60,6 @@
 (setq window-combination-resize t)
 
 ;;;; Tabs
-(require 'tab-bar)
 (setq tab-bar-close-button-show nil)
 (setq tab-bar-new-button-show nil)
 (tab-bar-mode 1)

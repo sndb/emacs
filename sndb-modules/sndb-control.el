@@ -32,7 +32,6 @@
 (setq save-interprogram-paste-before-kill t)
 
 ;;;; Auto-Revert
-(require 'autorevert)
 (global-auto-revert-mode 1)
 
 ;;;; Repeat

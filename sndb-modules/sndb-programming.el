@@ -23,6 +23,8 @@
 (setq js-indent-level 2)
 
 ;;;; Scheme
+(require 'geiser)
+
 (defun scheme-add-keywords (face-name keyword-rules)
   (let* ((keyword-list
           (mapcar (lambda (x)
@@ -50,11 +52,23 @@
 (add-hook 'racket-before-run-hook #'racket-repl-clear)
 
 ;;;; Paredit
+(require 'paredit)
 (dolist (hook '(clojure-mode-hook
                 emacs-lisp-mode-hook
                 racket-mode-hook
                 scheme-mode-hook))
   (add-hook hook #'enable-paredit-mode))
+
+;;;; Rainbow
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+;;;; Subword
+(dolist (hook '(html-mode-hook
+                css-mode-hook
+                js-mode-hook
+                go-mode-hook))
+  (add-hook hook #'subword-mode))
 
 ;;;; Eglot
 (require 'eglot)
