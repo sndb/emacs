@@ -62,10 +62,6 @@
 ;;;; Feed reader
 (require 'elfeed)
 
-(setq sndb-feeds-file (locate-user-emacs-file "feeds.el"))
-(when (file-exists-p sndb-feeds-file)
-  (load-file sndb-feeds-file))
-
 (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
 (setq-default elfeed-search-filter "@2-weeks-ago +unread -spam ")
 

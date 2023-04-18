@@ -27,12 +27,12 @@
 (setq use-short-answers t)
 (setq confirm-kill-processes nil)
 (setq echo-keystrokes 0.1)
-(setq display-time-day-and-date t)
-(setq display-time-24hr-format t)
-(setq display-time-default-load-average nil)
 (setq mode-line-compact 'long)
 (setq visible-bell t)
 (setq use-dialog-box nil)
+(setq initial-scratch-message nil)
+(setq inhibit-startup-screen t)
+(setq uniquify-buffer-name-style 'forward)
 (setq-default indicate-empty-lines t)
 
 (blink-cursor-mode -1)
@@ -65,13 +65,6 @@
 (setq tab-bar-close-button-show nil)
 (setq tab-bar-new-button-show nil)
 (tab-bar-mode 1)
-
-;;;; Buffers
-(setq view-read-only t)
-(setq uniquify-buffer-name-style 'forward)
-(setq initial-scratch-message nil)
-
-(global-set-key [remap list-buffers] #'ibuffer)
 
 ;;;; Format
 (require 'format-all)

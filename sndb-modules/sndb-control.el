@@ -1,4 +1,4 @@
-;;;; Hotkeys
+;;;; Bindings
 (global-unset-key (kbd "<insert>"))
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-c"))
@@ -8,6 +8,7 @@
 (global-set-key [remap upcase-word] #'upcase-dwim)
 (global-set-key [remap downcase-word] #'downcase-dwim)
 (global-set-key [remap capitalize-word] #'capitalize-dwim)
+(global-set-key [remap list-buffers] #'ibuffer)
 
 (setq disabled-command-function nil)
 
@@ -23,6 +24,9 @@
 (global-set-key (kbd "C-x !") #'delete-other-windows-vertically)
 (global-set-key (kbd "C-;") #'other-window)
 (global-set-key (kbd "C-'") #'prev-window)
+
+;;;; Read-Only
+(setq view-read-only t)
 
 ;;;; Clipboard
 (setq save-interprogram-paste-before-kill t)

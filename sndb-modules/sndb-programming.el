@@ -58,7 +58,6 @@
 
 ;;;; Eglot
 (require 'eglot)
-(require 'go-mode)
 
 (dolist (hook '(c-mode-hook
                 clojure-mode-hook

@@ -2,7 +2,7 @@
 (require 'org-agenda)
 (setq org-modules '(org-habit org-id ol-info))
 
-;; Source
+;;;; Source
 (setq org-src-window-setup 'current-window)
 (setq org-src-preserve-indentation t)
 (setq org-confirm-babel-evaluate nil)
@@ -14,7 +14,7 @@
    (C . t)
    (latex . t)))
 
-;; UI
+;;;; UI
 (setq org-catch-invisible-edits 'error)
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-return-follows-link t)
@@ -25,17 +25,17 @@
 
 (add-hook 'org-mode-hook #'visual-line-mode)
 
-;; Images
+;;;; Images
 (setq org-startup-with-inline-images t)
 (setq org-image-actual-width 640)
 
-;; LaTeX
+;;;; LaTeX
 (setq org-highlight-latex-and-related '(latex))
 (setq org-startup-with-latex-preview t)
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 (setq org-latex-preview-ltxpng-directory (concat user-emacs-directory "ltximg/"))
 
-;; Tasks
+;;;; Tasks
 (setq org-archive-location (concat org-directory "/archive.org::"))
 (setq org-enforce-todo-dependencies t)
 (setq org-enforce-todo-checkbox-dependencies t)
@@ -45,7 +45,7 @@
       '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
 (setq org-use-fast-todo-selection 'expert)
 
-;; Clock
+;;;; Clock
 (setq org-clock-persist t)
 (setq org-clock-in-resume t)
 (setq org-clock-out-remove-zero-time-clocks t)
@@ -53,7 +53,7 @@
 (setq org-clock-report-include-clocking-task t)
 (org-clock-persistence-insinuate)
 
-;; Agenda
+;;;; Agenda
 (setq org-agenda-window-setup 'other-tab)
 (setq org-agenda-files `(,org-directory))
 (setq org-agenda-dim-blocked-tasks t)
@@ -65,7 +65,7 @@
 (define-key org-mode-map (kbd "C-c y") #'org-todo-yesterday)
 (define-key org-agenda-mode-map (kbd "C-c y") #'org-agenda-todo-yesterday)
 
-;; Capture
+;;;; Capture
 (setq sndb-task-template "* TODO %?\n%u\n%i")
 (setq sndb-bookmarks-file (concat org-directory "/bookmarks.org"))
 (setq org-capture-templates
@@ -81,7 +81,7 @@
          (file+headline ,sndb-bookmarks-file "New")
          "- [[%c][%?]]")))
 
-;; Refiling
+;;;; Refiling
 (setq org-refile-targets
       '((org-agenda-files . (:maxlevel . 3))
         (nil . (:maxlevel . 3))))

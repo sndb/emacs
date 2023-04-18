@@ -9,6 +9,7 @@
 
 (sndb-load-if-exists (locate-user-emacs-file "custom.el"))
 (sndb-load-if-exists (locate-user-emacs-file "private.el"))
+(sndb-load-if-exists (locate-user-emacs-file "feeds.el"))
 
 (setq large-file-warning-threshold (* 50 1024 1024))
 
@@ -59,10 +60,5 @@
 (setq history-delete-duplicates t)
 (setq history-length 1000)
 (savehist-mode 1)
-
-;;;; Startup
-(setq inhibit-startup-screen t)
-(defun display-startup-echo-area-message ()
-  (message (emacs-init-time)))
 
 (provide 'sndb-essential)
