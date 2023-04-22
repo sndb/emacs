@@ -1,3 +1,6 @@
+;;;; Styles
+(setq completion-styles '(basic substring partial-completion flex))
+
 ;;;; Abbrev
 (setq dabbrev-case-fold-search nil)
 (setq abbrev-file-name (locate-user-emacs-file "abbrevs.el"))
@@ -18,34 +21,7 @@
 
 ;;;; Vertico
 (require 'vertico)
-(setq vertico-scroll-margin 0)
-(setq vertico-cycle t)
 (vertico-mode 1)
-
-;;;; Orderless
-(require 'orderless)
-
-(setq completion-styles '(orderless basic))
-(setq completion-category-defaults nil)
-(setq completion-category-overrides '((file (styles basic partial-completion))))
-
-(setq orderless-matching-styles
-      '(orderless-flex
-        orderless-regexp))
-
-(setq orderless-style-dispatchers
-      '(sndb-orderless-literal-dispatcher
-        sndb-orderless-initialism-dispatcher))
-
-(defun sndb-orderless-literal-dispatcher (pattern _index _total)
-  "Match component as literal if it ends in =."
-  (when (string-suffix-p "=" pattern)
-    `(orderless-literal . ,(substring pattern 0 -1))))
-
-(defun sndb-orderless-initialism-dispatcher (pattern _index _total)
-  "Match component as initialism if it ends in ,."
-  (when (string-suffix-p "," pattern)
-    `(orderless-initialism . ,(substring pattern 0 -1))))
 
 ;;;; Marginalia
 (require 'marginalia)
@@ -101,8 +77,8 @@
 
 ;;;; Corfu
 (require 'corfu)
-(setq corfu-scroll-margin 0)
 (global-corfu-mode 1)
+(corfu-popupinfo-mode 1)
 
 (defun corfu-enable-always-in-minibuffer ()
   "Enable Corfu in the minibuffer if Vertico is not active."

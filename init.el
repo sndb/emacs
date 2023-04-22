@@ -38,21 +38,23 @@
         embark
         embark-consult
         marginalia
-        orderless
         vertico
         wgrep
+
+        ;; Programming
+        eglot
+        eldoc-box
+        format-all
+        puni
+        rainbow-delimiters
 
         ;; Languages
         cider
         clojure-mode
-        eglot
-        eldoc-box
-        format-all
+        racket-mode
         geiser
         geiser-guile
         go-mode
-        paredit
-        racket-mode
 
         ;; Applications
         elfeed
@@ -67,8 +69,10 @@
         ;; Look
         diff-hl
         hl-todo
+        modus-themes
         ef-themes
-        modus-themes))
+        standard-themes
+        moe-theme))
 
 (defun sndb-install-packages ()
   "Install all the packages from `sndb-package-list'."

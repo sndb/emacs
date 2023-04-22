@@ -1,6 +1,8 @@
 ;;;; Theme
 (require 'modus-themes)
 (require 'ef-themes)
+(require 'standard-themes)
+(require 'moe-theme)
 
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
@@ -14,8 +16,9 @@
 
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
 (global-set-key (kbd "C-<f5>") #'ef-themes-select)
+(global-set-key (kbd "M-<f5>") #'standard-themes-toggle)
 
-(load-theme 'modus-vivendi)
+(standard-themes-load-dark)
 
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
@@ -46,6 +49,8 @@
 ;;;; Parentheses
 (setq show-paren-delay 0)
 (setq show-paren-style 'mixed)
+(setq show-paren-when-point-in-periphery t)
+(setq show-paren-when-point-inside-paren t)
 (show-paren-mode 1)
 
 ;;;; Highlight keywords
