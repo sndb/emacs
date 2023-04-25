@@ -71,8 +71,7 @@
         hl-todo
         modus-themes
         ef-themes
-        standard-themes
-        moe-theme))
+        standard-themes))
 
 (defun sndb-install-packages ()
   "Install all the packages from `sndb-package-list'."
