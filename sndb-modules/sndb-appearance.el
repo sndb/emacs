@@ -14,7 +14,7 @@
 (global-set-key (kbd "C-<f5>") #'ef-themes-select)
 (global-set-key (kbd "M-<f5>") #'standard-themes-toggle)
 
-(load-theme 'modus-operandi-tinted)
+(load-theme 'modus-vivendi-tinted)
 
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
