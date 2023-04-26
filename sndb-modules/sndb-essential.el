@@ -6,7 +6,9 @@
   (when (file-exists-p file)
     (load-file file)))
 
-(sndb-load-if-exists (locate-user-emacs-file "custom.el"))
+(setq custom-file (locate-user-emacs-file "custom.el"))
+
+(sndb-load-if-exists custom-file)
 (sndb-load-if-exists (locate-user-emacs-file "private.el"))
 (sndb-load-if-exists (locate-user-emacs-file "feeds.el"))
 
