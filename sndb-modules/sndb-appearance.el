@@ -8,7 +8,9 @@
 (setq modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
 (setq modus-themes-mixed-fonts t)
 (setq modus-themes-common-palette-overrides
-      '((string green-cooler)))
+      '((string green-cooler)
+        (border-mode-line-active unspecified)
+        (border-mode-line-inactive unspecified)))
 
 (global-set-key (kbd   "<f5>") #'modus-themes-toggle)
 (global-set-key (kbd "C-<f5>") #'ef-themes-select)
@@ -44,9 +46,7 @@
 
 ;;;; Parentheses
 (setq show-paren-delay 0)
-(setq show-paren-style 'mixed)
 (setq show-paren-when-point-in-periphery t)
-(setq show-paren-when-point-inside-paren t)
 (show-paren-mode 1)
 
 ;;;; Highlight keywords
