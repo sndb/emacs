@@ -51,6 +51,9 @@
 ;;;; Racket
 (add-hook 'racket-before-run-hook #'racket-repl-clear)
 
+;;;; Clojure
+(setq cider-allow-jack-in-without-project t)
+
 ;;;; Puni
 (require 'puni)
 

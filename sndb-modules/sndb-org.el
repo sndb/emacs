@@ -66,20 +66,15 @@
 (define-key org-agenda-mode-map (kbd "C-c y") #'org-agenda-todo-yesterday)
 
 ;;;; Capture
-(setq sndb-task-template "* TODO %?\n%u\n%i")
-(setq sndb-bookmarks-file (concat org-directory "/bookmarks.org"))
 (setq org-capture-templates
-      `(("t" "Task" entry
+      '(("t" "Task" entry
          (file+headline "" "Tasks")
-         ,sndb-task-template
+         "* TODO %?\n%u\n%i"
          :empty-lines 1)
-        ("c" "Current" entry
-         (clock)
-         ,sndb-task-template
-         :empty-lines 1)
-        ("b" "Bookmark" item
-         (file+headline ,sndb-bookmarks-file "New")
-         "- [[%c][%?]]")))
+        ("n" "Note" entry
+         (file+headline "" "Notes")
+         "* %?\n%u\n%i"
+         :empty-lines 1)))
 
 ;;;; Refiling
 (setq org-refile-targets
