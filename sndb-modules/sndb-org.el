@@ -1,6 +1,6 @@
 (require 'org)
 (require 'org-agenda)
-(setq org-modules '(org-habit org-id ol-info))
+(setq org-modules '(org-id ol-info))
 
 ;;;; Source
 (setq org-src-window-setup 'current-window)
@@ -15,12 +15,13 @@
    (latex . t)))
 
 ;;;; UI
+(setq org-startup-folded 'showall)
 (setq org-catch-invisible-edits 'error)
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-return-follows-link t)
 (setq org-id-link-to-org-use-id 'create-if-interactive)
 (setq org-list-allow-alphabetical t)
-(setq org-ellipsis "…")
+(setq org-ellipsis "↷")
 (setq org-export-with-author nil)
 
 (add-hook 'org-mode-hook #'visual-line-mode)
@@ -54,12 +55,11 @@
 (org-clock-persistence-insinuate)
 
 ;;;; Agenda
-(setq org-agenda-window-setup 'other-tab)
+(setq org-agenda-window-setup 'current-window)
 (setq org-agenda-files `(,org-directory))
 (setq org-agenda-dim-blocked-tasks t)
 (setq org-agenda-todo-ignore-scheduled 'future)
 (setq org-agenda-start-on-weekday nil)
-(setq org-habit-graph-column 88)
 (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
 (setq org-agenda-skip-scheduled-if-done t)
 (define-key org-mode-map (kbd "C-c y") #'org-todo-yesterday)
