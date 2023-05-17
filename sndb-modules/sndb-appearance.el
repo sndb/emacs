@@ -33,6 +33,7 @@
 (setq initial-scratch-message nil)
 (setq inhibit-startup-screen t)
 (setq uniquify-buffer-name-style 'forward)
+(setq column-number-indicator-zero-based nil)
 (setq-default indicate-empty-lines t)
 
 (blink-cursor-mode -1)
