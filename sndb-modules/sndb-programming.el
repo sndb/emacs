@@ -59,15 +59,16 @@
 
 (setq puni-confirm-when-delete-unbalanced-active-region nil)
 
-(dolist (hook '(prog-mode-hook
-                text-mode-hook
+(dolist (hook '(emacs-lisp-mode-hook
                 eval-expression-minibuffer-setup-hook
+                clojure-mode-hook
                 cider-repl-mode-hook
+                scheme-mode-hook
                 geiser-repl-mode-hook
+                racket-mode-hook
                 racket-repl-mode-hook))
-  (add-hook hook #'puni-mode))
-
-(electric-pair-mode 1)
+  (add-hook hook #'puni-mode)
+  (add-hook hook #'electric-pair-local-mode))
 
 (define-key puni-mode-map (kbd "C-)") #'puni-slurp-forward)
 (define-key puni-mode-map (kbd "C-(") #'puni-slurp-backward)
