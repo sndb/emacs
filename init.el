@@ -46,7 +46,6 @@
         eldoc-box
         format-all
         puni
-        rainbow-delimiters
 
         ;; Languages
         cider
@@ -69,9 +68,7 @@
         ;; Look
         diff-hl
         hl-todo
-        modus-themes
-        ef-themes
-        standard-themes))
+        modus-themes))
 
 (defun sndb-install-packages ()
   "Install all the packages from `sndb-package-list'."

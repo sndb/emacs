@@ -1,21 +1,13 @@
 ;;;; Theme
 (require 'modus-themes)
-(require 'ef-themes)
-(require 'standard-themes)
 
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
 (setq modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
 (setq modus-themes-mixed-fonts t)
-(setq modus-themes-common-palette-overrides
-      '((string green-cooler)
-        (border-mode-line-active unspecified)
-        (border-mode-line-inactive unspecified)))
+(setq modus-themes-italic-constructs t)
 
-(global-set-key (kbd   "<f5>") #'modus-themes-toggle)
-(global-set-key (kbd "C-<f5>") #'ef-themes-select)
-(global-set-key (kbd "M-<f5>") #'standard-themes-toggle)
-
+(global-set-key (kbd "<f5>") #'modus-themes-toggle)
 (load-theme 'modus-vivendi-tinted)
 
 ;;;; Fonts
