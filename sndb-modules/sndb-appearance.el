@@ -3,12 +3,11 @@
 
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
-(setq modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
 (setq modus-themes-mixed-fonts t)
 (setq modus-themes-italic-constructs t)
 
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
-(load-theme 'modus-vivendi-tinted)
+(load-theme 'modus-vivendi)
 
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
