@@ -11,7 +11,7 @@
 
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
-(mapc (lambda (face) (set-face-attribute face nil :font "Hack-11"))
+(mapc (lambda (face) (set-face-attribute face nil :font "Hack-13"))
       '(default fixed-pitch))
 
 ;;;; Indicators
