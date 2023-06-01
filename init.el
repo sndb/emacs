@@ -48,8 +48,6 @@
         puni
 
         ;; Languages
-        cider
-        clojure-mode
         racket-mode
         geiser
         geiser-guile

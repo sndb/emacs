@@ -51,9 +51,6 @@
 ;;;; Racket
 (add-hook 'racket-before-run-hook #'racket-repl-clear)
 
-;;;; Clojure
-(setq cider-allow-jack-in-without-project t)
-
 ;;;; Puni
 (require 'puni)
 
@@ -61,8 +58,6 @@
 
 (dolist (hook '(emacs-lisp-mode-hook
                 eval-expression-minibuffer-setup-hook
-                clojure-mode-hook
-                cider-repl-mode-hook
                 scheme-mode-hook
                 geiser-repl-mode-hook
                 racket-mode-hook
@@ -89,12 +84,8 @@
 (dolist (hook '(c-mode-hook
                 go-mode-hook
                 python-mode-hook
-                clojure-mode-hook
                 racket-mode-hook
-                sh-mode-hook
-                html-mode-hook
-                css-mode-hook
-                js-mode-hook))
+                sh-mode-hook))
   (add-hook hook #'eglot-ensure))
 
 (define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
