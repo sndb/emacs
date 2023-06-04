@@ -54,4 +54,7 @@
 (global-set-key (kbd "C-S-n") #'sndb-scroll-up)
 (global-set-key (kbd "C-S-p") #'sndb-scroll-down)
 
+;;;; Search
+(setq isearch-lazy-count t)
+
 (provide 'sndb-control)
