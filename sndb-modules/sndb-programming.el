@@ -51,6 +51,9 @@
 ;;;; Racket
 (add-hook 'racket-before-run-hook #'racket-repl-clear)
 
+;;;; Clojure
+(setq cider-allow-jack-in-without-project t)
+
 ;;;; Puni
 (require 'puni)
 
@@ -58,6 +61,8 @@
 
 (dolist (hook '(emacs-lisp-mode-hook
                 eval-expression-minibuffer-setup-hook
+                clojure-mode-hook
+                cider-repl-mode-hook
                 scheme-mode-hook
                 geiser-repl-mode-hook
                 racket-mode-hook

@@ -48,10 +48,12 @@
         puni
 
         ;; Languages
-        racket-mode
+        cider
+        clojure-mode
         geiser
         geiser-guile
         go-mode
+        racket-mode
 
         ;; Applications
         elfeed
