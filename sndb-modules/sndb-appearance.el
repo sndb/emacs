@@ -6,13 +6,24 @@
 (setq modus-themes-mixed-fonts t)
 (setq modus-themes-bold-constructs t)
 (setq modus-themes-italic-constructs t)
+(setq modus-themes-common-palette-overrides
+      '((comment red-faint)
+        (string green-cooler)
+        (bg-region bg-lavender)
+        (fg-region unspecified)
+        (bg-mode-line-active bg-blue-subtle)
+        (border-mode-line-active unspecified)
+        (bg-mode-line-inactive bg-dim)
+        (border-mode-line-inactive unspecified)
+        (fringe unspecified)))
 
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
 (load-theme 'modus-vivendi)
 
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
-(mapc (lambda (face) (set-face-attribute face nil :font "Hack-13"))
+(mapc (lambda (face)
+        (set-face-attribute face nil :family "Hack" :height 130))
       '(default fixed-pitch))
 
 ;;;; Indicators
@@ -47,6 +58,7 @@
 (global-hl-todo-mode 1)
 
 ;;;; Long lines
+(require 'so-long)
 (global-so-long-mode 1)
 
 ;;;; Windows
