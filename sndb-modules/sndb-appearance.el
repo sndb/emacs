@@ -108,9 +108,21 @@
                ("ﬀ" . "ff")))
       (replace-string (car pair) (cdr pair) nil (point-min) (point-max)))))
 
+(defun sndb-insert-heading (c)
+  "Insert a horizontal line of the length of the previous line."
+  (interactive "cType a character: ")
+  (insert
+   (make-string
+    (save-excursion
+      (forward-line -1)
+      (- (progn (end-of-line) (point))
+         (progn (beginning-of-line) (point))))
+    c)))
+
 (global-set-key (kbd "M-SPC") #'cycle-spacing)
 (global-set-key (kbd "C-c w") #'whitespace-mode)
 (global-set-key (kbd "C-c f") #'sndb-format-buffer)
 (global-set-key (kbd "C-c i") #'sndb-indent-buffer)
+(global-set-key (kbd "C-c h") #'sndb-insert-heading)
 
 (provide 'sndb-appearance)
