@@ -4,6 +4,9 @@
 (global-set-key (kbd "C-<f2>") #'vterm-other-window)
 (setq vterm-max-scrollback 16384)
 
+;;;; Shell
+(setq shell-command-prompt-show-cwd t)
+
 ;;;; PDF reader
 (require 'pdf-tools)
 (setq pdf-info-restart-process-p t)
@@ -32,10 +35,14 @@
 
 ;;;; Directory editor
 (require 'dired)
+
 (setq dired-kill-when-opening-new-dired-buffer t)
 (setq dired-dwim-target t)
 (setq dired-listing-switches "-lhFA")
 (setq dired-switches-in-mode-line 'as-is)
+
+(add-hook 'dired-mode-hook #'dired-hide-details-mode)
+(add-hook 'dired-mode-hook #'hl-line-mode)
 
 ;;;; Multimedia system
 (require 'emms-setup)

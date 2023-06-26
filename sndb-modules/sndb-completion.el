@@ -21,6 +21,11 @@
 
 ;;;; Vertico
 (require 'vertico)
+
+(setq vertico-scroll-margin 0)
+(setq vertico-count 8)
+(setq vertico-resize nil)
+
 (vertico-mode 1)
 
 ;;;; Marginalia
@@ -30,9 +35,12 @@
 ;;;; Consult
 (require 'consult)
 
-(setq consult-preview-key '(:debounce 0.5 any))
-(setq register-preview-delay 0.5)
-(setq register-preview-function #'consult-register-format)
+(setq consult-find-args "find . -not ( -path */.git* -prune )")
+(setq consult-preview-key '(:debounce 0.25 any))
+(setq register-preview-delay 0.25
+      register-preview-function #'consult-register-format)
+(setq xref-show-xrefs-function #'consult-xref
+      xref-show-definitions-function #'consult-xref)
 
 ;; remap
 (global-set-key [remap switch-to-buffer] #'consult-buffer)
@@ -60,8 +68,7 @@
 (global-set-key (kbd "M-g m") #'consult-mark)
 
 ;; register
-(global-set-key (kbd "C-M-#") #'consult-register)
-(global-set-key (kbd "M-#") #'consult-register-load)
+(global-set-key (kbd "M-\"") #'consult-register-load)
 (global-set-key (kbd "M-'") #'consult-register-store)
 
 ;;;; Embark
@@ -77,6 +84,10 @@
 
 ;;;; Corfu
 (require 'corfu)
+
+(setq corfu-scroll-margin 0)
+(setq corfu-count 8)
+
 (global-corfu-mode 1)
 (corfu-popupinfo-mode 1)
 
@@ -88,5 +99,7 @@
 
 ;;;; Wgrep
 (require 'wgrep)
+(setq wgrep-auto-save-buffer t)
+(define-key grep-mode-map (kbd "C-x C-q") #'wgrep-change-to-wgrep-mode)
 
 (provide 'sndb-completion)

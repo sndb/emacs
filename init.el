@@ -29,7 +29,10 @@
 ;;; Code:
 
 (require 'package)
+
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+(add-hook 'package-menu-mode-hook #'hl-line-mode)
 
 (setq sndb-package-list
       '(;; Completion
