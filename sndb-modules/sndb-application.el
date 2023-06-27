@@ -70,7 +70,6 @@
 (require 'elfeed)
 
 (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
-(setq-default elfeed-search-filter "@2-weeks-ago +unread -spam ")
 
 (global-set-key (kbd "<XF86HomePage>") #'elfeed)
 
