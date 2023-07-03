@@ -3,9 +3,6 @@
 (setq comment-style 'extra-line)
 (add-hook 'c-mode-common-hook #'indent-tabs-mode)
 
-;;;; Go
-(add-hook 'before-save-hook #'gofmt-before-save)
-
 ;;;; SQL
 (setq sql-product 'sqlite)
 (add-hook 'sql-mode-hook
@@ -24,6 +21,8 @@
 
 ;;;; Scheme
 (require 'geiser)
+(require 'geiser-guile)
+(require 'geiser-gambit)
 
 (defun scheme-add-keywords (face-name keyword-rules)
   (let* ((keyword-list
@@ -71,10 +70,9 @@
 (define-key puni-mode-map (kbd "C-(") #'puni-slurp-backward)
 (define-key puni-mode-map (kbd "C-}") #'puni-barf-forward)
 (define-key puni-mode-map (kbd "C-{") #'puni-barf-backward)
-(define-key puni-mode-map (kbd "C-' r") #'puni-raise)
-(define-key puni-mode-map (kbd "C-' s") #'puni-splice)
-(define-key puni-mode-map (kbd "C-' C-s") #'puni-squeeze)
-(define-key puni-mode-map (kbd "C-' c") #'puni-convolute)
+(define-key puni-mode-map (kbd "C-' C-r") #'puni-raise)
+(define-key puni-mode-map (kbd "C-' C-s") #'puni-splice)
+(define-key puni-mode-map (kbd "C-' C-q") #'puni-squeeze)
 (define-key puni-mode-map (kbd "C-' C-c") #'puni-split)
 
 ;;;; Subword
@@ -93,5 +91,16 @@
 (define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
 (define-key eglot-mode-map (kbd "C-c t") #'eglot-code-actions)
 (define-key eglot-mode-map (kbd "C-h .") #'eldoc-box-eglot-help-at-point)
+
+;;;; Flymake
+(require 'flymake)
+
+(setq flymake-suppress-zero-counters t)
+(setq flymake-wrap-around nil)
+
+(define-key flymake-mode-map (kbd "C-c d d") #'flymake-show-buffer-diagnostics)
+(define-key flymake-mode-map (kbd "C-c d D") #'flymake-show-project-diagnostics)
+(define-key flymake-mode-map (kbd "M-n") #'flymake-goto-next-error)
+(define-key flymake-mode-map (kbd "M-p") #'flymake-goto-prev-error)
 
 (provide 'sndb-programming)

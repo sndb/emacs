@@ -35,6 +35,7 @@
 (setq auto-save-default nil)
 
 ;;;; History
+(setq bookmark-set-fringe-mark nil)
 (setq history-delete-duplicates t)
 (setq history-length 1000)
 (setq recentf-max-saved-items 200)

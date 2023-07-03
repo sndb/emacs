@@ -42,34 +42,14 @@
 (setq xref-show-xrefs-function #'consult-xref
       xref-show-definitions-function #'consult-xref)
 
-;; remap
-(global-set-key [remap switch-to-buffer] #'consult-buffer)
-(global-set-key [remap switch-to-buffer-other-window] #'consult-buffer-other-window)
-(global-set-key [remap switch-to-buffer-other-frame] #'consult-buffer-other-frame)
-(global-set-key [remap project-switch-to-buffer] #'consult-project-buffer)
-(global-set-key [remap bookmark-jump] #'consult-bookmark)
-(global-set-key [remap goto-line] #'consult-goto-line)
-(global-set-key [remap yank-pop] #'consult-yank-pop)
-
-;; search-map
-(global-set-key (kbd "M-s d") #'consult-find)
-(global-set-key (kbd "M-s g") #'consult-grep)
-(global-set-key (kbd "M-s G") #'consult-git-grep)
-(global-set-key (kbd "M-s D") #'consult-locate)
-(global-set-key (kbd "M-s l") #'consult-line)
-(global-set-key (kbd "M-s L") #'consult-line-multi)
-
-;; goto-map
-(global-set-key (kbd "M-g i") #'consult-imenu)
-(global-set-key (kbd "M-g I") #'consult-imenu-multi)
-(global-set-key (kbd "M-g e") #'consult-compile-error)
-(global-set-key (kbd "M-g f") #'consult-flymake)
-(global-set-key (kbd "M-g o") #'consult-outline)
-(global-set-key (kbd "M-g m") #'consult-mark)
-
-;; register
-(global-set-key (kbd "M-\"") #'consult-register-load)
-(global-set-key (kbd "M-'") #'consult-register-store)
+(global-set-key (kbd "M-s M-r") #'consult-recent-file)
+(global-set-key (kbd "M-s M-f") #'consult-find)
+(global-set-key (kbd "M-s M-g") #'consult-grep)
+(global-set-key (kbd "M-s M-l") #'consult-line)
+(global-set-key (kbd "M-s M-i") #'consult-imenu)
+(global-set-key (kbd "M-s M-o") #'consult-outline)
+(global-set-key (kbd "M-s M-d") #'consult-flymake)
+(global-set-key (kbd "M-g M-g") #'consult-goto-line)
 
 ;;;; Embark
 (require 'embark)
