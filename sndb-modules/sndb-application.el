@@ -29,8 +29,12 @@
   (interactive (list (password-store--completing-read)))
   (password-store-copy-field entry "login"))
 
+(global-set-key (kbd "C-c p g") #'password-store-generate)
+(global-set-key (kbd "C-c p n") #'password-store-generate-no-symbols)
 (global-set-key (kbd "C-c p p") #'password-store-copy)
+(global-set-key (kbd "C-c p f") #'password-store-copy-field)
 (global-set-key (kbd "C-c p e") #'password-store-edit)
+(global-set-key (kbd "C-c p r") #'password-store-remove)
 (global-set-key (kbd "C-c p l") #'sndb-password-store-copy-login)
 
 ;;;; Directory editor
