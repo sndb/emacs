@@ -45,7 +45,6 @@
 (setq dired-listing-switches "-lhFA")
 (setq dired-switches-in-mode-line 'as-is)
 
-(add-hook 'dired-mode-hook #'dired-hide-details-mode)
 (add-hook 'dired-mode-hook #'hl-line-mode)
 
 ;;;; Multimedia system
