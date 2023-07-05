@@ -9,12 +9,6 @@
 (setq modus-themes-common-palette-overrides
       '((comment red-faint)
         (string green-cooler)
-        (bg-region bg-lavender)
-        (fg-region unspecified)
-        (bg-mode-line-active bg-blue-subtle)
-        (border-mode-line-active unspecified)
-        (bg-mode-line-inactive bg-dim)
-        (border-mode-line-inactive unspecified)
         (fringe unspecified)))
 
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
