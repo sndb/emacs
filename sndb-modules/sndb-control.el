@@ -2,8 +2,6 @@
 (setq disabled-command-function nil)
 
 (global-unset-key (kbd "<insert>"))
-(global-unset-key (kbd "C-x C-c"))
-(global-unset-key (kbd "C-x o"))
 (global-unset-key (kbd "C-z"))
 
 (global-set-key [remap zap-to-char] #'zap-up-to-char)
@@ -11,9 +9,6 @@
 (global-set-key [remap downcase-word] #'downcase-dwim)
 (global-set-key [remap capitalize-word] #'capitalize-dwim)
 (global-set-key [remap list-buffers] #'ibuffer)
-
-(global-set-key (kbd "C-x C-c C-c") #'save-buffers-kill-emacs)
-(global-set-key (kbd "C-z") #'repeat)
 
 ;;;; Windows
 (setq help-window-select t)
