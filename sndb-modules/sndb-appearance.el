@@ -4,8 +4,6 @@
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
 (setq modus-themes-mixed-fonts t)
-(setq modus-themes-bold-constructs t)
-(setq modus-themes-italic-constructs t)
 (setq modus-themes-common-palette-overrides
       '((comment red-faint)
         (string green-cooler)
@@ -17,7 +15,7 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 (mapc (lambda (face)
-        (set-face-attribute face nil :family "Hack" :height 110))
+        (set-face-attribute face nil :font "Hack:pixelsize=14"))
       '(default fixed-pitch))
 
 ;;;; Indicators
