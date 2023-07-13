@@ -44,6 +44,7 @@
 (setq dired-dwim-target t)
 (setq dired-listing-switches "-lhFA")
 (setq dired-switches-in-mode-line 'as-is)
+(setq dired-auto-revert-buffer #'dired-directory-changed-p)
 
 (add-hook 'dired-mode-hook #'hl-line-mode)
 
