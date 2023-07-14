@@ -13,16 +13,7 @@
         (delete-file filename))
       (kill-buffer buffer))))
 
-(defun sndb-load-if-exists (file)
-  (when (file-exists-p file)
-    (load-file file)))
-
-(setq custom-file (locate-user-emacs-file "custom.el"))
-
-(sndb-load-if-exists custom-file)
-(sndb-load-if-exists (locate-user-emacs-file "private.el"))
-(sndb-load-if-exists (locate-user-emacs-file "feeds.el"))
-
+(setq custom-file (make-temp-file "emacs-custom-"))
 (setq large-file-warning-threshold (* 50 1024 1024))
 
 ;;;; Backup

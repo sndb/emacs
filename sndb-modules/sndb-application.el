@@ -73,22 +73,12 @@
 ;;;; Feed reader
 (require 'elfeed)
 
+(let ((feeds (locate-user-emacs-file "feeds.el")))
+  (when (file-exists-p feeds)
+    (load-file feeds)))
+
 (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
 
 (global-set-key (kbd "<XF86HomePage>") #'elfeed)
-
-;;;; Mail
-(setq auth-sources '("~/.authinfo.gpg")
-      user-full-name "Daniil Sobolev"
-      user-mail-address "sndb@sndb.xyz")
-
-(require 'notmuch)
-(global-set-key (kbd "<XF86Mail>") #'notmuch)
-
-(require 'smtpmail)
-(setq smtpmail-smtp-server "smtp.mailbox.org")
-(setq smtpmail-smtp-service 587)
-(setq smtpmail-stream-type 'starttls)
-(setq send-mail-function 'smtpmail-send-it)
 
 (provide 'sndb-application)
