@@ -60,7 +60,6 @@
 
 (global-set-key (kbd "C-.") #'embark-act)
 (global-set-key (kbd "M-.") #'embark-dwim)
-(global-set-key (kbd "C-h B") #'embark-bindings)
 
 ;;;; Corfu
 (require 'corfu)

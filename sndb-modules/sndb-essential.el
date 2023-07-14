@@ -8,13 +8,13 @@
   (let* ((buffer (get-buffer buffer-name))
          (filename (buffer-file-name buffer)))
     (when buffer
-      (when (and filename
-                 (file-exists-p filename))
+      (when (and filename (file-exists-p filename))
         (delete-file filename))
       (kill-buffer buffer))))
 
 (setq custom-file (make-temp-file "emacs-custom-"))
 (setq large-file-warning-threshold (* 50 1024 1024))
+(setq vc-follow-symlinks t)
 
 ;;;; Backup
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backup/"))))

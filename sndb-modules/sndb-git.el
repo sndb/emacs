@@ -1,5 +1,3 @@
-(setq vc-follow-symlinks t)
-
 ;;;; Magit
 (require 'magit)
 (setq magit-diff-refine-hunk 'all)
