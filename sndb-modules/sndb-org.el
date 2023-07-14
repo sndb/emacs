@@ -26,10 +26,6 @@
 
 (add-hook 'org-mode-hook #'visual-line-mode)
 
-;;;; Images
-(setq org-startup-with-inline-images t)
-(setq org-image-actual-width 640)
-
 ;;;; LaTeX
 (setq org-highlight-latex-and-related '(latex))
 (setq org-startup-with-latex-preview t)
@@ -45,14 +41,6 @@
 (setq org-todo-keywords
       '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
 (setq org-use-fast-todo-selection 'expert)
-
-;;;; Clock
-(setq org-clock-persist t)
-(setq org-clock-in-resume t)
-(setq org-clock-out-remove-zero-time-clocks t)
-(setq org-clock-persist-query-resume nil)
-(setq org-clock-report-include-clocking-task t)
-(org-clock-persistence-insinuate)
 
 ;;;; Agenda
 (setq org-agenda-window-setup 'current-window)
@@ -83,25 +71,8 @@
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
 
-(defun sndb-sort-headings ()
-  "Sorts the contents of all headings on the first level."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (let ((p (point)))
-      (while (not (= p
-                     (progn (org-forward-heading-same-level 1)
-                            (setq p (point)))))
-        (org-sort-entries nil ?a)))))
-
-(defun sndb-open-notes ()
-  "Open `org-default-notes-file'."
-  (interactive)
-  (find-file org-default-notes-file))
-
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
-(global-set-key (kbd "C-c n") #'sndb-open-notes)
 
 (provide 'sndb-org)
