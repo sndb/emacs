@@ -72,6 +72,8 @@
 (setq sentence-end-double-space nil)
 (setq-default indent-tabs-mode nil)
 
+(add-hook 'text-mode-hook #'turn-on-auto-fill)
+
 (defun sndb-format-buffer ()
   "Auto-format the source code in the current buffer."
   (interactive)
