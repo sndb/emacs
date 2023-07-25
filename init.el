@@ -66,7 +66,6 @@
         magit-todos
         nov
         password-store
-        pdf-tools
         vterm
 
         ;; Look

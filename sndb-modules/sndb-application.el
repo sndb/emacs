@@ -7,12 +7,6 @@
 ;;;; Shell
 (setq shell-command-prompt-show-cwd t)
 
-;;;; PDF reader
-(require 'pdf-tools)
-(setq pdf-info-restart-process-p t)
-(setq pdf-view-resize-factor 1.1)
-(pdf-tools-install)
-
 ;;;; EPUB reader
 (require 'nov)
 (setq nov-text-width fill-column)
