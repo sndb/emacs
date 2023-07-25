@@ -66,14 +66,22 @@
   (add-hook hook #'puni-mode)
   (add-hook hook #'electric-pair-local-mode))
 
+(defvar sndb-puni-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-r") #'puni-raise)
+    (define-key map (kbd "C-s") #'puni-splice)
+    (define-key map (kbd "C-q") #'puni-squeeze)
+    (define-key map (kbd "C-c") #'puni-split)
+    (define-key map (kbd "C-'") #'puni-expand-region)
+    map))
+
+(put #'puni-expand-region 'repeat-map 'sndb-puni-mode-map)
+
+(define-key puni-mode-map (kbd "C-'") sndb-puni-mode-map)
 (define-key puni-mode-map (kbd "C-)") #'puni-slurp-forward)
 (define-key puni-mode-map (kbd "C-(") #'puni-slurp-backward)
 (define-key puni-mode-map (kbd "C-}") #'puni-barf-forward)
 (define-key puni-mode-map (kbd "C-{") #'puni-barf-backward)
-(define-key puni-mode-map (kbd "C-' C-r") #'puni-raise)
-(define-key puni-mode-map (kbd "C-' C-s") #'puni-splice)
-(define-key puni-mode-map (kbd "C-' C-q") #'puni-squeeze)
-(define-key puni-mode-map (kbd "C-' C-c") #'puni-split)
 
 ;;;; Subword
 (global-subword-mode 1)
