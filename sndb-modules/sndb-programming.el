@@ -72,12 +72,10 @@
     (define-key map (kbd "C-s") #'puni-splice)
     (define-key map (kbd "C-q") #'puni-squeeze)
     (define-key map (kbd "C-c") #'puni-split)
-    (define-key map (kbd "C-'") #'puni-expand-region)
     map))
 
-(put #'puni-expand-region 'repeat-map 'sndb-puni-mode-map)
-
 (define-key puni-mode-map (kbd "C-'") sndb-puni-mode-map)
+(define-key puni-mode-map (kbd "C-=") #'puni-expand-region)
 (define-key puni-mode-map (kbd "C-)") #'puni-slurp-forward)
 (define-key puni-mode-map (kbd "C-(") #'puni-slurp-backward)
 (define-key puni-mode-map (kbd "C-}") #'puni-barf-forward)

@@ -69,4 +69,8 @@
 
 (add-hook 'occur-mode-hook #'hl-line-mode)
 
+;;;; Expand region
+(require 'expand-region)
+(global-set-key (kbd "C-=") #'er/expand-region)
+
 (provide 'sndb-control)
