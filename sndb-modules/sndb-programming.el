@@ -3,6 +3,10 @@
 (setq comment-style 'extra-line)
 (add-hook 'c-mode-common-hook #'indent-tabs-mode)
 
+;;;; Shell
+(setq sh-basic-offset 8)
+(add-hook 'sh-mode-hook #'indent-tabs-mode)
+
 ;;;; SQL
 (setq sql-product 'sqlite)
 (add-hook 'sql-mode-hook
