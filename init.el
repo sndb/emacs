@@ -55,7 +55,6 @@
         clojure-mode
         geiser
         geiser-guile
-        geiser-gambit
         go-mode
         racket-mode
 

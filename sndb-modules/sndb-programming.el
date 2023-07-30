@@ -26,7 +26,6 @@
 ;;;; Scheme
 (require 'geiser)
 (require 'geiser-guile)
-(require 'geiser-gambit)
 
 (defun scheme-add-keywords (face-name keyword-rules)
   (let* ((keyword-list
