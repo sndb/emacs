@@ -15,7 +15,7 @@
 ;;;; Fonts
 (setq text-scale-mode-step 1.1)
 (mapc (lambda (face)
-        (set-face-attribute face nil :family "Hack" :height 110))
+        (set-face-attribute face nil :family "Fira Mono" :height 105))
       '(default fixed-pitch))
 
 ;;;; Indicators
