@@ -2,8 +2,7 @@
 (setq completion-styles '(basic substring partial-completion flex))
 
 ;;;; Abbrev
-(setq dabbrev-case-fold-search nil)
-(setq abbrev-file-name (locate-user-emacs-file "abbrevs.el"))
+(setq abbrev-file-name (locate-user-emacs-file "abbrev.el"))
 (add-hook 'prog-mode-hook #'abbrev-mode)
 
 ;;;; Ignore case

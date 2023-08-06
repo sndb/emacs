@@ -39,6 +39,12 @@
 (setq dired-listing-switches "-lhFA")
 (setq dired-switches-in-mode-line 'as-is)
 (setq dired-auto-revert-buffer #'dired-directory-changed-p)
+(setq dired-mouse-drag-files t)
+(setq dired-create-destination-dirs 'ask)
+(setq dired-create-destination-dirs-on-trailing-dirsep t)
+(setq dired-isearch-filenames t)
+
+(define-key dired-mode-map (kbd "C-+") #'dired-create-empty-file)
 
 (add-hook 'dired-mode-hook #'hl-line-mode)
 

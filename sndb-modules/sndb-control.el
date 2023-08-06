@@ -9,6 +9,8 @@
 (global-set-key [remap downcase-word] #'downcase-dwim)
 (global-set-key [remap capitalize-word] #'capitalize-dwim)
 (global-set-key [remap list-buffers] #'ibuffer)
+(global-set-key [remap dabbrev-expand] #'hippie-expand)
+(global-set-key (kbd "C-M-y") #'duplicate-dwim)
 
 ;;;; Windows
 (setq help-window-select t)
@@ -68,9 +70,5 @@
 (setq isearch-repeat-on-direction-change t)
 
 (add-hook 'occur-mode-hook #'hl-line-mode)
-
-;;;; Expand region
-(require 'expand-region)
-(global-set-key (kbd "C-=") #'er/expand-region)
 
 (provide 'sndb-control)

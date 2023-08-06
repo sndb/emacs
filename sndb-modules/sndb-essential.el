@@ -25,8 +25,13 @@
 (setq create-lockfiles nil)
 (setq auto-save-default nil)
 
+;;;; Bookmarks
+(setq bookmark-fringe-mark nil)
+(setq bookmark-save-flag 1)
+
+(add-hook 'bookmark-bmenu-mode-hook #'hl-line-mode)
+
 ;;;; History
-(setq bookmark-set-fringe-mark nil)
 (setq history-delete-duplicates t)
 (setq history-length 1000)
 (setq recentf-max-saved-items 200)

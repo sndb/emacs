@@ -43,15 +43,12 @@
 ;;;; Parentheses
 (setq show-paren-delay 0)
 (setq show-paren-when-point-in-periphery t)
+(setq show-paren-context-when-offscreen 'child-frame)
 (show-paren-mode 1)
 
 ;;;; Highlight keywords
 (require 'hl-todo)
 (global-hl-todo-mode 1)
-
-;;;; Long lines
-(require 'so-long)
-(global-so-long-mode 1)
 
 ;;;; Windows
 (setq window-resize-pixelwise t)
@@ -125,7 +122,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
           (max 0 (- underline-length (current-column)))))
     (insert (make-string target-length c))))
 
-(global-set-key (kbd "M-SPC") #'cycle-spacing)
 (global-set-key (kbd "C-c w") #'whitespace-mode)
 (global-set-key (kbd "C-c f") #'sndb-format-buffer)
 (global-set-key (kbd "C-c i") #'sndb-indent-buffer)
