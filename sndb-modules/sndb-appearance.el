@@ -1,6 +1,8 @@
 ;;;; Theme
 (require 'modus-themes)
 
+(add-to-list 'default-frame-alist '(font . "Fira Mono-10.5"))
+
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
 (setq modus-themes-mixed-fonts t)
@@ -11,12 +13,6 @@
 
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
 (load-theme 'modus-vivendi)
-
-;;;; Fonts
-(setq text-scale-mode-step 1.1)
-(mapc (lambda (face)
-        (set-face-attribute face nil :family "Fira Mono" :height 105))
-      '(default fixed-pitch))
 
 ;;;; Indicators
 (setq use-short-answers t)
