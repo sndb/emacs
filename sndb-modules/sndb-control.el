@@ -42,6 +42,8 @@
 ;;;; Mouse
 (setq mouse-wheel-progressive-speed nil)
 (setq mouse-yank-at-point t)
+(setq mouse-autoselect-window t)
+(setq focus-follows-mouse t)
 
 ;;;; Scrolling
 (setq scroll-preserve-screen-position t)
