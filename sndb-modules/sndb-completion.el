@@ -1,5 +1,8 @@
-;;;; Styles
-(setq completion-styles '(basic substring partial-completion flex))
+;;;; Orderless
+(require 'orderless)
+
+(setq completion-styles '(orderless basic))
+(setq completion-category-overrides '((file (styles basic partial-completion))))
 
 ;;;; Abbrev
 (setq abbrev-file-name (locate-user-emacs-file "abbrev.el"))

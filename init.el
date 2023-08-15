@@ -36,6 +36,7 @@
 
 (setq sndb-package-list
       '(;; Completion
+        orderless
         consult
         corfu
         embark
