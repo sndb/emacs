@@ -1,17 +1,25 @@
+;;;; Minibuffer
+(setq enable-recursive-minibuffers t)
+(setq resize-mini-windows t)
+(setq minibuffer-default-prompt-format " [%s]")
+
+(minibuffer-depth-indicate-mode 1)
+(minibuffer-electric-default-mode 1)
+
 ;;;; Orderless
 (require 'orderless)
 
 (setq completion-styles '(orderless basic))
+(setq completion-category-defaults nil)
 (setq completion-category-overrides '((file (styles basic partial-completion))))
+
+(setq completion-ignore-case t)
+(setq read-buffer-completion-ignore-case t)
+(setq read-file-name-completion-ignore-case t)
 
 ;;;; Abbrev
 (setq abbrev-file-name (locate-user-emacs-file "abbrev.el"))
 (add-hook 'prog-mode-hook #'abbrev-mode)
-
-;;;; Ignore case
-(setq completion-ignore-case t)
-(setq read-buffer-completion-ignore-case t)
-(setq read-file-name-completion-ignore-case t)
 
 ;;;; ElDoc
 (require 'eldoc)
