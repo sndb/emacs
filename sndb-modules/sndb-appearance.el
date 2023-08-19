@@ -1,11 +1,8 @@
 ;;;; Theme
 (require 'modus-themes)
 
-(add-to-list 'default-frame-alist '(font . "Fira Mono-10.5"))
-
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
-(setq modus-themes-mixed-fonts t)
 (setq modus-themes-common-palette-overrides
       '((comment red-faint)
         (string green-cooler)

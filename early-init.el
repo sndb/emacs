@@ -4,7 +4,7 @@
 (setq load-prefer-newer t)
 (setq native-comp-async-report-warnings-errors 'silent)
 
-(setq frame-title-format '(buffer-file-name "%b - %f" ("%b - " default-directory)))
+(setq frame-title-format '("%b"))
 (setq frame-resize-pixelwise t)
 (setq frame-inhibit-implied-resize t)
 
