@@ -1,9 +1,14 @@
 ;;;; Bindings
-(setq disabled-command-function nil)
 
-(global-unset-key (kbd "<insert>"))
-(global-unset-key (kbd "C-z"))
+;; Enable commands
+(dolist (c '(narrow-to-region))
+  (put c 'disabled nil))
 
+;; Disable commands
+(dolist (c '(overwrite-mode suspend-frame))
+  (put c 'disabled t))
+
+;; Remap commands
 (global-set-key [remap zap-to-char] #'zap-up-to-char)
 (global-set-key [remap upcase-word] #'upcase-dwim)
 (global-set-key [remap downcase-word] #'downcase-dwim)
