@@ -33,6 +33,11 @@
 (setq css-indent-offset 2)
 (setq js-indent-level 2)
 
+;;;; Clojure
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook #'cider-format-buffer nil t)))
+
 ;;;; Scheme
 (require 'geiser)
 (require 'geiser-guile)
@@ -168,26 +173,25 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (define-key flymake-mode-map (kbd "M-p") #'flymake-goto-prev-error)
 
 ;;;; Format
-(require 'format-all)
-
 (defun sndb-format-buffer ()
   "Auto-format the source code in the current buffer."
   (interactive)
-  (cond
-   ((eglot-managed-p) (eglot-format-buffer))
-   ((consp format-all-formatters) (format-all-buffer))
-   (t (sndb-format-buffer-simple))))
+  (if (eglot-managed-p)
+      (eglot-format-buffer)
+    (sndb-format-buffer-simple)))
 
 (defun sndb-format-buffer-simple ()
+  "Indent the current buffer and delete trailing whitespace."
   (interactive)
   (indent-region (point-min) (point-max))
   (delete-trailing-whitespace))
 
 (global-set-key (kbd "C-c f") #'sndb-format-buffer)
 
-(add-hook 'prog-mode-hook #'format-all-ensure-formatter)
-
-(dolist (hook '(go-mode-hook))
+(dolist (hook '(go-mode-hook
+                emacs-lisp-mode-hook
+                scheme-mode-hook
+                racket-mode-hook))
   (add-hook hook
             (lambda ()
               (add-hook 'before-save-hook #'sndb-format-buffer nil t))))
