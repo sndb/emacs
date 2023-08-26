@@ -73,12 +73,15 @@
 
 ;;;; Corfu
 (require 'corfu)
+(require 'corfu-popupinfo)
+(require 'corfu-candidate-overlay)
 
 (setq corfu-scroll-margin 0)
 (setq corfu-count 8)
 
 (global-corfu-mode 1)
 (corfu-popupinfo-mode 1)
+(corfu-candidate-overlay-mode 1)
 
 (defun corfu-enable-always-in-minibuffer ()
   "Enable Corfu in the minibuffer if Vertico is not active."

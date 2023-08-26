@@ -39,6 +39,7 @@
         orderless
         consult
         corfu
+        corfu-candidate-overlay
         embark
         embark-consult
         marginalia
