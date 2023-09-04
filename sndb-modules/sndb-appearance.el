@@ -6,7 +6,11 @@
 (setq modus-themes-common-palette-overrides
       '((comment red-faint)
         (string green-cooler)
-        (fringe unspecified)))
+        (fringe unspecified)
+        (border-mode-line-active bg-mode-line-active)
+        (border-mode-line-inactive bg-mode-line-inactive)))
+
+(custom-set-faces '(mode-line ((t :box (:style released-button)))))
 
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
 (load-theme 'modus-vivendi)
