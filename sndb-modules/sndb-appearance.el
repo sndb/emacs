@@ -3,6 +3,8 @@
 
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
+(setq modus-themes-bold-constructs t)
+(setq modus-themes-italic-constructs t)
 (setq modus-themes-common-palette-overrides
       '((comment red-faint)
         (string green-cooler)
