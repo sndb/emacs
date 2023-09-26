@@ -1,8 +1,21 @@
 ;;;; Terminal emulator
 (require 'vterm)
-(global-set-key (kbd "<f2>") #'vterm)
-(global-set-key (kbd "C-<f2>") #'vterm-other-window)
+
 (setq vterm-max-scrollback 16384)
+
+(defun sndb-vterm-buffer-name ()
+  (string-join (list "*vterm* - " (buffer-name))))
+
+(defun sndb-vterm ()
+  (interactive)
+  (vterm (sndb-vterm-buffer-name)))
+
+(defun sndb-vterm-other-window ()
+  (interactive)
+  (vterm-other-window (sndb-vterm-buffer-name)))
+
+(global-set-key (kbd "<f2>") #'sndb-vterm)
+(global-set-key (kbd "C-<f2>") #'sndb-vterm-other-window)
 
 ;;;; Shell
 (setq shell-command-prompt-show-cwd t)
