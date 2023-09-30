@@ -62,7 +62,6 @@
 
         ;; Applications
         elfeed
-        emms
         magit
         magit-todos
         nov

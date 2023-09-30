@@ -61,28 +61,6 @@
 
 (add-hook 'dired-mode-hook #'hl-line-mode)
 
-;;;; Multimedia system
-(require 'emms-setup)
-(require 'emms-info-exiftool)
-(require 'emms-history)
-
-(emms-all)
-
-(setq emms-player-list '(emms-player-mpv))
-(setq emms-source-file-default-directory "~/music/")
-
-(emms-history-load)
-
-(global-set-key (kbd "C-c e e") #'emms)
-(global-set-key (kbd "C-c e b") #'emms-browser)
-(global-set-key (kbd "C-c e p") #'emms-previous)
-(global-set-key (kbd "C-c e n") #'emms-next)
-(global-set-key (kbd "C-c e s") #'emms-stop)
-(global-set-key (kbd "C-c e r") #'emms-random)
-(global-set-key (kbd "C-c e >") #'emms-seek-forward)
-(global-set-key (kbd "C-c e <") #'emms-seek-backward)
-(global-set-key (kbd "C-c e SPC") #'emms-pause)
-
 ;;;; Feed reader
 (require 'elfeed)
 
