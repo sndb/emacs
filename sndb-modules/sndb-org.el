@@ -15,9 +15,10 @@
    (latex . t)))
 
 ;;;; UI
+(setq org-directory "~/data/notes")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-startup-folded 'showall)
 (setq org-catch-invisible-edits 'error)
-(setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-return-follows-link t)
 (setq org-id-link-to-org-use-id 'create-if-interactive)
 (setq org-list-allow-alphabetical t)
