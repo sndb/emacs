@@ -86,6 +86,7 @@
 (require 'sndb-essential)
 (require 'sndb-appearance)
 (require 'sndb-control)
+(require 'sndb-format)
 (require 'sndb-programming)
 (require 'sndb-completion)
 (require 'sndb-org)

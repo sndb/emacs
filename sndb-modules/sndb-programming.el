@@ -21,13 +21,13 @@
 
 (add-hook 'sql-mode-hook
           (lambda ()
+            (setq sndb-auto-format-function #'format-all-buffer)
             (setq format-all-formatters
                   '(("SQL" (pgformatter
                             "--function-case" "2"
                             "--keyword-case" "2"
                             "--type-case" "2"
-                            "--no-extra-line"
-                            "--tabs"))))))
+                            "--no-extra-line"))))))
 
 ;;;; Web
 (setq css-indent-offset 2)
@@ -36,7 +36,7 @@
 ;;;; Clojure
 (add-hook 'clojure-mode-hook
           (lambda ()
-            (add-hook 'before-save-hook #'cider-format-buffer nil t)))
+            (setq sndb-auto-format-function #'cider-format-buffer)))
 
 ;;;; Scheme
 (require 'geiser)
@@ -171,29 +171,5 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (define-key flymake-mode-map (kbd "C-c d D") #'flymake-show-project-diagnostics)
 (define-key flymake-mode-map (kbd "M-n") #'flymake-goto-next-error)
 (define-key flymake-mode-map (kbd "M-p") #'flymake-goto-prev-error)
-
-;;;; Format
-(defun sndb-format-buffer ()
-  "Auto-format the source code in the current buffer."
-  (interactive)
-  (if (eglot-managed-p)
-      (eglot-format-buffer)
-    (sndb-format-buffer-simple)))
-
-(defun sndb-format-buffer-simple ()
-  "Indent the current buffer and delete trailing whitespace."
-  (interactive)
-  (indent-region (point-min) (point-max))
-  (delete-trailing-whitespace))
-
-(global-set-key (kbd "C-c f") #'sndb-format-buffer)
-
-(dolist (hook '(go-mode-hook
-                emacs-lisp-mode-hook
-                scheme-mode-hook
-                racket-mode-hook))
-  (add-hook hook
-            (lambda ()
-              (add-hook 'before-save-hook #'sndb-format-buffer nil t))))
 
 (provide 'sndb-programming)
