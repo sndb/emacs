@@ -8,22 +8,27 @@
 (setq modus-themes-common-palette-overrides
       '((comment red-faint)
         (string green-cooler)
-        (fringe unspecified)))
+        (fringe unspecified)
+        (border-mode-line-active unspecified)
+        (border-mode-line-inactive unspecified)
+        (bg-mode-line-inactive bg-dim)))
 
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
 (load-theme 'modus-vivendi)
+
+;;;; Mode line
+(setq mode-line-compact 'long)
+(setq mode-line-position-column-line-format '(" (%l,%C)"))
 
 ;;;; Indicators
 (setq use-short-answers t)
 (setq confirm-kill-processes nil)
 (setq echo-keystrokes 0.1)
-(setq mode-line-compact 'long)
 (setq visible-bell t)
 (setq use-dialog-box nil)
 (setq initial-scratch-message nil)
 (setq inhibit-startup-screen t)
 (setq uniquify-buffer-name-style 'forward)
-(setq column-number-indicator-zero-based nil)
 (setq-default indicate-empty-lines t)
 
 (blink-cursor-mode -1)
