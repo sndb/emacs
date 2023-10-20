@@ -135,6 +135,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
     (define-key map (kbd "C-s") #'puni-splice)
     (define-key map (kbd "C-q") #'puni-squeeze)
     (define-key map (kbd "C-c") #'puni-split)
+    (define-key map (kbd "C-v") #'puni-convolute)
     map))
 
 (define-key puni-mode-map (kbd "C-'") sndb-puni-mode-map)
