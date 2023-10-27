@@ -60,8 +60,10 @@
 
 (scheme-add-keywords
  'font-lock-keyword-face
- '((1 . letcc)
-   (1 . try)))
+ '((1 . let/cc)
+   (1 . try)
+   (2 . juxt)
+   (2 . for)))
 
 (setq geiser-repl-history-filename (concat user-emacs-directory "geiser-history"))
 
