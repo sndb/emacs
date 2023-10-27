@@ -3,14 +3,10 @@
 
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
-(setq modus-themes-bold-constructs t)
-(setq modus-themes-italic-constructs t)
 (setq modus-themes-common-palette-overrides
       '((comment red-faint)
         (string green-cooler)
         (fringe unspecified)
-        (border-mode-line-active unspecified)
-        (border-mode-line-inactive unspecified)
         (bg-mode-line-inactive bg-dim)))
 
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
