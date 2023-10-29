@@ -63,14 +63,11 @@
         ;; Applications
         elfeed
         magit
-        magit-todos
         nov
         password-store
         vterm
 
-        ;; Look
-        diff-hl
-        hl-todo
+        ;; Appearance
         modus-themes))
 
 (defun sndb-install-packages ()
@@ -90,7 +87,6 @@
 (require 'sndb-programming)
 (require 'sndb-completion)
 (require 'sndb-org)
-(require 'sndb-git)
 (require 'sndb-application)
 (require 'sndb-custom nil t)
 

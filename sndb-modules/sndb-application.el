@@ -1,3 +1,13 @@
+;;;; Magit
+(require 'magit)
+(setq magit-diff-refine-hunk 'all)
+(setq magit-repository-directories '(("~" . 3)))
+
+;;;; Repositories
+(require 'magit-repos)
+(add-to-list 'magit-repolist-columns '("Flag" 4 magit-repolist-column-flag (:right-align t)))
+(global-set-key (kbd "C-c g") #'magit-list-repositories)
+
 ;;;; Terminal emulator
 (require 'vterm)
 

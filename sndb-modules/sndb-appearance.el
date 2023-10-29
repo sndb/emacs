@@ -12,10 +12,6 @@
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
 (load-theme 'modus-vivendi)
 
-;;;; Mode line
-(setq mode-line-compact 'long)
-(setq mode-line-position-column-line-format '(" (%l,%C)"))
-
 ;;;; Indicators
 (setq use-short-answers t)
 (setq confirm-kill-processes nil)
@@ -25,13 +21,8 @@
 (setq initial-scratch-message nil)
 (setq inhibit-startup-screen t)
 (setq uniquify-buffer-name-style 'forward)
-(setq-default indicate-empty-lines t)
 
 (blink-cursor-mode -1)
-(display-time-mode -1)
-(line-number-mode 1)
-(column-number-mode 1)
-(size-indication-mode -1)
 
 (dolist (hook '(text-mode-hook prog-mode-hook))
   (add-hook hook (lambda () (setq show-trailing-whitespace t))))
@@ -41,10 +32,6 @@
 (setq show-paren-when-point-in-periphery t)
 (setq show-paren-context-when-offscreen 'child-frame)
 (show-paren-mode 1)
-
-;;;; Highlight keywords
-(require 'hl-todo)
-(global-hl-todo-mode 1)
 
 ;;;; Windows
 (setq window-resize-pixelwise t)
