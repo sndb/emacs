@@ -1,7 +1,7 @@
 ;;;; Magit
 (require 'magit)
 (setq magit-diff-refine-hunk 'all)
-(setq magit-repository-directories '(("~" . 3)))
+(setq magit-repository-directories '(("~/data" . 3)))
 
 ;;;; Repositories
 (require 'magit-repos)
