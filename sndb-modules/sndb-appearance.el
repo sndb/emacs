@@ -7,7 +7,10 @@
       '((comment red-faint)
         (string green-cooler)
         (fringe unspecified)
-        (bg-mode-line-inactive bg-dim)))
+        (bg-mode-line-active bg-active)
+        (bg-mode-line-inactive bg-dim)
+        (border-mode-line-active unspecified)
+        (border-mode-line-inactive unspecified)))
 
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
 (load-theme 'modus-vivendi)
