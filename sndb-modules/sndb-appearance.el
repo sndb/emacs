@@ -26,23 +26,18 @@
 (setq uniquify-buffer-name-style 'forward)
 
 (blink-cursor-mode -1)
+(show-paren-mode 1)
 
 (dolist (hook '(text-mode-hook prog-mode-hook))
   (add-hook hook (lambda () (setq show-trailing-whitespace t))))
-
-;;;; Parentheses
-(setq show-paren-delay 0)
-(setq show-paren-when-point-in-periphery t)
-(setq show-paren-context-when-offscreen 'child-frame)
-(show-paren-mode 1)
 
 ;;;; Windows
 (setq window-resize-pixelwise t)
 (setq window-combination-resize t)
 
 ;;;; Tabs
+(setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator))
 (setq tab-bar-close-button-show nil)
-(setq tab-bar-new-button-show nil)
 (tab-bar-mode 1)
 
 (provide 'sndb-appearance)

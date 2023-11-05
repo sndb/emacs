@@ -5,6 +5,9 @@
 (setq require-final-newline t)
 (setq-default indent-tabs-mode nil)
 
+(electric-pair-mode 1)
+(global-subword-mode 1)
+
 ;;;; C
 (setq c-default-style "linux")
 (setq comment-style 'extra-line)
@@ -128,8 +131,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
                 geiser-repl-mode-hook
                 racket-mode-hook
                 racket-repl-mode-hook))
-  (add-hook hook #'puni-mode)
-  (add-hook hook #'electric-pair-local-mode))
+  (add-hook hook #'puni-mode))
 
 (defvar sndb-puni-mode-map
   (let ((map (make-sparse-keymap)))
@@ -146,9 +148,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (define-key puni-mode-map (kbd "C-(") #'puni-slurp-backward)
 (define-key puni-mode-map (kbd "C-}") #'puni-barf-forward)
 (define-key puni-mode-map (kbd "C-{") #'puni-barf-backward)
-
-;;;; Subword
-(global-subword-mode 1)
 
 ;;;; Eglot
 (require 'eglot)
