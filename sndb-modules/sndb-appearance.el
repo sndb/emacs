@@ -19,9 +19,7 @@
 (setq use-short-answers t)
 (setq confirm-kill-processes nil)
 (setq echo-keystrokes 0.1)
-(setq visible-bell t)
 (setq use-dialog-box nil)
-(setq initial-scratch-message nil)
 (setq inhibit-startup-screen t)
 (setq uniquify-buffer-name-style 'forward)
 

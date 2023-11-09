@@ -13,15 +13,10 @@
       (kill-buffer buffer))))
 
 (setq custom-file (make-temp-file "emacs-custom-"))
-(setq large-file-warning-threshold (* 50 1024 1024))
 (setq vc-follow-symlinks t)
 
 ;;;; Backup
-(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backup/"))))
-(setq backup-by-copying t)
-(setq version-control t)
-(setq delete-old-versions t)
-(setq kept-new-versions 4)
+(setq make-backup-files nil)
 (setq create-lockfiles nil)
 (setq auto-save-default nil)
 
