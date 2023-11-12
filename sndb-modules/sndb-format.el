@@ -17,7 +17,7 @@
 (define-minor-mode sndb-auto-format-mode
   "Auto-format the current buffer on save."
   :global t
-  :lighter "Afmt")
+  :lighter " Afmt")
 
 (defun sndb-auto-format-before-save ()
   "Auto-format the current buffer if `sndb-auto-format-mode' is enabled."
