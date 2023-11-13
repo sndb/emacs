@@ -66,7 +66,8 @@
  '((1 . let/cc)
    (1 . try)
    (2 . juxt)
-   (2 . for)))
+   (2 . for)
+   (2 . trace-let)))
 
 (setq geiser-repl-history-filename (concat user-emacs-directory "geiser-history"))
 
