@@ -57,7 +57,6 @@
         clojure-mode
         geiser
         geiser-guile
-        go-mode
         racket-mode
 
         ;; Applications

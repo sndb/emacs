@@ -3,6 +3,10 @@
 (setq magit-diff-refine-hunk 'all)
 (setq magit-repository-directories '(("~/data" . 3)))
 
+;;;; Ediff
+(setq ediff-split-window-function #'split-window-horizontally)
+(setq ediff-window-setup-function #'ediff-setup-windows-plain)
+
 ;;;; Repositories
 (require 'magit-repos)
 (add-to-list 'magit-repolist-columns '("Flag" 4 magit-repolist-column-flag (:right-align t)))
@@ -11,21 +15,42 @@
 ;;;; Terminal emulator
 (require 'vterm)
 
-(setq vterm-max-scrollback 16384)
+(setq vterm-max-scrollback 10000)
 
-(defun sndb-vterm-buffer-name ()
-  (string-join (list "*vterm* - " (buffer-name))))
+(add-hook 'vterm-exit-functions
+          (lambda (buffer _)
+            (unless (one-window-p)
+              (delete-window (get-buffer-window buffer)))))
+
+(defun sndb-local-name (name)
+  (let* ((project (project-current))
+         (base (file-name-nondirectory
+                (directory-file-name
+                 (if project
+                     (project-root project)
+                   default-directory)))))
+    (concat "*" base "-" name "*")))
 
 (defun sndb-vterm ()
   (interactive)
-  (vterm (sndb-vterm-buffer-name)))
+  (let* ((name (sndb-local-name "vterm"))
+         (buffer (get-buffer name)))
+    (if buffer
+        (let ((window (get-buffer-window buffer)))
+          (if (equal (current-buffer) buffer)
+              (unless (one-window-p)
+                (delete-window window))
+            (let ((window (if (window-live-p window)
+                              window
+                            (split-root-window-below))))
+              (set-window-buffer window buffer)
+              (select-window window))))
+      (let ((window (split-root-window-below)))
+        (select-window window)
+        (vterm name)))))
 
-(defun sndb-vterm-other-window ()
-  (interactive)
-  (vterm-other-window (sndb-vterm-buffer-name)))
-
-(global-set-key (kbd "<f2>") #'sndb-vterm)
-(global-set-key (kbd "C-<f2>") #'sndb-vterm-other-window)
+(keymap-unset vterm-mode-map "<f2>")
+(keymap-global-set "<f2>" #'sndb-vterm)
 
 ;;;; Shell
 (setq shell-command-prompt-show-cwd t)

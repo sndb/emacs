@@ -134,14 +134,12 @@ If the length of the previous line is 0, use the value of `fill-column'."
                 racket-repl-mode-hook))
   (add-hook hook #'puni-mode))
 
-(defvar sndb-puni-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-r") #'puni-raise)
-    (define-key map (kbd "C-s") #'puni-splice)
-    (define-key map (kbd "C-q") #'puni-squeeze)
-    (define-key map (kbd "C-c") #'puni-split)
-    (define-key map (kbd "C-v") #'puni-convolute)
-    map))
+(defvar-keymap sndb-puni-mode-map
+  "C-r" #'puni-raise
+  "C-s" #'puni-splice
+  "C-q" #'puni-squeeze
+  "C-c" #'puni-split
+  "C-v" #'puni-convolute)
 
 (define-key puni-mode-map (kbd "C-'") sndb-puni-mode-map)
 (define-key puni-mode-map (kbd "C-=") #'puni-expand-region)
@@ -154,7 +152,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (require 'eglot)
 
 (dolist (hook '(c-mode-hook
-                go-mode-hook
+                go-ts-mode-hook
                 python-mode-hook
                 racket-mode-hook
                 sh-mode-hook))
@@ -174,5 +172,13 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (define-key flymake-mode-map (kbd "C-c d D") #'flymake-show-project-diagnostics)
 (define-key flymake-mode-map (kbd "M-n") #'flymake-goto-next-error)
 (define-key flymake-mode-map (kbd "M-p") #'flymake-goto-prev-error)
+
+;;;; Tree-sitter
+(require 'treesit)
+(require 'go-ts-mode)
+
+(setq treesit-language-source-alist
+      '((go "https://github.com/tree-sitter/tree-sitter-go")
+        (gomod "https://github.com/camdencheek/tree-sitter-go-mod")))
 
 (provide 'sndb-programming)

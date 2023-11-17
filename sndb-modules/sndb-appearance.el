@@ -15,6 +15,10 @@
 (global-set-key (kbd "<f5>") #'modus-themes-toggle)
 (load-theme 'modus-vivendi)
 
+;;;; Breadcrumb
+(require 'breadcrumb)
+(breadcrumb-mode 1)
+
 ;;;; Indicators
 (setq use-short-answers t)
 (setq confirm-kill-processes nil)
