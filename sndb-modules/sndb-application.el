@@ -10,7 +10,7 @@
 ;;;; Repositories
 (require 'magit-repos)
 (add-to-list 'magit-repolist-columns '("Flag" 4 magit-repolist-column-flag (:right-align t)))
-(global-set-key (kbd "C-c g") #'magit-list-repositories)
+(keymap-global-set "C-c g" #'magit-list-repositories)
 
 ;;;; Terminal emulator
 (require 'vterm)
@@ -23,6 +23,7 @@
               (delete-window (get-buffer-window buffer)))))
 
 (defun sndb-local-name (name)
+  "Create a name related to the current project or directory."
   (let* ((project (project-current))
          (base (file-name-nondirectory
                 (directory-file-name
@@ -32,6 +33,8 @@
     (concat "*" base "-" name "*")))
 
 (defun sndb-vterm ()
+  "Switch to the local Vterm buffer.
+Close it if the Vterm buffer is selected."
   (interactive)
   (let* ((name (sndb-local-name "vterm"))
          (buffer (get-buffer name)))
@@ -71,13 +74,13 @@
   (interactive (list (password-store--completing-read)))
   (password-store-copy-field entry "login"))
 
-(global-set-key (kbd "C-c p g") #'password-store-generate)
-(global-set-key (kbd "C-c p n") #'password-store-generate-no-symbols)
-(global-set-key (kbd "C-c p p") #'password-store-copy)
-(global-set-key (kbd "C-c p f") #'password-store-copy-field)
-(global-set-key (kbd "C-c p e") #'password-store-edit)
-(global-set-key (kbd "C-c p r") #'password-store-remove)
-(global-set-key (kbd "C-c p l") #'sndb-password-store-copy-login)
+(keymap-global-set "C-c p g" #'password-store-generate)
+(keymap-global-set "C-c p n" #'password-store-generate-no-symbols)
+(keymap-global-set "C-c p p" #'password-store-copy)
+(keymap-global-set "C-c p f" #'password-store-copy-field)
+(keymap-global-set "C-c p e" #'password-store-edit)
+(keymap-global-set "C-c p r" #'password-store-remove)
+(keymap-global-set "C-c p l" #'sndb-password-store-copy-login)
 
 ;;;; Directory editor
 (require 'dired)
@@ -92,7 +95,7 @@
 (setq dired-create-destination-dirs-on-trailing-dirsep t)
 (setq dired-isearch-filenames t)
 
-(define-key dired-mode-map (kbd "C-+") #'dired-create-empty-file)
+(keymap-set dired-mode-map "C-+" #'dired-create-empty-file)
 
 (add-hook 'dired-mode-hook #'hl-line-mode)
 
@@ -105,6 +108,6 @@
 
 (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
 
-(global-set-key (kbd "<XF86HomePage>") #'elfeed)
+(keymap-global-set "<XF86HomePage>" #'elfeed)
 
 (provide 'sndb-application)

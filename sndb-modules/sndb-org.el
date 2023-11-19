@@ -51,8 +51,8 @@
 (setq org-agenda-start-on-weekday nil)
 (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
 (setq org-agenda-skip-scheduled-if-done t)
-(define-key org-mode-map (kbd "C-c y") #'org-todo-yesterday)
-(define-key org-agenda-mode-map (kbd "C-c y") #'org-agenda-todo-yesterday)
+(keymap-set org-mode-map "C-c y" #'org-todo-yesterday)
+(keymap-set org-agenda-mode-map "C-c y" #'org-agenda-todo-yesterday)
 
 ;;;; Capture
 (setq org-capture-templates
@@ -72,8 +72,8 @@
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
 
-(global-set-key (kbd "C-c l") #'org-store-link)
-(global-set-key (kbd "C-c a") #'org-agenda)
-(global-set-key (kbd "C-c c") #'org-capture)
+(keymap-global-set "C-c l" #'org-store-link)
+(keymap-global-set "C-c a" #'org-agenda)
+(keymap-global-set "C-c c" #'org-capture)
 
 (provide 'sndb-org)

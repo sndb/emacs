@@ -9,24 +9,64 @@
   (put c 'disabled t))
 
 ;; Remap commands
-(global-set-key [remap zap-to-char] #'zap-up-to-char)
-(global-set-key [remap upcase-word] #'upcase-dwim)
-(global-set-key [remap downcase-word] #'downcase-dwim)
-(global-set-key [remap capitalize-word] #'capitalize-dwim)
-(global-set-key [remap list-buffers] #'ibuffer)
-(global-set-key [remap dabbrev-expand] #'hippie-expand)
-(global-set-key (kbd "C-M-y") #'duplicate-dwim)
+(keymap-global-set "M-z" #'zap-up-to-char)
+(keymap-global-set "M-u" #'upcase-dwim)
+(keymap-global-set "M-l" #'downcase-dwim)
+(keymap-global-set "M-c" #'capitalize-dwim)
+(keymap-global-set "C-x C-b" #'ibuffer)
+(keymap-global-set "M-/" #'hippie-expand)
+(keymap-global-set "C-M-y" #'duplicate-dwim)
+
+;;;; Buffers
+(defun sndb-kill-buffer ()
+  "Kill the current buffer and close its window."
+  (interactive)
+  (if (one-window-p)
+      (kill-buffer)
+    (kill-buffer-and-window)))
+
+(keymap-global-set "C-x k" #'sndb-kill-buffer)
 
 ;;;; Windows
+(defun sndb-previous-window ()
+  "Select previous window in cyclic ordering of windows."
+  (interactive)
+  (other-window -1))
+
+(defun sndb-close ()
+  "Delete the current window.
+Close the current tab if that was its only window."
+  (interactive)
+  (if (one-window-p)
+      (tab-close)
+    (delete-window)))
+
 (setq help-window-select t)
 
-(global-set-key [remap balance-windows] #'balance-windows-area)
-(global-set-key (kbd "C-x !") #'delete-other-windows-vertically)
-(global-set-key (kbd "C-;") #'other-window)
+(defvar-keymap sndb-close-map
+  :repeat t
+  "0" #'sndb-close)
+
+(keymap-global-set "C-x !" #'delete-other-windows-vertically)
+(keymap-global-set "C-;" #'other-window)
+(keymap-global-set "C-:" #'sndb-previous-window)
+(keymap-global-set "C-x 0" #'sndb-close)
 
 (setq display-buffer-alist
       `((,(regexp-quote shell-command-buffer-name-async)
          display-buffer-no-window)))
+
+;;;; Lines
+(defun sndb-backward-kill-line ()
+  "Kill the rest of the current line backward."
+  (interactive)
+  (kill-line -1))
+
+(setq delete-trailing-lines nil)
+(setq require-final-newline t)
+(setq kill-whole-line t)
+
+(keymap-global-set "C-S-k" #'sndb-backward-kill-line)
 
 ;;;; Read-Only
 (setq view-read-only t)
@@ -64,8 +104,8 @@
   (interactive)
   (scroll-down 4))
 
-(global-set-key (kbd "C-S-n") #'sndb-scroll-up)
-(global-set-key (kbd "C-S-p") #'sndb-scroll-down)
+(keymap-global-set "C-S-n" #'sndb-scroll-up)
+(keymap-global-set "C-S-p" #'sndb-scroll-down)
 
 (put #'sndb-scroll-up 'isearch-scroll t)
 (put #'sndb-scroll-down 'isearch-scroll t)
@@ -77,5 +117,14 @@
 (setq isearch-repeat-on-direction-change t)
 
 (add-hook 'occur-mode-hook #'hl-line-mode)
+
+;;;; Prefix
+(defvar-keymap sndb-prefix-map
+  :repeat t
+  "n" #'next-buffer
+  "p" #'previous-buffer
+  "t" #'tab-window-detach)
+
+(keymap-global-set "C-z" sndb-prefix-map)
 
 (provide 'sndb-control)

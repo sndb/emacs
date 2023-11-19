@@ -17,10 +17,6 @@
 (setq read-buffer-completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
 
-;;;; Abbrev
-(setq abbrev-file-name (locate-user-emacs-file "abbrev.el"))
-(add-hook 'prog-mode-hook #'abbrev-mode)
-
 ;;;; ElDoc
 (require 'eldoc)
 (require 'eldoc-box)
@@ -52,14 +48,14 @@
 (setq xref-show-xrefs-function #'consult-xref
       xref-show-definitions-function #'consult-xref)
 
-(global-set-key (kbd "M-s M-r") #'consult-recent-file)
-(global-set-key (kbd "M-s M-f") #'consult-find)
-(global-set-key (kbd "M-s M-g") #'consult-grep)
-(global-set-key (kbd "M-s M-l") #'consult-line)
-(global-set-key (kbd "M-s M-i") #'consult-imenu)
-(global-set-key (kbd "M-s M-o") #'consult-outline)
-(global-set-key (kbd "M-s M-d") #'consult-flymake)
-(global-set-key (kbd "M-g M-g") #'consult-goto-line)
+(keymap-global-set "M-s M-r" #'consult-recent-file)
+(keymap-global-set "M-s M-f" #'consult-find)
+(keymap-global-set "M-s M-g" #'consult-grep)
+(keymap-global-set "M-s M-l" #'consult-line)
+(keymap-global-set "M-s M-i" #'consult-imenu)
+(keymap-global-set "M-s M-o" #'consult-outline)
+(keymap-global-set "M-s M-d" #'consult-flymake)
+(keymap-global-set "M-g M-g" #'consult-goto-line)
 
 ;;;; Embark
 (require 'embark)
@@ -68,8 +64,8 @@
 (setq prefix-help-command #'embark-prefix-help-command)
 (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)
 
-(global-set-key (kbd "C-.") #'embark-act)
-(global-set-key (kbd "M-.") #'embark-dwim)
+(keymap-global-set "C-." #'embark-act)
+(keymap-global-set "M-." #'embark-dwim)
 
 ;;;; Corfu
 (require 'corfu)
@@ -92,6 +88,6 @@
 ;;;; Wgrep
 (require 'wgrep)
 (setq wgrep-auto-save-buffer t)
-(define-key grep-mode-map (kbd "C-x C-q") #'wgrep-change-to-wgrep-mode)
+(keymap-set grep-mode-map "C-x C-q" #'wgrep-change-to-wgrep-mode)
 
 (provide 'sndb-completion)

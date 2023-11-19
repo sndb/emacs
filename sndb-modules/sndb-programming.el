@@ -1,12 +1,12 @@
 ;;;; Common
 (setq default-input-method "TeX")
-(setq delete-trailing-lines nil)
 (setq display-raw-bytes-as-hex t)
-(setq require-final-newline t)
 (setq-default indent-tabs-mode nil)
 
 (electric-pair-mode 1)
 (global-subword-mode 1)
+
+(keymap-global-set "C-c m" #'woman)
 
 ;;;; C
 (setq c-default-style "linux")
@@ -79,8 +79,8 @@
 
 (add-hook 'text-mode-hook #'turn-on-auto-fill)
 
-(defun sndb-replace-untypable-characters ()
-  "Replace the characters that are inconvenient to type."
+(defun sndb-replace-inconvenient-characters ()
+  "Replace all inconvenient characters in the current buffer."
   (interactive)
   (save-excursion
     (dolist (pair
@@ -117,36 +117,30 @@ If the length of the previous line is 0, use the value of `fill-column'."
           (max 0 (- underline-length (current-column)))))
     (insert (make-string target-length c))))
 
-(global-set-key (kbd "C-c u") #'sndb-insert-underline)
+(keymap-global-set "C-c u" #'sndb-insert-underline)
 
 ;;;; Puni
 (require 'puni)
 
 (setq puni-confirm-when-delete-unbalanced-active-region nil)
 
-(dolist (hook '(emacs-lisp-mode-hook
-                eval-expression-minibuffer-setup-hook
-                clojure-mode-hook
-                cider-repl-mode-hook
-                scheme-mode-hook
-                geiser-repl-mode-hook
-                racket-mode-hook
-                racket-repl-mode-hook))
+(dolist (hook '(prog-mode-hook text-mode-hook))
   (add-hook hook #'puni-mode))
 
 (defvar-keymap sndb-puni-mode-map
+  :repeat t
   "C-r" #'puni-raise
   "C-s" #'puni-splice
   "C-q" #'puni-squeeze
   "C-c" #'puni-split
   "C-v" #'puni-convolute)
 
-(define-key puni-mode-map (kbd "C-'") sndb-puni-mode-map)
-(define-key puni-mode-map (kbd "C-=") #'puni-expand-region)
-(define-key puni-mode-map (kbd "C-)") #'puni-slurp-forward)
-(define-key puni-mode-map (kbd "C-(") #'puni-slurp-backward)
-(define-key puni-mode-map (kbd "C-}") #'puni-barf-forward)
-(define-key puni-mode-map (kbd "C-{") #'puni-barf-backward)
+(keymap-set puni-mode-map "C-'" sndb-puni-mode-map)
+(keymap-set puni-mode-map "C-=" #'puni-expand-region)
+(keymap-set puni-mode-map "C-)" #'puni-slurp-forward)
+(keymap-set puni-mode-map "C-(" #'puni-slurp-backward)
+(keymap-set puni-mode-map "C-}" #'puni-barf-forward)
+(keymap-set puni-mode-map "C-{" #'puni-barf-backward)
 
 ;;;; Eglot
 (require 'eglot)
@@ -158,9 +152,9 @@ If the length of the previous line is 0, use the value of `fill-column'."
                 sh-mode-hook))
   (add-hook hook #'eglot-ensure))
 
-(define-key eglot-mode-map (kbd "C-c r") #'eglot-rename)
-(define-key eglot-mode-map (kbd "C-c t") #'eglot-code-actions)
-(define-key eglot-mode-map (kbd "C-h .") #'eldoc-box-eglot-help-at-point)
+(keymap-set eglot-mode-map "C-c r" #'eglot-rename)
+(keymap-set eglot-mode-map "C-c t" #'eglot-code-actions)
+(keymap-set eglot-mode-map "C-h ." #'eldoc-box-help-at-point)
 
 ;;;; Flymake
 (require 'flymake)
@@ -168,10 +162,8 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (setq flymake-suppress-zero-counters t)
 (setq flymake-wrap-around nil)
 
-(define-key flymake-mode-map (kbd "C-c d d") #'flymake-show-buffer-diagnostics)
-(define-key flymake-mode-map (kbd "C-c d D") #'flymake-show-project-diagnostics)
-(define-key flymake-mode-map (kbd "M-n") #'flymake-goto-next-error)
-(define-key flymake-mode-map (kbd "M-p") #'flymake-goto-prev-error)
+(keymap-set flymake-mode-map "M-n" #'flymake-goto-next-error)
+(keymap-set flymake-mode-map "M-p" #'flymake-goto-prev-error)
 
 ;;;; Tree-sitter
 (require 'treesit)
@@ -180,5 +172,19 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (setq treesit-language-source-alist
       '((go "https://github.com/tree-sitter/tree-sitter-go")
         (gomod "https://github.com/camdencheek/tree-sitter-go-mod")))
+
+;;;; Tempel
+(require 'tempel)
+
+(keymap-global-set "M-*" #'tempel-insert)
+(keymap-global-set "M-<iso-lefttab>" #'tempel-complete)
+
+(defun tempel-setup-capf ()
+  (setq-local completion-at-point-functions
+              (cons #'tempel-expand
+                    completion-at-point-functions)))
+
+(dolist (hook '(prog-mode-hook text-mode-hook))
+  (add-hook hook #'tempel-setup-capf))
 
 (provide 'sndb-programming)

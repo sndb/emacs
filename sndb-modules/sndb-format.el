@@ -29,6 +29,6 @@
 
 (sndb-auto-format-mode 1)
 
-(global-set-key (kbd "C-c f") #'sndb-auto-format-mode)
+(keymap-global-set "C-c f" #'sndb-auto-format-mode)
 
 (provide 'sndb-format)
