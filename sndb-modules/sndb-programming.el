@@ -124,7 +124,12 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 (setq puni-confirm-when-delete-unbalanced-active-region nil)
 
-(dolist (hook '(prog-mode-hook text-mode-hook))
+(dolist (hook '(prog-mode-hook
+                text-mode-hook
+                eval-expression-minibuffer-setup-hook
+                cider-repl-mode-hook
+                geiser-repl-mode-hook
+                racket-repl-mode-hook))
   (add-hook hook #'puni-mode))
 
 (defvar-keymap sndb-puni-mode-map
