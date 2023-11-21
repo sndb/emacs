@@ -23,7 +23,7 @@
 
 (setq eldoc-echo-area-prefer-doc-buffer t)
 (setq eldoc-echo-area-use-multiline-p nil)
-(setq eldoc-idle-delay 0)
+(setq eldoc-idle-delay 0.25)
 
 ;;;; Vertico
 (require 'vertico)

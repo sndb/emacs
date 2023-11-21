@@ -2,7 +2,7 @@
   "Auto-format the source code in the current buffer."
   (interactive)
   (if (eglot-managed-p)
-      (eglot-format-buffer)
+      (eglot-format)
     (sndb-format-buffer-simple)))
 
 (defun sndb-format-buffer-simple ()

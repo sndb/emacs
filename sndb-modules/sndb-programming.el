@@ -1,6 +1,7 @@
 ;;;; Common
 (setq default-input-method "TeX")
 (setq display-raw-bytes-as-hex t)
+(setq tab-always-indent 'complete)
 (setq-default indent-tabs-mode nil)
 
 (electric-pair-mode 1)
@@ -141,7 +142,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
   "C-v" #'puni-convolute)
 
 (keymap-set puni-mode-map "C-'" sndb-puni-mode-map)
-(keymap-set puni-mode-map "C-=" #'puni-expand-region)
 (keymap-set puni-mode-map "C-)" #'puni-slurp-forward)
 (keymap-set puni-mode-map "C-(" #'puni-slurp-backward)
 (keymap-set puni-mode-map "C-}" #'puni-barf-forward)
@@ -149,6 +149,8 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 ;;;; Eglot
 (require 'eglot)
+
+(setq eglot-events-buffer-size 0)
 
 (dolist (hook '(c-mode-hook
                 go-ts-mode-hook
@@ -159,7 +161,9 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 (keymap-set eglot-mode-map "C-c r" #'eglot-rename)
 (keymap-set eglot-mode-map "C-c t" #'eglot-code-actions)
+(keymap-set eglot-mode-map "C-c o" #'eglot-code-action-organize-imports)
 (keymap-set eglot-mode-map "C-h ." #'eldoc-box-help-at-point)
+(keymap-set eglot-mode-map "C-c h" #'eldoc)
 
 ;;;; Flymake
 (require 'flymake)
@@ -180,15 +184,15 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 ;;;; Tempel
 (require 'tempel)
-
 (keymap-global-set "M-<iso-lefttab>" #'tempel-complete)
 
-(defun tempel-setup-capf ()
-  (setq-local completion-at-point-functions
-              (cons #'tempel-expand
-                    completion-at-point-functions)))
+;;;; Expreg
+(require 'expreg)
+(keymap-global-set "C-=" #'expreg-expand)
+(keymap-global-set "C--" #'expreg-contract)
 
-(dolist (hook '(prog-mode-hook text-mode-hook))
-  (add-hook hook #'tempel-setup-capf))
+;;;; Vundo
+(require 'vundo)
+(keymap-global-set "C-?" #'vundo)
 
 (provide 'sndb-programming)

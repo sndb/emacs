@@ -35,7 +35,7 @@
 (add-hook 'package-menu-mode-hook #'hl-line-mode)
 
 (setq sndb-package-list
-      '(;; Completion
+      '(;; General
         orderless
         consult
         corfu
@@ -45,12 +45,13 @@
         marginalia
         vertico
         wgrep
-
-        ;; Programming
         eglot
         eldoc-box
         format-all
         puni
+        tempel
+        expreg
+        vundo
 
         ;; Languages
         cider
@@ -58,6 +59,9 @@
         geiser
         geiser-guile
         racket-mode
+        markdown-mode
+        lua-mode
+        yaml-mode
 
         ;; Applications
         magit
@@ -66,6 +70,7 @@
         vterm
 
         ;; Appearance
+        breadcrumb
         modus-themes))
 
 (defun sndb-install-packages ()
