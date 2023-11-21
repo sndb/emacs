@@ -181,7 +181,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
 ;;;; Tempel
 (require 'tempel)
 
-(keymap-global-set "M-*" #'tempel-insert)
 (keymap-global-set "M-<iso-lefttab>" #'tempel-complete)
 
 (defun tempel-setup-capf ()
