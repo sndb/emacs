@@ -60,7 +60,6 @@
         racket-mode
 
         ;; Applications
-        elfeed
         magit
         nov
         password-store

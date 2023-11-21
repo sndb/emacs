@@ -99,15 +99,4 @@ Close it if the Vterm buffer is selected."
 
 (add-hook 'dired-mode-hook #'hl-line-mode)
 
-;;;; Feed reader
-(require 'elfeed)
-
-(let ((feeds (locate-user-emacs-file "feeds.el")))
-  (when (file-exists-p feeds)
-    (load-file feeds)))
-
-(setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
-
-(keymap-global-set "<XF86HomePage>" #'elfeed)
-
 (provide 'sndb-application)
