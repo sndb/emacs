@@ -122,8 +122,7 @@ Close the current tab if that was its only window."
 (defvar-keymap sndb-prefix-map
   :repeat t
   "n" #'next-buffer
-  "p" #'previous-buffer
-  "t" #'tab-window-detach)
+  "p" #'previous-buffer)
 
 (keymap-global-set "C-z" sndb-prefix-map)
 
