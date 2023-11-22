@@ -22,6 +22,8 @@ With prefix argument select a theme using minibuffer completion."
      #'modus-themes-toggle)))
 
 (keymap-global-set "<f5>" #'sndb-switch-theme)
+
+(set-face-attribute 'default nil :family "Hack" :height 105)
 (load-theme 'modus-vivendi)
 
 ;;;; Breadcrumb

@@ -91,6 +91,5 @@
 (require 'sndb-completion)
 (require 'sndb-org)
 (require 'sndb-application)
-(require 'sndb-custom nil t)
 
 ;;; rc.el ends here
