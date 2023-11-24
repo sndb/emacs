@@ -44,7 +44,9 @@ With prefix argument select a theme using minibuffer completion."
 (show-paren-mode 1)
 
 (dolist (hook '(prog-mode-hook text-mode-hook))
-  (add-hook hook (lambda () (setq show-trailing-whitespace t))))
+  (add-hook hook (lambda ()
+                   (setq show-trailing-whitespace t)
+                   (setq indicate-empty-lines t))))
 
 ;;;; Windows
 (setq window-resize-pixelwise t)

@@ -32,6 +32,8 @@
                    default-directory)))))
     (concat "*" base "-" name "*")))
 
+(setq sndb-vterm-split-window-function #'split-root-window-right)
+
 (defun sndb-vterm ()
   "Switch to the local Vterm buffer.
 Close it if the Vterm buffer is selected."
@@ -45,10 +47,10 @@ Close it if the Vterm buffer is selected."
                 (delete-window window))
             (let ((window (if (window-live-p window)
                               window
-                            (split-root-window-below))))
+                            (funcall sndb-vterm-split-window-function))))
               (set-window-buffer window buffer)
               (select-window window))))
-      (let ((window (split-root-window-below)))
+      (let ((window (funcall sndb-vterm-split-window-function)))
         (select-window window)
         (vterm name)))))
 
