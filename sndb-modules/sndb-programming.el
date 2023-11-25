@@ -184,7 +184,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 ;;;; Tempel
 (require 'tempel)
-(keymap-global-set "M-<iso-lefttab>" #'tempel-complete)
+(keymap-global-set "M-<tab>" #'tempel-complete)
 
 ;;;; Expreg
 (require 'expreg)
