@@ -55,6 +55,7 @@ With prefix argument select a theme using minibuffer completion."
 ;;;; Tabs
 (setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator))
 (setq tab-bar-close-button-show nil)
+(setq tab-bar-show 1)
 (tab-bar-mode 1)
 
 (provide 'sndb-appearance)
