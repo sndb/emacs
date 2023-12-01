@@ -60,11 +60,6 @@ Close it if the Vterm buffer is selected."
 ;;;; Shell
 (setq shell-command-prompt-show-cwd t)
 
-;;;; EPUB reader
-(require 'nov)
-(setq nov-text-width fill-column)
-(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-
 ;;;; Password manager
 (require 'epg)
 (setq epg-pinentry-mode 'loopback)

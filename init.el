@@ -65,7 +65,6 @@
 
         ;; Applications
         magit
-        nov
         password-store
         vterm
 
