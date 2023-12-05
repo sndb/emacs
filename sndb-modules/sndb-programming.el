@@ -157,7 +157,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (dolist (hook '(c-mode-hook
                 go-ts-mode-hook
                 python-mode-hook
-                racket-mode-hook
                 sh-mode-hook))
   (add-hook hook #'eglot-ensure))
 
