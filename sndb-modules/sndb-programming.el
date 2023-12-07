@@ -15,6 +15,11 @@
 
 (add-hook 'c-mode-common-hook #'indent-tabs-mode)
 
+;;;; Python
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq sndb-auto-format-function #'format-all-buffer)))
+
 ;;;; Shell
 (setq sh-basic-offset 8)
 
@@ -25,13 +30,7 @@
 
 (add-hook 'sql-mode-hook
           (lambda ()
-            (setq sndb-auto-format-function #'format-all-buffer)
-            (setq format-all-formatters
-                  '(("SQL" (pgformatter
-                            "--function-case" "2"
-                            "--keyword-case" "2"
-                            "--type-case" "2"
-                            "--no-extra-line"))))))
+            (setq sndb-auto-format-function #'format-all-buffer)))
 
 ;;;; Web
 (setq css-indent-offset 2)
@@ -165,6 +164,17 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (keymap-set eglot-mode-map "C-c o" #'eglot-code-action-organize-imports)
 (keymap-set eglot-mode-map "C-h ." #'eldoc-box-help-at-point)
 (keymap-set eglot-mode-map "C-c h" #'eldoc)
+
+;;;; Format-all
+(require 'format-all)
+
+(setq-default format-all-formatters
+              '(("Python" ruff)
+                ("SQL" (pgformatter
+                        "--function-case" "2"
+                        "--keyword-case" "2"
+                        "--type-case" "2"
+                        "--no-extra-line"))))
 
 ;;;; Flymake
 (require 'flymake)
