@@ -4,7 +4,6 @@
 (setq tab-always-indent 'complete)
 (setq-default indent-tabs-mode nil)
 
-(electric-pair-mode 1)
 (global-subword-mode 1)
 
 (keymap-global-set "C-c m" #'woman)
@@ -132,6 +131,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
                 geiser-repl-mode-hook
                 racket-mode-hook
                 racket-repl-mode-hook))
+  (add-hook hook #'electric-pair-local-mode)
   (add-hook hook #'puni-mode))
 
 (defvar-keymap sndb-puni-mode-map
