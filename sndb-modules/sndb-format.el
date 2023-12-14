@@ -1,5 +1,5 @@
 (defun sndb-format-buffer ()
-  "Auto-format the source code in the current buffer."
+  "Format the source code in the current buffer."
   (interactive)
   (if (eglot-managed-p)
       (eglot-format)
@@ -16,19 +16,15 @@
 
 (define-minor-mode sndb-auto-format-mode
   "Auto-format the current buffer on save."
-  :global t
   :lighter " Afmt")
 
 (defun sndb-auto-format-before-save ()
   "Auto-format the current buffer if `sndb-auto-format-mode' is enabled."
-  (when (and (derived-mode-p 'prog-mode 'text-mode)
-             sndb-auto-format-mode)
+  (when sndb-auto-format-mode
     (funcall sndb-auto-format-function)))
 
 (add-hook 'before-save-hook #'sndb-auto-format-before-save)
 
-(sndb-auto-format-mode 1)
-
-(keymap-global-set "C-c f" #'sndb-auto-format-mode)
+(keymap-global-set "C-c f" #'sndb-format-buffer)
 
 (provide 'sndb-format)

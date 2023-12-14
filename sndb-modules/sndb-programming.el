@@ -11,34 +11,32 @@
 ;;;; C
 (setq c-default-style "linux")
 (setq comment-style 'extra-line)
-
 (add-hook 'c-mode-common-hook #'indent-tabs-mode)
 
+;;;; Go
+(require 'go-ts-mode)
+(add-hook 'go-ts-mode-hook #'sndb-auto-format-mode)
+
 ;;;; Python
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq sndb-auto-format-function #'format-all-buffer)))
+(require 'python)
+(keymap-set python-mode-map "C-c f" #'format-all-buffer)
 
 ;;;; Shell
 (setq sh-basic-offset 8)
-
 (add-hook 'sh-mode-hook #'indent-tabs-mode)
 
 ;;;; SQL
+(require 'sql)
 (setq sql-product 'sqlite)
-
-(add-hook 'sql-mode-hook
-          (lambda ()
-            (setq sndb-auto-format-function #'format-all-buffer)))
+(keymap-set sql-mode-map "C-c f" #'format-all-buffer)
 
 ;;;; Web
 (setq css-indent-offset 2)
 (setq js-indent-level 2)
 
 ;;;; Clojure
-(add-hook 'clojure-mode-hook
-          (lambda ()
-            (setq sndb-auto-format-function #'cider-format-buffer)))
+(require 'clojure-mode)
+(keymap-set clojure-mode-map "C-c f" #'cider-format-buffer)
 
 ;;;; Scheme
 (require 'geiser)
@@ -187,8 +185,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 ;;;; Tree-sitter
 (require 'treesit)
-(require 'go-ts-mode)
-
 (setq treesit-language-source-alist
       '((go "https://github.com/tree-sitter/tree-sitter-go")
         (gomod "https://github.com/camdencheek/tree-sitter-go-mod")))
