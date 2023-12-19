@@ -26,12 +26,6 @@ With prefix argument select a theme using minibuffer completion."
 (set-face-attribute 'default nil :family "Hack" :height 105)
 (load-theme 'modus-vivendi)
 
-;;;; Breadcrumb
-(require 'breadcrumb)
-(setq breadcrumb-imenu-max-length 0.5)
-(setq breadcrumb-project-max-length 0.5)
-(breadcrumb-mode 1)
-
 ;;;; Indicators
 (setq use-short-answers t)
 (setq confirm-kill-processes nil)
@@ -45,8 +39,7 @@ With prefix argument select a theme using minibuffer completion."
 
 (dolist (hook '(prog-mode-hook text-mode-hook))
   (add-hook hook (lambda ()
-                   (setq show-trailing-whitespace t)
-                   (setq indicate-empty-lines t))))
+                   (setq show-trailing-whitespace t))))
 
 ;;;; Windows
 (setq window-resize-pixelwise t)
