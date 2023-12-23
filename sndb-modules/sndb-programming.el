@@ -152,6 +152,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (setq eglot-events-buffer-size 0)
 
 (dolist (hook '(c-mode-hook
+                c++-mode-hook
                 go-ts-mode-hook
                 python-mode-hook
                 sh-mode-hook))
@@ -191,7 +192,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 ;;;; Tempel
 (require 'tempel)
-(keymap-global-set "M-<tab>" #'tempel-complete)
+(keymap-global-set "<backtab>" #'tempel-complete)
 
 ;;;; Expreg
 (require 'expreg)
