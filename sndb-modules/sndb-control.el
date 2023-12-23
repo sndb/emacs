@@ -64,7 +64,6 @@ Close the current tab if that was its only window."
 
 (setq delete-trailing-lines nil)
 (setq require-final-newline t)
-(setq kill-whole-line t)
 
 (keymap-global-set "C-S-k" #'sndb-backward-kill-line)
 
