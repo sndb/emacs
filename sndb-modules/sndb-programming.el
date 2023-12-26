@@ -9,9 +9,9 @@
 (keymap-global-set "C-c m" #'woman)
 
 ;;;; C
-(setq c-default-style "linux")
-(setq comment-style 'extra-line)
-(add-hook 'c-mode-common-hook #'indent-tabs-mode)
+(require 'c-ts-mode)
+(setq c-ts-mode-indent-offset 8)
+(setq c-ts-mode-indent-style 'linux)
 
 ;;;; Go
 (require 'go-ts-mode)
@@ -19,20 +19,17 @@
 
 ;;;; Python
 (require 'python)
-(keymap-set python-mode-map "C-c f" #'format-all-buffer)
+(keymap-set python-ts-mode-map "C-c f" #'format-all-buffer)
 
 ;;;; Shell
+(require 'sh-script)
 (setq sh-basic-offset 8)
-(add-hook 'sh-mode-hook #'indent-tabs-mode)
+(add-hook 'sh-base-mode-hook #'indent-tabs-mode)
 
 ;;;; SQL
 (require 'sql)
 (setq sql-product 'sqlite)
 (keymap-set sql-mode-map "C-c f" #'format-all-buffer)
-
-;;;; Web
-(setq css-indent-offset 2)
-(setq js-indent-level 2)
 
 ;;;; Clojure
 (require 'clojure-mode)
@@ -151,10 +148,10 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 (setq eglot-events-buffer-size 0)
 
-(dolist (hook '(c-mode-hook
-                c++-mode-hook
+(dolist (hook '(c-ts-mode-hook
+                c++-ts-mode-hook
                 go-ts-mode-hook
-                python-mode-hook
+                python-ts-mode-hook
                 sh-mode-hook))
   (add-hook hook #'eglot-ensure))
 
@@ -186,9 +183,19 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 ;;;; Tree-sitter
 (require 'treesit)
+
+(setq major-mode-remap-alist
+      '((c-mode . c-ts-mode)
+        (sh-mode . bash-ts-mode)
+        (python-mode . python-ts-mode)))
+
 (setq treesit-language-source-alist
-      '((go "https://github.com/tree-sitter/tree-sitter-go")
-        (gomod "https://github.com/camdencheek/tree-sitter-go-mod")))
+      '((c "https://github.com/tree-sitter/tree-sitter-c")
+        (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+        (go "https://github.com/tree-sitter/tree-sitter-go")
+        (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+        (python "https://github.com/tree-sitter/tree-sitter-python")
+        (bash "https://github.com/tree-sitter/tree-sitter-bash")))
 
 ;;;; Tempel
 (require 'tempel)
