@@ -7,7 +7,7 @@
       '((comment red-faint)
         (string green-cooler)
         (fringe unspecified)
-        (bg-mode-line-active bg-active)
+        (bg-mode-line-active bg-blue-subtle)
         (bg-mode-line-inactive bg-dim)
         (border-mode-line-active unspecified)
         (border-mode-line-inactive unspecified)))
