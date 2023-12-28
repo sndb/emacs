@@ -15,11 +15,9 @@
 
 ;;;; Go
 (require 'go-ts-mode)
-(add-hook 'go-ts-mode-hook #'sndb-auto-format-mode)
 
 ;;;; Python
 (require 'python)
-(keymap-set python-ts-mode-map "C-c f" #'format-all-buffer)
 
 ;;;; Shell
 (require 'sh-script)
@@ -29,11 +27,9 @@
 ;;;; SQL
 (require 'sql)
 (setq sql-product 'sqlite)
-(keymap-set sql-mode-map "C-c f" #'format-all-buffer)
 
 ;;;; Clojure
 (require 'clojure-mode)
-(keymap-set clojure-mode-map "C-c f" #'cider-format-buffer)
 
 ;;;; Scheme
 (require 'geiser)
@@ -162,7 +158,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (keymap-set eglot-mode-map "C-h ." #'eldoc-box-help-at-point)
 (keymap-set eglot-mode-map "C-c h" #'eldoc)
 
-;;;; Format-all
+;;;; Format
 (require 'format-all)
 
 (setq-default format-all-formatters
@@ -172,6 +168,12 @@ If the length of the previous line is 0, use the value of `fill-column'."
                         "--keyword-case" "2"
                         "--type-case" "2"
                         "--no-extra-line"))))
+
+(add-hook 'go-ts-mode-hook #'sndb-auto-format-mode)
+
+(mapc (lambda (map)
+        (keymap-set map "C-c f" #'format-all-buffer))
+      (list python-ts-mode-map sql-mode-map))
 
 ;;;; Flymake
 (require 'flymake)
