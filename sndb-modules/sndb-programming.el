@@ -146,7 +146,8 @@ If the length of the previous line is 0, use the value of `fill-column'."
 ;;;; Eglot
 (require 'eglot)
 
-(setq eglot-events-buffer-size 0)
+(setq eglot-events-buffer-config (plist-put eglot-events-buffer-config :size 0))
+(add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
 
 (dolist (hook '(c-ts-mode-hook
                 c++-ts-mode-hook

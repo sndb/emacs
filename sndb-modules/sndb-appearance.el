@@ -36,6 +36,8 @@ With prefix argument select a theme using minibuffer completion."
 
 (blink-cursor-mode -1)
 (show-paren-mode 1)
+(line-number-mode 1)
+(column-number-mode 1)
 
 (dolist (hook '(prog-mode-hook text-mode-hook))
   (add-hook hook (lambda ()
