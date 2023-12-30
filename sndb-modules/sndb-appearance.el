@@ -4,26 +4,16 @@
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
 (setq modus-themes-common-palette-overrides
-      '((comment red-faint)
-        (string green-cooler)
+      '((comment yellow-cooler)
         (fringe unspecified)
-        (bg-mode-line-active bg-blue-subtle)
+        (fg-region yellow-faint)
+        (bg-region bg-yellow-subtle)
+        (bg-mode-line-active bg-active)
         (bg-mode-line-inactive bg-dim)
         (border-mode-line-active unspecified)
         (border-mode-line-inactive unspecified)))
 
-(defun sndb-switch-theme (arg)
-  "Toggle between the light and dark themes.
-With prefix argument select a theme using minibuffer completion."
-  (interactive "P")
-  (call-interactively
-   (if arg
-       #'modus-themes-select
-     #'modus-themes-toggle)))
-
-(keymap-global-set "<f5>" #'sndb-switch-theme)
-
-(set-face-attribute 'default nil :family "Hack" :height 105)
+(set-face-attribute 'default nil :family "Fira Mono" :height 105)
 (load-theme 'modus-vivendi)
 
 ;;;; Indicators
