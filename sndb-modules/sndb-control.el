@@ -93,15 +93,17 @@ Close the current tab if that was its only window."
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 1)
 
+(setq sndb-scroll-delta 8)
+
 (defun sndb-scroll-up ()
   "Scroll a few lines up."
   (interactive)
-  (scroll-up 4))
+  (scroll-up sndb-scroll-delta))
 
 (defun sndb-scroll-down ()
   "Scroll a few lines down."
   (interactive)
-  (scroll-down 4))
+  (scroll-down sndb-scroll-delta))
 
 (keymap-global-set "C-S-n" #'sndb-scroll-up)
 (keymap-global-set "C-S-p" #'sndb-scroll-down)
