@@ -4,7 +4,7 @@
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
 (setq modus-themes-common-palette-overrides
-      '((comment yellow-cooler)
+      '((comment red-faint)
         (fringe unspecified)
         (fg-region yellow-faint)
         (bg-region bg-yellow-subtle)
@@ -13,7 +13,7 @@
         (border-mode-line-active unspecified)
         (border-mode-line-inactive unspecified)))
 
-(set-face-attribute 'default nil :family "Fira Mono" :height 105)
+(set-face-attribute 'default nil :family "Hack" :height 105)
 (load-theme 'modus-vivendi)
 
 ;;;; Indicators
