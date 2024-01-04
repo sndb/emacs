@@ -4,10 +4,19 @@
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
 (setq modus-themes-common-palette-overrides
-      '((comment red-faint)
+      '((comment fg-dim)
+        (docstring yellow-faint)
+        (string yellow-faint)
+        (keyword fg-alt)
+
+        (builtin fg-main)
+        (constant fg-main)
+        (fnname fg-main)
+        (preprocessor fg-main)
+        (type fg-main)
+        (variable fg-main)
+
         (fringe unspecified)
-        (fg-region yellow-faint)
-        (bg-region bg-yellow-subtle)
         (bg-mode-line-active bg-active)
         (bg-mode-line-inactive bg-dim)
         (border-mode-line-active unspecified)
