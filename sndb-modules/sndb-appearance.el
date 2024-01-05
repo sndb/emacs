@@ -8,12 +8,12 @@
         (docstring yellow-faint)
         (string yellow-faint)
         (keyword fg-alt)
+        (type fg-alt)
 
         (builtin fg-main)
         (constant fg-main)
         (fnname fg-main)
         (preprocessor fg-main)
-        (type fg-main)
         (variable fg-main)
 
         (fringe unspecified)

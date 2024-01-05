@@ -28,7 +28,6 @@
 ;;;; Vertico
 (require 'vertico)
 
-(setq vertico-preselect 'prompt)
 (setq vertico-scroll-margin 0)
 (setq vertico-count 8)
 (setq vertico-resize nil)
@@ -72,8 +71,6 @@
 (require 'corfu)
 (require 'corfu-popupinfo)
 
-(setq corfu-preview-current nil)
-(setq corfu-preselect 'prompt)
 (setq corfu-scroll-margin 0)
 (setq corfu-count 8)
 (setq corfu-popupinfo-delay nil)
