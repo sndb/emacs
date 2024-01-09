@@ -17,12 +17,10 @@
         (variable fg-main)
 
         (fringe unspecified)
-        (bg-mode-line-active bg-active)
-        (bg-mode-line-inactive bg-dim)
         (border-mode-line-active unspecified)
         (border-mode-line-inactive unspecified)))
 
-(set-face-attribute 'default nil :family "Hack" :height 105)
+(set-face-attribute 'default nil :family "Source Code Pro" :height 105)
 (load-theme 'modus-vivendi)
 
 ;;;; Indicators
