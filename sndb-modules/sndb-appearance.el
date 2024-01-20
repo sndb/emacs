@@ -20,7 +20,8 @@
         (border-mode-line-active unspecified)
         (border-mode-line-inactive unspecified)))
 
-(set-face-attribute 'default nil :family "Source Code Pro" :height 105)
+(keymap-global-set "<f5>" #'modus-themes-toggle)
+(set-face-attribute 'default nil :family "Hack" :height 105)
 (load-theme 'modus-vivendi)
 
 ;;;; Indicators
