@@ -1,10 +1,12 @@
 ;;;; Common
-(setq default-input-method "TeX")
+(setq default-input-method "russian-computer")
 (setq display-raw-bytes-as-hex t)
 (setq tab-always-indent 'complete)
 (setq-default indent-tabs-mode nil)
 
 (global-subword-mode 1)
+(electric-indent-mode -1)
+(add-hook 'prog-mode-hook #'electric-indent-local-mode)
 
 (keymap-global-set "C-c m" #'woman)
 
