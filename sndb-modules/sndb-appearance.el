@@ -21,7 +21,7 @@
         (border-mode-line-inactive unspecified)))
 
 (keymap-global-set "<f5>" #'modus-themes-toggle)
-(set-face-attribute 'default nil :family "Hack" :height 105)
+(set-face-attribute 'default nil :family "Liberation Mono" :height 105)
 (load-theme 'modus-vivendi)
 
 ;;;; Indicators
