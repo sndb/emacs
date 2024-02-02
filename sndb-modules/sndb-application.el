@@ -32,7 +32,7 @@
                    default-directory)))))
     (concat "*" base "-" name "*")))
 
-(setq sndb-vterm-split-window-function #'split-root-window-right)
+(setq sndb-vterm-split-window-function #'split-window-right)
 
 (defun sndb-vterm ()
   "Switch to the local Vterm buffer.
