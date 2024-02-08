@@ -157,7 +157,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (keymap-set eglot-mode-map "C-c r" #'eglot-rename)
 (keymap-set eglot-mode-map "C-c t" #'eglot-code-actions)
 (keymap-set eglot-mode-map "C-c o" #'eglot-code-action-organize-imports)
-(keymap-set eglot-mode-map "C-h ." #'eldoc-box-help-at-point)
 (keymap-set eglot-mode-map "C-c h" #'eldoc)
 
 ;;;; Format

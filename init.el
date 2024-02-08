@@ -45,7 +45,6 @@
         vertico
         wgrep
         eglot
-        eldoc-box
         format-all
         puni
         tempel
@@ -68,7 +67,6 @@
         vterm
 
         ;; Appearance
-        breadcrumb
         modus-themes))
 
 (defun sndb-install-packages ()

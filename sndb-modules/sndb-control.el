@@ -92,6 +92,7 @@ Close the current tab if that was its only window."
 ;;;; Scrolling
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 1)
+(setq scroll-margin 2)
 
 (setq sndb-scroll-delta 8)
 

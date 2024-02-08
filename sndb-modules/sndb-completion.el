@@ -19,19 +19,17 @@
 
 ;;;; ElDoc
 (require 'eldoc)
-(require 'eldoc-box)
-
 (setq eldoc-echo-area-prefer-doc-buffer t)
 (setq eldoc-echo-area-use-multiline-p nil)
 (setq eldoc-idle-delay 0.25)
 
+;;;; Corfu
+(require 'corfu)
+(global-corfu-mode 1)
+
 ;;;; Vertico
 (require 'vertico)
-
-(setq vertico-scroll-margin 0)
-(setq vertico-count 8)
 (setq vertico-resize nil)
-
 (vertico-mode 1)
 
 ;;;; Marginalia
@@ -66,23 +64,6 @@
 
 (keymap-global-set "C-." #'embark-act)
 (keymap-global-set "M-." #'embark-dwim)
-
-;;;; Corfu
-(require 'corfu)
-(require 'corfu-popupinfo)
-
-(setq corfu-scroll-margin 0)
-(setq corfu-count 8)
-(setq corfu-popupinfo-delay nil)
-
-(global-corfu-mode 1)
-(corfu-popupinfo-mode 1)
-
-(defun corfu-enable-always-in-minibuffer ()
-  "Enable Corfu in the minibuffer if Vertico is not active."
-  (unless (bound-and-true-p vertico--input)
-    (corfu-mode 1)))
-(add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
 
 ;;;; Wgrep
 (require 'wgrep)
