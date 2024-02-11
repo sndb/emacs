@@ -53,8 +53,14 @@ Close the current tab if that was its only window."
 (keymap-global-set "C-x 0" #'sndb-close)
 
 (setq display-buffer-alist
-      `((,(regexp-quote shell-command-buffer-name-async)
-         display-buffer-no-window)))
+      '(((or "\\*Async Shell Command\\*"
+             "\\*Warnings\\*")
+         display-buffer-no-window
+         (allow-no-window . t))
+        ("\\*eldoc\\*"
+         display-buffer-below-selected
+         (window-height . shrink-window-if-larger-than-buffer)
+         (body-function . select-window))))
 
 ;;;; Lines
 (defun sndb-backward-kill-line ()
