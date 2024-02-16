@@ -43,6 +43,8 @@
   (add-hook hook (lambda ()
                    (setq show-trailing-whitespace t))))
 
+(keymap-global-set "C-c w" #'whitespace-mode)
+
 ;;;; Windows
 (setq window-resize-pixelwise t)
 (setq window-combination-resize t)
