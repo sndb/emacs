@@ -1,16 +1,15 @@
 ;;;; Magit
 (require 'magit)
-(setq magit-diff-refine-hunk 'all)
-(setq magit-repository-directories '(("~/data" . 3)))
+
+(require 'magit-diff)
+(setq magit-diff-refine-hunk t)
+
+(require 'magit-repos)
+(setq magit-repository-directories '(("~/data/source" . 2)))
 
 ;;;; Ediff
 (setq ediff-split-window-function #'split-window-horizontally)
 (setq ediff-window-setup-function #'ediff-setup-windows-plain)
-
-;;;; Repositories
-(require 'magit-repos)
-(add-to-list 'magit-repolist-columns '("Flag" 4 magit-repolist-column-flag (:right-align t)))
-(keymap-global-set "C-c g" #'magit-list-repositories)
 
 ;;;; Terminal emulator
 (require 'vterm)
