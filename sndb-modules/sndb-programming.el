@@ -28,7 +28,7 @@
 
 ;;;; SQL
 (require 'sql)
-(setq sql-product 'sqlite)
+(setq sql-product 'postgres)
 
 ;;;; Clojure
 (require 'clojure-mode)
