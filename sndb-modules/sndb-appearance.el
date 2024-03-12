@@ -1,3 +1,8 @@
+;;;; Fonts
+(set-face-attribute 'default nil :family "Liberation Mono" :height 105)
+(set-face-attribute 'fixed-pitch nil :family "Liberation Mono" :height 105)
+(set-face-attribute 'variable-pitch nil :family "Liberation Sans" :height 105)
+
 ;;;; Theme
 (require 'modus-themes)
 
@@ -21,9 +26,6 @@
         (border-mode-line-inactive unspecified)))
 
 (keymap-global-set "<f5>" #'modus-themes-toggle)
-(set-face-attribute 'default nil :family "Liberation Mono" :height 105)
-(set-face-attribute 'fixed-pitch nil :family "Liberation Mono" :height 105)
-(set-face-attribute 'variable-pitch nil :family "Liberation Sans" :height 105)
 (load-theme 'modus-vivendi)
 
 ;;;; Indicators
