@@ -57,12 +57,8 @@
 ;;;; Capture
 (setq org-capture-templates
       '(("t" "Task" entry
-         (file+headline "" "Tasks")
+         (file "tasks.org")
          "* TODO %?\n%u\n%i"
-         :empty-lines 1)
-        ("n" "Note" entry
-         (file+headline "" "Notes")
-         "* %?\n%u\n%i"
          :empty-lines 1)))
 
 ;;;; Refiling
