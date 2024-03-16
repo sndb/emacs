@@ -165,10 +165,9 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (setq-default format-all-formatters
               '(("Python" ruff)
                 ("SQL" (pgformatter
-                        "--function-case" "2"
-                        "--keyword-case" "2"
-                        "--type-case" "2"
-                        "--no-extra-line"))))
+                        "--no-extra-line"
+                        "--spaces" "2"
+                        "--wrap-limit" "80"))))
 
 (add-hook 'go-ts-mode-hook #'sndb-auto-format-mode)
 
