@@ -48,7 +48,7 @@
 
 (keymap-global-set "M-s M-r" #'consult-recent-file)
 (keymap-global-set "M-s M-f" #'consult-find)
-(keymap-global-set "M-s M-g" #'consult-grep)
+(keymap-global-set "M-s M-g" #'consult-ripgrep)
 (keymap-global-set "M-s M-l" #'consult-line)
 (keymap-global-set "M-s M-i" #'consult-imenu)
 (keymap-global-set "M-s M-o" #'consult-outline)
