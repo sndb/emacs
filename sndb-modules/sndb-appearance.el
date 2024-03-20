@@ -8,8 +8,21 @@
 
 (setq custom-safe-themes t)
 (setq x-gtk-use-system-tooltips nil)
+(setq modus-themes-italic-constructs t)
 (setq modus-themes-common-palette-overrides
-      '((fringe unspecified)
+      '((docstring yellow-faint)
+        (string yellow-faint)
+
+        (keyword fg-alt)
+        (type fg-alt)
+
+        (builtin fg-main)
+        (constant fg-main)
+        (fnname fg-main)
+        (preprocessor fg-main)
+        (variable fg-main)
+
+        (fringe unspecified)
         (border-mode-line-active unspecified)
         (border-mode-line-inactive unspecified)))
 
