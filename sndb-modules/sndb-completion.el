@@ -40,6 +40,7 @@
 (require 'consult)
 
 (setq consult-find-args "find . -not ( -path */.git* -prune )")
+(setq consult-ripgrep-args (concat consult-ripgrep-args " --hidden --glob=!.git"))
 (setq consult-preview-key '(:debounce 0.25 any))
 (setq register-preview-delay 0.25
       register-preview-function #'consult-register-format)
