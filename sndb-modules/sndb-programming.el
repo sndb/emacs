@@ -63,9 +63,6 @@
 
 (setq geiser-repl-history-filename (concat user-emacs-directory "geiser-history"))
 
-;;;; Racket
-(add-hook 'racket-before-run-hook #'racket-repl-clear)
-
 ;;;; Text
 (setq sentence-end-double-space nil)
 
@@ -121,9 +118,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
                 clojure-mode-hook
                 cider-repl-mode-hook
                 scheme-mode-hook
-                geiser-repl-mode-hook
-                racket-mode-hook
-                racket-repl-mode-hook))
+                geiser-repl-mode-hook))
   (add-hook hook #'electric-pair-local-mode)
   (add-hook hook #'puni-mode))
 

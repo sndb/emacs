@@ -56,7 +56,6 @@
         clojure-mode
         geiser
         geiser-guile
-        racket-mode
         markdown-mode
         lua-mode
         yaml-mode
