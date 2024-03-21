@@ -1,6 +1,6 @@
 ;;;; Fonts
-(set-face-attribute 'default nil :family "Liberation Mono" :height 105)
-(set-face-attribute 'fixed-pitch nil :family "Liberation Mono" :height 105)
+(set-face-attribute 'default nil :family "Hack" :height 105)
+(set-face-attribute 'fixed-pitch nil :family "Hack" :height 105)
 (set-face-attribute 'variable-pitch nil :family "Liberation Sans" :height 105)
 
 ;;;; Theme
