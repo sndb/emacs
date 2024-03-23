@@ -145,8 +145,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (dolist (hook '(c-ts-mode-hook
                 c++-ts-mode-hook
                 go-ts-mode-hook
-                python-ts-mode-hook
-                sh-mode-hook))
+                python-ts-mode-hook))
   (add-hook hook #'eglot-ensure))
 
 (keymap-set eglot-mode-map "C-c r" #'eglot-rename)
