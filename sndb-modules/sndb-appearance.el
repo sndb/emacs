@@ -10,8 +10,8 @@
 (setq x-gtk-use-system-tooltips nil)
 (setq modus-themes-italic-constructs t)
 (setq modus-themes-common-palette-overrides
-      '((docstring yellow-faint)
-        (string yellow-faint)
+      '((docstring blue-warmer)
+        (string blue-warmer)
 
         (keyword fg-alt)
         (type fg-alt)
