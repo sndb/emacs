@@ -31,9 +31,12 @@
 
 ;;;; Refile
 (setq org-refile-targets
-      '((org-agenda-files . (:maxlevel . 3))
-        (nil . (:maxlevel . 3))))
+      '((org-agenda-files . (:maxlevel . 1))
+        (nil . (:maxlevel . 1))))
 (setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+
+(advice-add 'org-capture-refile :after #'org-save-all-org-buffers)
 
 ;;;; Source
 (setq org-src-window-setup 'current-window)
