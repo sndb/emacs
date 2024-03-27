@@ -95,4 +95,8 @@ Close it if the Vterm buffer is selected."
 
 (add-hook 'dired-mode-hook #'hl-line-mode)
 
+;; EPUB
+(require 'nov)
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
 (provide 'sndb-application)

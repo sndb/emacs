@@ -65,6 +65,7 @@
         magit
         password-store
         vterm
+        nov
 
         ;; Appearance
         modus-themes))
