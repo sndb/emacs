@@ -59,6 +59,7 @@
         markdown-mode
         lua-mode
         yaml-mode
+        web-mode
 
         ;; Applications
         magit

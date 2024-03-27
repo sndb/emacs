@@ -26,6 +26,12 @@
 (setq sh-basic-offset 8)
 (add-hook 'sh-base-mode-hook #'indent-tabs-mode)
 
+;;;; Web
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.tmpl\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(setq web-mode-engines-alist '(("go" . "\\.tmpl\\'")))
+
 ;;;; SQL
 (require 'sql)
 (setq sql-product 'postgres)
