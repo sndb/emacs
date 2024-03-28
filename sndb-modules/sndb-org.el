@@ -3,6 +3,7 @@
 
 (setq org-directory "~/data/notes")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-archive-location (concat org-directory "/archive.org::"))
 (setq org-startup-folded 'showall)
 (setq org-fold-catch-invisible-edits 'error)
 (setq org-enforce-todo-dependencies t)
