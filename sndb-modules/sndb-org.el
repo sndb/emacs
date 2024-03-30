@@ -27,7 +27,7 @@
 (setq org-capture-templates
       '(("t" "Task" entry
          (file "tasks.org")
-         "* TODO %?\n%u\n%i"
+         "* TODO %?\n%i"
          :empty-lines 1)))
 
 ;;;; Refile
