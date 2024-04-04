@@ -1,7 +1,7 @@
 ;;;; Fonts
-(set-face-attribute 'default nil :family "Hack" :height 105)
-(set-face-attribute 'fixed-pitch nil :family "Hack" :height 105)
-(set-face-attribute 'variable-pitch nil :family "Liberation Sans" :height 105)
+(let ((family "mononoki") (height 110))
+  (set-face-attribute 'default nil :family family :height height)
+  (set-face-attribute 'fixed-pitch nil :family family :height height))
 
 ;;;; Theme
 (require 'modus-themes)
