@@ -194,8 +194,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (require 'treesit)
 
 (setq major-mode-remap-alist
-      '((c-mode . c-ts-mode)
-        (sh-mode . bash-ts-mode)
+      '((sh-mode . bash-ts-mode)
         (python-mode . python-ts-mode)))
 
 (setq treesit-language-source-alist
