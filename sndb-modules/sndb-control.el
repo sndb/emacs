@@ -15,7 +15,6 @@
 (keymap-global-set "M-c" #'capitalize-dwim)
 (keymap-global-set "C-x C-b" #'ibuffer)
 (keymap-global-set "M-/" #'hippie-expand)
-(keymap-global-set "C-M-y" #'duplicate-dwim)
 
 ;;;; Buffers
 (defun sndb-kill-buffer ()
@@ -63,15 +62,12 @@ Close the current tab if that was its only window."
          (body-function . select-window))))
 
 ;;;; Lines
-(defun sndb-backward-kill-line ()
-  "Kill the rest of the current line backward."
-  (interactive)
-  (kill-line -1))
-
 (setq delete-trailing-lines nil)
 (setq require-final-newline t)
+(setq duplicate-line-final-position 1)
+(setq duplicate-region-final-position 1)
 
-(keymap-global-set "C-S-k" #'sndb-backward-kill-line)
+(keymap-global-set "C-M-y" #'duplicate-dwim)
 
 ;;;; Read-Only
 (setq view-read-only t)
