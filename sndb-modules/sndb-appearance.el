@@ -1,33 +1,24 @@
+;;;; Common
+(setq custom-safe-themes t)
+(setq x-gtk-use-system-tooltips nil)
+
 ;;;; Fonts
 (let ((family "mononoki") (height 110))
   (set-face-attribute 'default nil :family family :height height)
   (set-face-attribute 'fixed-pitch nil :family family :height height))
 
 ;;;; Theme
-(require 'modus-themes)
+(require 'ef-themes)
 
-(setq custom-safe-themes t)
-(setq x-gtk-use-system-tooltips nil)
-(setq modus-themes-italic-constructs t)
-(setq modus-themes-common-palette-overrides
-      '((docstring blue-warmer)
-        (string blue-warmer)
+(defun sndb-random-theme ()
+  "Load a random theme based on the current time of day."
+  (interactive)
+  (let* ((hour (decoded-time-hour (decode-time (current-time))))
+         (variant (if (< 6 hour 18) 'light 'dark)))
+    (ef-themes-load-random variant)))
 
-        (keyword fg-alt)
-        (type fg-alt)
-
-        (builtin fg-main)
-        (constant fg-main)
-        (fnname fg-main)
-        (preprocessor fg-main)
-        (variable fg-main)
-
-        (fringe unspecified)
-        (border-mode-line-active unspecified)
-        (border-mode-line-inactive unspecified)))
-
-(keymap-global-set "<f5>" #'modus-themes-toggle)
-(load-theme 'modus-vivendi)
+(keymap-global-set "<f5>" #'sndb-random-theme)
+(sndb-random-theme)
 
 ;;;; Indicators
 (setq use-short-answers t)
