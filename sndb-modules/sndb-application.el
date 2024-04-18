@@ -90,8 +90,12 @@ Close it if the Vterm buffer is selected."
 (setq dired-create-destination-dirs 'ask)
 (setq dired-create-destination-dirs-on-trailing-dirsep t)
 (setq dired-isearch-filenames t)
+(setq dired-movement-style 'bounded)
+(setq dired-filename-display-length 'window)
+(setq shell-command-guess-functions '(shell-command-guess-xdg))
 
 (keymap-set dired-mode-map "C-+" #'dired-create-empty-file)
+(keymap-set dired-mode-map "C-<return>" #'dired-do-open)
 
 (add-hook 'dired-mode-hook #'hl-line-mode)
 
