@@ -58,6 +58,7 @@
         geiser-guile
         markdown-mode
         web-mode
+        sql-indent
 
         ;; Applications
         magit
@@ -66,7 +67,8 @@
         nov
 
         ;; Appearance
-        modus-themes))
+        modus-themes
+        ef-themes))
 
 (defun sndb-install-packages ()
   "Install all the packages from `sndb-package-list'."
