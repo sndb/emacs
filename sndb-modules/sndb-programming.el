@@ -21,6 +21,12 @@
 ;;;; Python
 (require 'python)
 
+;;;; Lua
+(require 'lua-ts-mode)
+
+;;;; YAML
+(require 'yaml-ts-mode)
+
 ;;;; Shell
 (require 'sh-script)
 (setq sh-basic-offset 8)
@@ -198,7 +204,9 @@ If the length of the previous line is 0, use the value of `fill-column'."
         (go "https://github.com/tree-sitter/tree-sitter-go")
         (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
         (python "https://github.com/tree-sitter/tree-sitter-python")
-        (bash "https://github.com/tree-sitter/tree-sitter-bash")))
+        (bash "https://github.com/tree-sitter/tree-sitter-bash")
+        (lua "https://github.com/tree-sitter-grammars/tree-sitter-lua")
+        (yaml "https://github.com/tree-sitter-grammars/tree-sitter-yaml")))
 
 ;;;; Tempel
 (require 'tempel)

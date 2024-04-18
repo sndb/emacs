@@ -57,8 +57,6 @@
         geiser
         geiser-guile
         markdown-mode
-        lua-mode
-        yaml-mode
         web-mode
 
         ;; Applications
