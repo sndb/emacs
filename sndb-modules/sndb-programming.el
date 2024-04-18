@@ -207,6 +207,13 @@ If the length of the previous line is 0, use the value of `fill-column'."
         (lua "https://github.com/tree-sitter-grammars/tree-sitter-lua")
         (yaml "https://github.com/tree-sitter-grammars/tree-sitter-yaml")))
 
+(defun sndb-install-treesit-language-grammars ()
+  "Install all the grammars from `treesit-language-source-alist'."
+  (interactive)
+  (dolist (grammar treesit-language-source-alist)
+    (let ((lang (car grammar)))
+      (treesit-install-language-grammar lang))))
+
 ;;;; Tempel
 (require 'tempel)
 (keymap-global-set "<backtab>" #'tempel-complete)
