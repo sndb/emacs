@@ -14,7 +14,7 @@
   "Load a random theme based on the current time of day."
   (interactive)
   (let* ((hour (decoded-time-hour (decode-time (current-time))))
-         (variant (if (< 6 hour 18) 'light 'dark)))
+         (variant (if (<= 6 hour 18) 'light 'dark)))
     (ef-themes-load-random variant)))
 
 (keymap-global-set "<f5>" #'sndb-random-theme)
