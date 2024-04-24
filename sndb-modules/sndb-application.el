@@ -2,7 +2,7 @@
 (require 'magit)
 
 (require 'magit-diff)
-(setq magit-diff-refine-hunk t)
+(setq magit-diff-refine-hunk 'all)
 
 (require 'magit-repos)
 (setq magit-repository-directories '(("~/data/source" . 2)))
