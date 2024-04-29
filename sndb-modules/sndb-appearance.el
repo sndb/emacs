@@ -10,14 +10,27 @@
 ;;;; Theme
 (require 'ef-themes)
 
+(defun sndb-theme-variant ()
+  "Return `light' or `dark' based on the current time of day."
+  (let ((hour (decoded-time-hour (decode-time (current-time)))))
+    (if (<= 6 hour 18) 'light 'dark)))
+
 (defun sndb-random-theme ()
   "Load a random theme based on the current time of day."
   (interactive)
-  (let* ((hour (decoded-time-hour (decode-time (current-time))))
-         (variant (if (<= 6 hour 18) 'light 'dark)))
-    (ef-themes-load-random variant)))
+  (ef-themes-load-random (sndb-theme-variant)))
+
+(defun sndb-select-theme ()
+  "Select a theme based on the current time of day."
+  (interactive)
+  (call-interactively
+   (if (eq (sndb-theme-variant) 'dark)
+       #'ef-themes-select-dark
+     #'ef-themes-select-light)))
 
 (keymap-global-set "<f5>" #'sndb-random-theme)
+(keymap-global-set "C-<f5>" #'sndb-select-theme)
+
 (sndb-random-theme)
 
 ;;;; Indicators
