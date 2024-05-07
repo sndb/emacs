@@ -8,30 +8,32 @@
   (set-face-attribute 'fixed-pitch nil :family family :height height))
 
 ;;;; Theme
+(require 'modus-themes)
 (require 'ef-themes)
+
+(setq modus-themes-italic-constructs t)
+(setq modus-themes-common-palette-overrides
+      '((fringe unspecified)
+        (border-mode-line-active unspecified)
+        (border-mode-line-inactive unspecified)))
 
 (defun sndb-theme-variant ()
   "Return `light' or `dark' based on the current time of day."
   (let ((hour (decoded-time-hour (decode-time (current-time)))))
     (if (<= 6 hour 18) 'light 'dark)))
 
-(defun sndb-random-theme ()
+(defun sndb-random-ef-theme ()
   "Load a random theme based on the current time of day."
   (interactive)
   (ef-themes-load-random (sndb-theme-variant)))
 
-(defun sndb-select-theme ()
-  "Select a theme based on the current time of day."
-  (interactive)
-  (call-interactively
-   (if (eq (sndb-theme-variant) 'dark)
-       #'ef-themes-select-dark
-     #'ef-themes-select-light)))
+(keymap-global-set "<f5>" #'modus-themes-toggle)
+(keymap-global-set "C-<f5>" #'sndb-random-ef-theme)
 
-(keymap-global-set "<f5>" #'sndb-random-theme)
-(keymap-global-set "C-<f5>" #'sndb-select-theme)
-
-(sndb-random-theme)
+(let ((variant (if (eq (sndb-theme-variant) 'dark)
+                   'modus-vivendi
+                 'modus-operandi)))
+  (load-theme variant))
 
 ;;;; Indicators
 (setq use-short-answers t)
