@@ -27,6 +27,14 @@
 (keymap-global-set "C-x k" #'sndb-kill-buffer)
 
 ;;;; Windows
+(defun sndb-other-window ()
+  "Select next window in cyclic ordering of windows.
+Split the frame if there is a single window."
+  (interactive)
+  (when (one-window-p)
+    (split-window-sensibly))
+  (other-window 1))
+
 (defun sndb-previous-window ()
   "Select previous window in cyclic ordering of windows."
   (interactive)
@@ -47,7 +55,7 @@ Close the current tab if that was its only window."
   "0" #'sndb-close)
 
 (keymap-global-set "C-x !" #'delete-other-windows-vertically)
-(keymap-global-set "C-;" #'other-window)
+(keymap-global-set "C-;" #'sndb-other-window)
 (keymap-global-set "C-:" #'sndb-previous-window)
 (keymap-global-set "C-x 0" #'sndb-close)
 
