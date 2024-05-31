@@ -3,7 +3,7 @@
 (setq x-gtk-use-system-tooltips nil)
 
 ;;;; Fonts
-(let ((family "mononoki") (height 110))
+(let ((family "DejaVu Sans Mono") (height 105))
   (set-face-attribute 'default nil :family family :height height)
   (set-face-attribute 'fixed-pitch nil :family family :height height))
 
@@ -11,7 +11,6 @@
 (require 'modus-themes)
 (require 'ef-themes)
 
-(setq modus-themes-italic-constructs t)
 (setq modus-themes-common-palette-overrides
       '((fringe unspecified)
         (border-mode-line-active unspecified)
