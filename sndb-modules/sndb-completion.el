@@ -1,3 +1,8 @@
+;;;; Ignore case
+(setq completion-ignore-case t)
+(setq read-buffer-completion-ignore-case t)
+(setq read-file-name-completion-ignore-case t)
+
 ;;;; Minibuffer
 (setq enable-recursive-minibuffers t)
 (setq resize-mini-windows t)
@@ -8,14 +13,8 @@
 
 ;;;; Orderless
 (require 'orderless)
-
 (setq completion-styles '(orderless basic))
-(setq completion-category-defaults nil)
 (setq completion-category-overrides '((file (styles basic partial-completion))))
-
-(setq completion-ignore-case t)
-(setq read-buffer-completion-ignore-case t)
-(setq read-file-name-completion-ignore-case t)
 
 ;;;; ElDoc
 (require 'eldoc)
