@@ -99,8 +99,12 @@ Close it if the Vterm buffer is selected."
 
 (add-hook 'dired-mode-hook #'hl-line-mode)
 
-;; EPUB
+;;;; EPUB
 (require 'nov)
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+;;;; Calc
+(require 'calc)
+(setq calc-display-trail nil)
 
 (provide 'sndb-application)
