@@ -126,12 +126,4 @@ Close the current tab if that was its only window."
 
 (add-hook 'occur-mode-hook #'hl-line-mode)
 
-;;;; Prefix
-(defvar-keymap sndb-prefix-map
-  :repeat t
-  "n" #'next-buffer
-  "p" #'previous-buffer)
-
-(keymap-global-set "C-z" sndb-prefix-map)
-
 (provide 'sndb-control)
