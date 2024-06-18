@@ -1,14 +1,10 @@
-;;;; Bindings
-
-;; Enable commands
+;;;; Commands
 (dolist (c '(narrow-to-region))
   (put c 'disabled nil))
 
-;; Disable commands
 (dolist (c '(overwrite-mode suspend-frame))
   (put c 'disabled t))
 
-;; Remap commands
 (keymap-global-set "M-z" #'zap-up-to-char)
 (keymap-global-set "M-u" #'upcase-dwim)
 (keymap-global-set "M-l" #'downcase-dwim)
