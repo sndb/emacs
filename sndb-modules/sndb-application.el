@@ -6,6 +6,8 @@
 
 (require 'magit-repos)
 (setq magit-repository-directories '(("~/data/source" . 2)))
+(add-to-list 'magit-repolist-columns '("*" 1 magit-repolist-column-flag nil))
+(keymap-global-set "C-c g" #'magit-list-repositories)
 
 ;;;; Ediff
 (setq ediff-split-window-function #'split-window-horizontally)
