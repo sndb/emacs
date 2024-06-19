@@ -67,8 +67,7 @@
         nov
 
         ;; Appearance
-        modus-themes
-        ef-themes))
+        modus-themes))
 
 (defun sndb-install-packages ()
   "Install all the packages from `sndb-package-list'."

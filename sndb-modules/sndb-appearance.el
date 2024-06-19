@@ -9,7 +9,6 @@
 
 ;;;; Theme
 (require 'modus-themes)
-(require 'ef-themes)
 
 (setq modus-themes-common-palette-overrides
       '((fringe unspecified)
@@ -21,18 +20,11 @@
   (let ((hour (decoded-time-hour (decode-time (current-time)))))
     (if (<= 6 hour 18) 'light 'dark)))
 
-(defun sndb-random-ef-theme ()
-  "Load a random theme based on the current time of day."
-  (interactive)
-  (ef-themes-load-random (sndb-theme-variant)))
+(let ((themes '((light . modus-operandi)
+                (dark . modus-vivendi))))
+  (load-theme (alist-get (sndb-theme-variant) themes)))
 
 (keymap-global-set "<f5>" #'modus-themes-toggle)
-(keymap-global-set "C-<f5>" #'sndb-random-ef-theme)
-
-(let ((variant (if (eq (sndb-theme-variant) 'dark)
-                   'modus-vivendi
-                 'modus-operandi)))
-  (load-theme variant))
 
 ;;;; Indicators
 (setq use-short-answers t)
