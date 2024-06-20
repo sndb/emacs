@@ -76,8 +76,8 @@
 (setq geiser-repl-history-filename (concat user-emacs-directory "geiser-history"))
 
 ;;;; Text
+(setq-default major-mode #'text-mode)
 (setq sentence-end-double-space nil)
-
 (add-hook 'text-mode-hook #'turn-on-auto-fill)
 
 (defun sndb-replace-inconvenient-characters ()
@@ -162,23 +162,8 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (keymap-set eglot-mode-map "C-c r" #'eglot-rename)
 (keymap-set eglot-mode-map "C-c t" #'eglot-code-actions)
 (keymap-set eglot-mode-map "C-c o" #'eglot-code-action-organize-imports)
+(keymap-set eglot-mode-map "C-c f" #'eglot-format-buffer)
 (keymap-set eglot-mode-map "C-c h" #'eldoc)
-
-;;;; Format
-(require 'format-all)
-
-(setq-default format-all-formatters
-              '(("Python" ruff)
-                ("SQL" (pgformatter
-                        "--no-extra-line"
-                        "--spaces" "2"
-                        "--wrap-limit" "80"))))
-
-(add-hook 'go-ts-mode-hook #'sndb-auto-format-mode)
-
-(mapc (lambda (map)
-        (keymap-set map "C-c f" #'format-all-buffer))
-      (list python-ts-mode-map sql-mode-map))
 
 ;;;; Flymake
 (require 'flymake)

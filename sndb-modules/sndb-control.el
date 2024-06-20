@@ -66,7 +66,6 @@ Close the current tab if that was its only window."
          (body-function . select-window))))
 
 ;;;; Lines
-(setq delete-trailing-lines nil)
 (setq require-final-newline t)
 (setq duplicate-line-final-position 1)
 (setq duplicate-region-final-position 1)

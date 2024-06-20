@@ -40,10 +40,10 @@
 (column-number-mode 1)
 
 (dolist (hook '(prog-mode-hook text-mode-hook))
-  (add-hook hook (lambda ()
-                   (setq show-trailing-whitespace t))))
+  (add-hook hook (lambda () (setq show-trailing-whitespace t))))
 
 (keymap-global-set "C-c w" #'whitespace-mode)
+(keymap-global-set "C-c f" #'delete-trailing-whitespace)
 
 ;;;; Windows
 (setq window-resize-pixelwise t)
