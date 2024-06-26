@@ -18,6 +18,10 @@
 ;;;; Go
 (require 'go-ts-mode)
 
+(add-hook 'go-ts-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
+
 ;;;; Python
 (require 'python)
 
