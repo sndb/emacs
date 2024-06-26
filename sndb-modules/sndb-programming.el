@@ -155,6 +155,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
 
 (dolist (hook '(c-ts-mode-hook
+                c++-ts-mode-hook
                 go-ts-mode-hook
                 python-ts-mode-hook))
   (add-hook hook #'eglot-ensure))
@@ -179,11 +180,13 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 (setq major-mode-remap-alist
       '((c-mode . c-ts-mode)
+        (c++-mode . c++-ts-mode)
         (python-mode . python-ts-mode)
         (sh-mode . bash-ts-mode)))
 
 (setq treesit-language-source-alist
       '((c "https://github.com/tree-sitter/tree-sitter-c")
+        (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
         (go "https://github.com/tree-sitter/tree-sitter-go")
         (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
         (python "https://github.com/tree-sitter/tree-sitter-python")
