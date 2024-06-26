@@ -39,10 +39,16 @@
 (line-number-mode 1)
 (column-number-mode 1)
 
-(dolist (hook '(prog-mode-hook text-mode-hook))
-  (add-hook hook (lambda () (setq show-trailing-whitespace t))))
+;;;; Whitespace
+(require 'whitespace)
 
-(keymap-global-set "C-c w" #'whitespace-mode)
+(setq-default indicate-empty-lines t)
+(setq whitespace-style '(face tabs trailing tab-mark))
+(setq whitespace-global-modes '(not magit-mode))
+(add-to-list 'whitespace-display-mappings '(tab-mark 9 [124 9]) t)
+
+(global-whitespace-mode 1)
+
 (keymap-global-set "C-c f" #'delete-trailing-whitespace)
 
 ;;;; Windows
