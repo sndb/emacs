@@ -45,7 +45,7 @@
 (setq-default indicate-empty-lines t)
 (setq whitespace-style '(face tabs trailing tab-mark))
 (setq whitespace-global-modes '(not magit-mode))
-(add-to-list 'whitespace-display-mappings '(tab-mark 9 [124 9]) t)
+(add-to-list 'whitespace-display-mappings '(tab-mark 9 [8250 9]) t)
 
 (global-whitespace-mode 1)
 
