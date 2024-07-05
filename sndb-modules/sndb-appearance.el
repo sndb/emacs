@@ -15,14 +15,7 @@
         (border-mode-line-active unspecified)
         (border-mode-line-inactive unspecified)))
 
-(defun sndb-theme-variant ()
-  "Return `light' or `dark' based on the current time of day."
-  (let ((hour (decoded-time-hour (decode-time (current-time)))))
-    (if (<= 6 hour 18) 'light 'dark)))
-
-(let ((themes '((light . modus-operandi)
-                (dark . modus-vivendi))))
-  (load-theme (alist-get (sndb-theme-variant) themes)))
+(load-theme 'modus-vivendi)
 
 (keymap-global-set "<f5>" #'modus-themes-toggle)
 
