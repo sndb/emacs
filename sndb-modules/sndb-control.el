@@ -123,6 +123,4 @@ Close the current tab if that was its only window."
 (setq isearch-allow-scroll t)
 (setq isearch-repeat-on-direction-change t)
 
-(add-hook 'occur-mode-hook #'hl-line-mode)
-
 (provide 'sndb-control)

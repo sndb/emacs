@@ -99,8 +99,6 @@ Close it if the Vterm buffer is selected."
 (keymap-set dired-mode-map "C-+" #'dired-create-empty-file)
 (keymap-set dired-mode-map "C-<return>" #'dired-do-open)
 
-(add-hook 'dired-mode-hook #'hl-line-mode)
-
 ;;;; EPUB
 (require 'nov)
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))

@@ -24,8 +24,6 @@
 (setq bookmark-fringe-mark nil)
 (setq bookmark-save-flag 1)
 
-(add-hook 'bookmark-bmenu-mode-hook #'hl-line-mode)
-
 ;;;; History
 (setq history-delete-duplicates t)
 (setq history-length 1000)
