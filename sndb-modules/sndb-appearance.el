@@ -3,7 +3,7 @@
 (setq x-gtk-use-system-tooltips nil)
 
 ;;;; Fonts
-(let ((family "DejaVu Sans Mono") (height 105))
+(let ((family "Fira Mono") (height 105))
   (set-face-attribute 'default nil :family family :height height)
   (set-face-attribute 'fixed-pitch nil :family family :height height))
 
