@@ -31,6 +31,9 @@
 (setq vertico-resize nil)
 (vertico-mode 1)
 
+(require 'vertico-directory)
+(add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
+
 ;;;; Marginalia
 (require 'marginalia)
 (marginalia-mode 1)
