@@ -8,6 +8,7 @@
 (setq org-fold-catch-invisible-edits 'error)
 (setq org-enforce-todo-dependencies t)
 (setq org-enforce-todo-checkbox-dependencies t)
+(setq org-log-repeat nil)
 
 (keymap-global-set "C-c a" #'org-agenda)
 (keymap-global-set "C-c c" #'org-capture)
