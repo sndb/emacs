@@ -49,8 +49,6 @@
         vundo
 
         ;; Languages
-        cider
-        clojure-mode
         geiser
         geiser-guile
         markdown-mode

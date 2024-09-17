@@ -46,9 +46,6 @@
 (require 'sql)
 (setq sql-product 'postgres)
 
-;;;; Clojure
-(require 'clojure-mode)
-
 ;;;; Scheme
 (require 'geiser)
 (require 'geiser-guile)
@@ -131,8 +128,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 (dolist (hook '(emacs-lisp-mode-hook
                 eval-expression-minibuffer-setup-hook
-                clojure-mode-hook
-                cider-repl-mode-hook
                 scheme-mode-hook
                 geiser-repl-mode-hook))
   (add-hook hook #'electric-pair-local-mode)
