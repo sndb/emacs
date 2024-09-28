@@ -44,7 +44,6 @@
         wgrep
         eglot
         puni
-        tempel
         expreg
         vundo
 

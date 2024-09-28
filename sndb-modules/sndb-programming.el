@@ -200,10 +200,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
     (let ((lang (car grammar)))
       (treesit-install-language-grammar lang))))
 
-;;;; Tempel
-(require 'tempel)
-(keymap-global-set "<backtab>" #'tempel-complete)
-
 ;;;; Expreg
 (require 'expreg)
 (keymap-global-set "C-=" #'expreg-expand)
