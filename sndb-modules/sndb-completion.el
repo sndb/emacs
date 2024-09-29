@@ -28,7 +28,6 @@
 
 ;;;; Vertico
 (require 'vertico)
-(setq vertico-resize nil)
 (vertico-mode 1)
 
 (require 'vertico-directory)
