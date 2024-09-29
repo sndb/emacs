@@ -205,8 +205,4 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (keymap-global-set "C-=" #'expreg-expand)
 (keymap-global-set "C--" #'expreg-contract)
 
-;;;; Vundo
-(require 'vundo)
-(keymap-global-set "C-?" #'vundo)
-
 (provide 'sndb-programming)

@@ -45,7 +45,6 @@
         eglot
         puni
         expreg
-        vundo
 
         ;; Languages
         geiser
