@@ -181,7 +181,8 @@ If the length of the previous line is 0, use the value of `fill-column'."
       '((c-mode . c-ts-mode)
         (c++-mode . c++-ts-mode)
         (python-mode . python-ts-mode)
-        (sh-mode . bash-ts-mode)))
+        (sh-mode . bash-ts-mode)
+        (css-mode . css-ts-mode)))
 
 (setq treesit-language-source-alist
       '((c "https://github.com/tree-sitter/tree-sitter-c")
@@ -191,7 +192,8 @@ If the length of the previous line is 0, use the value of `fill-column'."
         (python "https://github.com/tree-sitter/tree-sitter-python")
         (bash "https://github.com/tree-sitter/tree-sitter-bash")
         (lua "https://github.com/tree-sitter-grammars/tree-sitter-lua")
-        (yaml "https://github.com/tree-sitter-grammars/tree-sitter-yaml")))
+        (yaml "https://github.com/tree-sitter-grammars/tree-sitter-yaml")
+        (css "https://github.com/tree-sitter/tree-sitter-css")))
 
 (defun sndb-install-treesit-language-grammars ()
   "Install all the grammars from `treesit-language-source-alist'."
