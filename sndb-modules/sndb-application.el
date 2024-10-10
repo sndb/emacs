@@ -5,7 +5,7 @@
 (setq magit-diff-refine-hunk 'all)
 
 (require 'magit-repos)
-(setq magit-repository-directories '(("~/data/source" . 2)))
+(setq magit-repository-directories '(("~/Git" . 2)))
 (add-to-list 'magit-repolist-columns '("*" 1 magit-repolist-column-flag nil))
 (keymap-global-set "C-c g" #'magit-list-repositories)
 
