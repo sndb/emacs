@@ -1,7 +1,3 @@
-;;;; Common
-(setq custom-safe-themes t)
-(setq x-gtk-use-system-tooltips nil)
-
 ;;;; Fonts
 (let ((family "Hack") (height 140))
   (set-face-attribute 'default nil :family family :height height)
@@ -9,6 +5,8 @@
 
 ;;;; Theme
 (require 'modus-themes)
+
+(setq custom-safe-themes t)
 
 (setq modus-themes-common-palette-overrides
       '((fringe unspecified)

@@ -5,8 +5,6 @@
 (setq gc-cons-threshold most-positive-fixnum)
 (setq load-prefer-newer t)
 (setq native-comp-async-report-warnings-errors 'silent)
-
-(setq frame-title-format '("%b"))
 (setq frame-resize-pixelwise t)
 (setq frame-inhibit-implied-resize t)
 
