@@ -85,7 +85,7 @@ Close it if the Vterm buffer is selected."
 
 (setq dired-kill-when-opening-new-dired-buffer t)
 (setq dired-dwim-target t)
-(setq dired-listing-switches "-lhFA")
+(setq dired-listing-switches "-lhvFA --group-directories-first")
 (setq dired-switches-in-mode-line 'as-is)
 (setq dired-auto-revert-buffer #'dired-directory-changed-p)
 (setq dired-mouse-drag-files t)
