@@ -8,8 +8,6 @@
 (electric-indent-mode -1)
 (add-hook 'prog-mode-hook #'electric-indent-local-mode)
 
-(keymap-global-set "C-c m" #'woman)
-
 ;;;; C
 (require 'c-ts-mode)
 (setq c-ts-mode-indent-offset 8)
@@ -77,24 +75,7 @@
 (setq geiser-repl-history-filename (concat user-emacs-directory "geiser-history"))
 
 ;;;; Text
-(setq-default major-mode #'text-mode)
 (setq sentence-end-double-space nil)
-(add-hook 'text-mode-hook #'turn-on-auto-fill)
-
-(defun sndb-replace-inconvenient-characters ()
-  "Replace all inconvenient characters in the current buffer."
-  (interactive)
-  (save-excursion
-    (dolist (pair
-             '(("‘" . "'")
-               ("’" . "'")
-               ("“" . "\"")
-               ("”" . "\"")
-               ("—" . " - ")
-               ("ﬃ" . "ffi")
-               ("ﬁ" . "fi")
-               ("ﬀ" . "ff")))
-      (replace-string (car pair) (cdr pair) nil (point-min) (point-max)))))
 
 (defun sndb-insert-underline (arg)
   "Insert an underline.

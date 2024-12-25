@@ -9,18 +9,9 @@
 (keymap-global-set "M-u" #'upcase-dwim)
 (keymap-global-set "M-l" #'downcase-dwim)
 (keymap-global-set "M-c" #'capitalize-dwim)
-(keymap-global-set "C-x C-b" #'ibuffer)
 (keymap-global-set "M-/" #'hippie-expand)
-
-;;;; Buffers
-(defun sndb-kill-buffer ()
-  "Kill the current buffer and close its window."
-  (interactive)
-  (if (one-window-p)
-      (kill-buffer)
-    (kill-buffer-and-window)))
-
-(keymap-global-set "C-x k" #'sndb-kill-buffer)
+(keymap-global-set "C-s" #'isearch-forward-regexp)
+(keymap-global-set "C-r" #'isearch-backward-regexp)
 
 ;;;; Windows
 (defun sndb-other-window ()
@@ -36,7 +27,14 @@ Split the frame if there is a single window."
   (interactive)
   (other-window -1))
 
-(defun sndb-close ()
+(defun sndb-kill-buffer ()
+  "Kill the current buffer and close its window."
+  (interactive)
+  (if (one-window-p)
+      (kill-buffer)
+    (kill-buffer-and-window)))
+
+(defun sndb-delete-window ()
   "Delete the current window.
 Close the current tab if that was its only window."
   (interactive)
@@ -44,16 +42,14 @@ Close the current tab if that was its only window."
       (tab-close)
     (delete-window)))
 
-(setq help-window-select t)
-
-(defvar-keymap sndb-close-map
+(defvar-keymap sndb-delete-window-map
   :repeat t
-  "0" #'sndb-close)
+  "0" #'sndb-delete-window)
 
-(keymap-global-set "C-x !" #'delete-other-windows-vertically)
 (keymap-global-set "C-;" #'sndb-other-window)
 (keymap-global-set "C-:" #'sndb-previous-window)
-(keymap-global-set "C-x 0" #'sndb-close)
+(keymap-global-set "C-x k" #'sndb-kill-buffer)
+(keymap-global-set "C-x 0" #'sndb-delete-window)
 
 (setq display-buffer-alist
       '(((or "\\*Async Shell Command\\*"
@@ -64,6 +60,8 @@ Close the current tab if that was its only window."
          display-buffer-below-selected
          (window-height . shrink-window-if-larger-than-buffer)
          (body-function . select-window))))
+
+(setq help-window-select t)
 
 ;;;; Lines
 (setq require-final-newline t)
@@ -119,7 +117,7 @@ Close the current tab if that was its only window."
 
 ;;;; Search
 (setq isearch-lazy-count t)
-(setq isearch-yank-on-move 'shift)
+(setq isearch-yank-on-move t)
 (setq isearch-allow-scroll t)
 (setq isearch-repeat-on-direction-change t)
 
