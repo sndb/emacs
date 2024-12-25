@@ -2,16 +2,8 @@
 (server-start)
 
 ;;;; Files
-(defun delete-visited-file (buffer-name)
-  "Delete the file visited by the buffer named BUFFER-NAME."
-  (interactive "bDelete file visited by buffer ")
-  (let* ((buffer (get-buffer buffer-name))
-         (filename (buffer-file-name buffer)))
-    (when buffer
-      (when (and filename (file-exists-p filename))
-        (delete-file filename))
-      (kill-buffer buffer))))
-
+(setq load-prefer-newer t)
+(setq native-comp-async-report-warnings-errors 'silent)
 (setq custom-file (make-temp-file "emacs-custom-"))
 (setq vc-follow-symlinks t)
 

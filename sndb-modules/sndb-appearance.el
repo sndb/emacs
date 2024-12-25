@@ -42,9 +42,19 @@
 
 (keymap-global-set "C-c f" #'delete-trailing-whitespace)
 
+;;;; Frame
+(setq frame-resize-pixelwise t)
+(setq frame-inhibit-implied-resize t)
+
 ;;;; Windows
 (setq window-resize-pixelwise t)
 (setq window-combination-resize t)
+
+;;;; Bars
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(horizontal-scroll-bar-mode -1)
 
 ;;;; Tabs
 (setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator))
