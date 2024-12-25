@@ -61,26 +61,11 @@ Close it if the Vterm buffer is selected."
 ;;;; Shell
 (setq shell-command-prompt-show-cwd t)
 
-;;;; Password manager
+;;;; GnuPG
 (require 'epg)
 (setq epg-pinentry-mode 'loopback)
 
-(require 'password-store)
-
-(defun sndb-password-store-copy-login (entry)
-  "Add login for ENTRY into the kill ring."
-  (interactive (list (password-store--completing-read)))
-  (password-store-copy-field entry "login"))
-
-(keymap-global-set "C-c p g" #'password-store-generate)
-(keymap-global-set "C-c p n" #'password-store-generate-no-symbols)
-(keymap-global-set "C-c p p" #'password-store-copy)
-(keymap-global-set "C-c p f" #'password-store-copy-field)
-(keymap-global-set "C-c p e" #'password-store-edit)
-(keymap-global-set "C-c p r" #'password-store-remove)
-(keymap-global-set "C-c p l" #'sndb-password-store-copy-login)
-
-;;;; Directory editor
+;;;; Dired
 (require 'dired)
 
 (setq dired-kill-when-opening-new-dired-buffer t)
@@ -97,10 +82,6 @@ Close it if the Vterm buffer is selected."
 (setq shell-command-guess-functions '(shell-command-guess-xdg))
 
 (keymap-set dired-mode-map "C-<return>" #'dired-do-open)
-
-;;;; EPUB
-(require 'nov)
-(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 
 ;;;; Calc
 (require 'calc)
