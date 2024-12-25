@@ -47,7 +47,6 @@
         expreg
 
         ;; Languages
-        geiser
         geiser-guile
         markdown-mode
         web-mode

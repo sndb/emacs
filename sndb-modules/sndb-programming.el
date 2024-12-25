@@ -45,33 +45,7 @@
 (setq sql-product 'postgres)
 
 ;;;; Scheme
-(require 'geiser)
 (require 'geiser-guile)
-
-(defun scheme-add-keywords (face-name keyword-rules)
-  (let* ((keyword-list
-          (mapcar (lambda (x)
-                    (symbol-name (cdr x)))
-                  keyword-rules))
-         (keyword-regexp
-          (concat "(" (regexp-opt keyword-list t) "\\>")))
-    (font-lock-add-keywords
-     'scheme-mode
-     `((,keyword-regexp 1 ',face-name))))
-  (mapc (lambda (x)
-          (put (cdr x)
-               'scheme-indent-function
-               (car x)))
-        keyword-rules))
-
-(scheme-add-keywords
- 'font-lock-keyword-face
- '((1 . let/cc)
-   (1 . try)
-   (2 . juxt)
-   (2 . for)
-   (2 . trace-let)))
-
 (setq geiser-repl-history-filename (concat user-emacs-directory "geiser-history"))
 
 ;;;; Text
