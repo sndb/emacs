@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;; Common
 (setq default-input-method "russian-computer")
 (setq display-raw-bytes-as-hex t)
@@ -8,6 +10,9 @@
 (electric-indent-mode -1)
 (add-hook 'prog-mode-hook #'electric-indent-local-mode)
 
+(defun call-before-save (hook function)
+  (add-hook hook (lambda () (add-hook 'before-save-hook function nil t))))
+
 ;;;; C
 (require 'c-ts-mode)
 (setq c-ts-mode-indent-offset 8)
@@ -15,10 +20,8 @@
 
 ;;;; Go
 (require 'go-ts-mode)
-
-(add-hook 'go-ts-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
+(call-before-save 'go-ts-mode-hook #'eglot-format-buffer)
+(call-before-save 'go-ts-mode-hook #'eglot-organize-imports)
 
 ;;;; Python
 (require 'python)
@@ -102,24 +105,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (keymap-set puni-mode-map "C-}" #'puni-barf-forward)
 (keymap-set puni-mode-map "C-{" #'puni-barf-backward)
 
-;;;; Eglot
-(require 'eglot)
-
-(setq eglot-events-buffer-config (plist-put eglot-events-buffer-config :size 0))
-(add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
-
-(dolist (hook '(c-ts-mode-hook
-                c++-ts-mode-hook
-                go-ts-mode-hook
-                python-ts-mode-hook))
-  (add-hook hook #'eglot-ensure))
-
-(keymap-set eglot-mode-map "C-c r" #'eglot-rename)
-(keymap-set eglot-mode-map "C-c t" #'eglot-code-actions)
-(keymap-set eglot-mode-map "C-c o" #'eglot-code-action-organize-imports)
-(keymap-set eglot-mode-map "C-c f" #'eglot-format-buffer)
-(keymap-set eglot-mode-map "C-c h" #'eldoc)
-
 ;;;; Flymake
 (require 'flymake)
 
@@ -161,5 +146,28 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (require 'expreg)
 (keymap-global-set "C-=" #'expreg-expand)
 (keymap-global-set "C--" #'expreg-contract)
+
+;;;; Eglot
+(require 'eglot)
+
+(setq eglot-events-buffer-config (plist-put eglot-events-buffer-config :size 0))
+(add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
+
+(dolist (hook '(c-ts-mode-hook
+                c++-ts-mode-hook
+                go-ts-mode-hook
+                python-ts-mode-hook))
+  (add-hook hook #'eglot-ensure))
+
+(keymap-set eglot-mode-map "C-c r" #'eglot-rename)
+(keymap-set eglot-mode-map "C-c t" #'eglot-code-actions)
+(keymap-set eglot-mode-map "C-c o" #'eglot-code-action-organize-imports)
+(keymap-set eglot-mode-map "C-c f" #'eglot-format-buffer)
+(keymap-set eglot-mode-map "C-c h" #'eldoc)
+
+(defun eglot-organize-imports ()
+  "Organize imports."
+  (interactive)
+  (call-interactively #'eglot-code-action-organize-imports))
 
 (provide 'sndb-programming)
