@@ -72,8 +72,8 @@
 (require 'sndb-essential)
 (require 'sndb-appearance)
 (require 'sndb-control)
-(require 'sndb-programming)
 (require 'sndb-completion)
+(require 'sndb-programming)
 (require 'sndb-org)
 (require 'sndb-application)
 
