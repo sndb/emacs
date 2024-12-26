@@ -23,6 +23,7 @@
 (setq use-dialog-box nil)
 (setq inhibit-startup-screen t)
 (setq uniquify-buffer-name-style 'forward)
+(setq ring-bell-function #'ignore)
 
 (blink-cursor-mode -1)
 (show-paren-mode 1)
