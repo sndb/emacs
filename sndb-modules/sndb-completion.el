@@ -61,7 +61,13 @@
 (require 'embark)
 (require 'embark-consult)
 
+(setq embark-indicators
+      '(embark-minimal-indicator
+        embark-highlight-indicator
+        embark-isearch-highlight-indicator))
+
 (setq prefix-help-command #'embark-prefix-help-command)
+
 (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)
 
 (keymap-global-set "C-." #'embark-act)
