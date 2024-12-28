@@ -33,6 +33,9 @@
 (require 'vertico-directory)
 (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
 
+(require 'vertico-multiform)
+(vertico-multiform-mode 1)
+
 ;;;; Marginalia
 (require 'marginalia)
 (marginalia-mode 1)
@@ -67,6 +70,8 @@
         embark-isearch-highlight-indicator))
 
 (setq prefix-help-command #'embark-prefix-help-command)
+
+(add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
 
 (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)
 
