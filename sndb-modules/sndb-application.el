@@ -13,50 +13,13 @@
 (setq ediff-split-window-function #'split-window-horizontally)
 (setq ediff-window-setup-function #'ediff-setup-windows-plain)
 
-;;;; Terminal emulator
-(require 'vterm)
-
-(setq vterm-max-scrollback 10000)
-
-(add-hook 'vterm-exit-functions
-          (lambda (buffer _)
-            (unless (one-window-p)
-              (delete-window (get-buffer-window buffer)))))
-
-(defun sndb-local-name (name)
-  "Create a name related to the current project or directory."
-  (let* ((project (project-current))
-         (base (file-name-nondirectory
-                (directory-file-name
-                 (if project
-                     (project-root project)
-                   default-directory)))))
-    (concat "*" base "-" name "*")))
-
-(setq sndb-vterm-split-window-function #'split-window-right)
-
-(defun sndb-vterm ()
-  "Switch to the local Vterm buffer.
-Close it if the Vterm buffer is selected."
+;;;; Terminal
+(defun sndb-launch-terminal ()
+  "Launch a new instance of Ghostty."
   (interactive)
-  (let* ((name (sndb-local-name "vterm"))
-         (buffer (get-buffer name)))
-    (if buffer
-        (let ((window (get-buffer-window buffer)))
-          (if (equal (current-buffer) buffer)
-              (unless (one-window-p)
-                (delete-window window))
-            (let ((window (if (window-live-p window)
-                              window
-                            (funcall sndb-vterm-split-window-function))))
-              (set-window-buffer window buffer)
-              (select-window window))))
-      (let ((window (funcall sndb-vterm-split-window-function)))
-        (select-window window)
-        (vterm name)))))
+  (start-process "ghostty" nil "ghostty"))
 
-(keymap-unset vterm-mode-map "<f2>")
-(keymap-global-set "<f2>" #'sndb-vterm)
+(keymap-global-set "<f2>" #'sndb-launch-terminal)
 
 ;;;; Shell
 (setq shell-command-prompt-show-cwd t)

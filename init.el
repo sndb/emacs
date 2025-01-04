@@ -33,8 +33,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (setq sndb-package-list
-      '(;; General
-        orderless
+      '(orderless
         consult
         corfu
         embark
@@ -45,19 +44,13 @@
         eglot
         puni
         expreg
+        magit
+        modus-themes
 
-        ;; Languages
         geiser-guile
         markdown-mode
         web-mode
-        sql-indent
-
-        ;; Applications
-        magit
-        vterm
-
-        ;; Appearance
-        modus-themes))
+        sql-indent))
 
 (defun sndb-install-packages ()
   "Install all the packages from `sndb-package-list'."
