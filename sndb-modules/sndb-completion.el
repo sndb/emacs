@@ -45,11 +45,9 @@
 
 (setq consult-find-args "find . -not ( -path */.git* -prune )")
 (setq consult-ripgrep-args (concat consult-ripgrep-args " --hidden --glob=!.git"))
-(setq consult-preview-key '(:debounce 0.25 any))
-(setq register-preview-delay 0.25
-      register-preview-function #'consult-register-format)
-(setq xref-show-xrefs-function #'consult-xref
-      xref-show-definitions-function #'consult-xref)
+(setq consult-preview-key '(:debounce 0.2 any))
+(setq xref-show-xrefs-function #'consult-xref)
+(setq xref-show-definitions-function #'consult-xref)
 
 (keymap-global-set "M-s M-r" #'consult-recent-file)
 (keymap-global-set "M-s M-f" #'consult-find)
@@ -59,6 +57,13 @@
 (keymap-global-set "M-s M-o" #'consult-outline)
 (keymap-global-set "M-s M-d" #'consult-flymake)
 (keymap-global-set "M-g M-g" #'consult-goto-line)
+
+(keymap-global-set "C-x b" #'consult-buffer)
+(keymap-global-set "C-x 4 b" #'consult-buffer-other-window)
+(keymap-global-set "C-x 5 b" #'consult-buffer-other-frame)
+(keymap-global-set "C-x t b" #'consult-buffer-other-tab)
+(keymap-global-set "C-x p b" #'consult-project-buffer)
+(keymap-global-set "C-x r b" #'consult-bookmark)
 
 ;;;; Embark
 (require 'embark)
