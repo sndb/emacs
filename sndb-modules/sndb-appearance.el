@@ -6,13 +6,11 @@
 ;;;; Theme
 (require 'modus-themes)
 
-(setq custom-safe-themes t)
-
 (setq modus-themes-common-palette-overrides
       '((fringe unspecified)
         (border-mode-line-inactive bg-mode-line-inactive)))
 
-(load-theme 'modus-vivendi)
+(load-theme 'modus-vivendi t)
 
 (keymap-global-set "<f5>" #'modus-themes-toggle)
 
