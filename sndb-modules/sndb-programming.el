@@ -18,6 +18,9 @@
 (setq c-ts-mode-indent-offset 8)
 (setq c-ts-mode-indent-style 'linux)
 
+;;;; Zig
+(require 'zig-mode)
+
 ;;;; Go
 (require 'go-ts-mode)
 (call-before-save 'go-ts-mode-hook #'eglot-format-buffer)
@@ -119,14 +122,12 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 (setq major-mode-remap-alist
       '((c-mode . c-ts-mode)
-        (c++-mode . c++-ts-mode)
         (python-mode . python-ts-mode)
         (sh-mode . bash-ts-mode)
         (css-mode . css-ts-mode)))
 
 (setq treesit-language-source-alist
       '((c "https://github.com/tree-sitter/tree-sitter-c")
-        (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
         (go "https://github.com/tree-sitter/tree-sitter-go")
         (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
         (python "https://github.com/tree-sitter/tree-sitter-python")
@@ -154,7 +155,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
 
 (dolist (hook '(c-ts-mode-hook
-                c++-ts-mode-hook
+                zig-mode-hook
                 go-ts-mode-hook
                 python-ts-mode-hook))
   (add-hook hook #'eglot-ensure))
@@ -163,7 +164,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (keymap-set eglot-mode-map "C-c t" #'eglot-code-actions)
 (keymap-set eglot-mode-map "C-c o" #'eglot-code-action-organize-imports)
 (keymap-set eglot-mode-map "C-c f" #'eglot-format-buffer)
-(keymap-set eglot-mode-map "C-c h" #'eldoc)
 
 (defun eglot-organize-imports ()
   "Organize imports."

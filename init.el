@@ -50,6 +50,7 @@
         geiser-guile
         markdown-mode
         web-mode
+        zig-mode
         sql-indent))
 
 (defun sndb-install-packages ()
