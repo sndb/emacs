@@ -39,7 +39,6 @@
 
 (recentf-mode 1)
 (save-place-mode 1)
-(winner-mode 1)
 (savehist-mode 1)
 
 (provide 'sndb-essential)
