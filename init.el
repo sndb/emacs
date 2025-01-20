@@ -45,6 +45,7 @@
         puni
         expreg
         magit
+        vterm
         modus-themes
 
         geiser-guile
