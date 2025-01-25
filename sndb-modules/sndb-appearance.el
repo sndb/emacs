@@ -6,9 +6,30 @@
 ;;;; Theme
 (require 'modus-themes)
 
-(setq modus-themes-common-palette-overrides
+(setq modus-themes-italic-constructs t)
+
+(setq modus-themes-preset-overrides-basic
       '((fringe unspecified)
-        (border-mode-line-inactive bg-mode-line-inactive)))
+        (border-mode-line-active unspecified)
+        (border-mode-line-inactive unspecified)))
+
+(setq modus-themes-preset-overrides-minimal
+      `((keyword fg-alt)
+        (type fg-alt)
+        (string blue-faint)
+        (docstring yellow-faint)
+        (comment yellow-faint)
+        (builtin fg-main)
+        (constant fg-main)
+        (fnname fg-main)
+        (preprocessor fg-main)
+        (variable fg-main)
+        (cursor fg-main)
+
+        ,@modus-themes-preset-overrides-basic))
+
+(setq modus-themes-common-palette-overrides
+      modus-themes-preset-overrides-minimal)
 
 (load-theme 'modus-vivendi t)
 
@@ -22,8 +43,8 @@
 (setq inhibit-startup-screen t)
 (setq uniquify-buffer-name-style 'forward)
 (setq ring-bell-function #'ignore)
+(setq blink-cursor-interval 0.6)
 
-(blink-cursor-mode -1)
 (show-paren-mode 1)
 (line-number-mode 1)
 (column-number-mode 1)
