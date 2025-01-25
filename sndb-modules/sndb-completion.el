@@ -54,7 +54,7 @@
 (keymap-global-set "M-s M-g" #'consult-ripgrep)
 (keymap-global-set "M-s M-l" #'consult-line)
 (keymap-global-set "M-s M-i" #'consult-imenu)
-(keymap-global-set "M-s M-o" #'consult-outline)
+(keymap-global-set "M-s M-e" #'consult-locate)
 (keymap-global-set "M-s M-d" #'consult-flymake)
 (keymap-global-set "M-g M-g" #'consult-goto-line)
 
