@@ -44,6 +44,7 @@
         eglot
         puni
         expreg
+        move-text
         magit
         vterm
         modus-themes

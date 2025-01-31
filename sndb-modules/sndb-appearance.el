@@ -24,7 +24,7 @@
         (fnname fg-main)
         (preprocessor fg-main)
         (variable fg-main)
-        (cursor fg-main)
+        (cursor fg-alt)
 
         ,@modus-themes-preset-overrides-basic))
 
@@ -45,9 +45,13 @@
 (setq ring-bell-function #'ignore)
 (setq blink-cursor-interval 0.6)
 
-(show-paren-mode 1)
 (line-number-mode 1)
 (column-number-mode 1)
+
+;;;; Parentheses
+(setq show-paren-when-point-in-periphery t)
+(setq show-paren-context-when-offscreen 'child-frame)
+(show-paren-mode 1)
 
 ;;;; Whitespace
 (require 'whitespace)
