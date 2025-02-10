@@ -64,15 +64,18 @@ Close the current tab if that was its only window."
 (setq help-window-select t)
 
 ;;;; Lines
-(require 'move-text)
-
 (setq require-final-newline t)
+(setq-default truncate-lines t)
+
+;;;; Duplicate
 (setq duplicate-line-final-position 1)
 (setq duplicate-region-final-position 1)
+(keymap-global-set "C-M-y" #'duplicate-dwim)
 
+;;;; Move Text
+(require 'move-text)
 (keymap-global-set "C-M-S-n" #'move-text-down)
 (keymap-global-set "C-M-S-p" #'move-text-up)
-(keymap-global-set "C-M-y" #'duplicate-dwim)
 
 ;;;; Read-Only
 (setq view-read-only t)

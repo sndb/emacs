@@ -43,8 +43,8 @@
 (setq inhibit-startup-screen t)
 (setq uniquify-buffer-name-style 'forward)
 (setq ring-bell-function #'ignore)
-(setq blink-cursor-interval 0.6)
 
+(blink-cursor-mode -1)
 (line-number-mode 1)
 (column-number-mode 1)
 
