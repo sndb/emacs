@@ -6,34 +6,25 @@
 ;;;; Theme
 (require 'modus-themes)
 
-(setq modus-themes-italic-constructs t)
-
-(setq modus-themes-preset-overrides-basic
+(setq modus-themes-common-palette-overrides
       '((fringe unspecified)
         (border-mode-line-active unspecified)
-        (border-mode-line-inactive unspecified)))
+        (border-mode-line-inactive unspecified)
 
-(setq modus-themes-preset-overrides-minimal
-      `((keyword fg-alt)
         (type fg-alt)
+        (keyword fg-alt)
+        (builtin fg-alt)
+        (preprocessor fg-alt)
+
         (string blue-faint)
         (docstring yellow-faint)
         (comment yellow-faint)
-        (builtin fg-main)
+
         (constant fg-main)
         (fnname fg-main)
-        (preprocessor fg-main)
-        (variable fg-main)
-        (cursor fg-alt)
+        (variable fg-main)))
 
-        ,@modus-themes-preset-overrides-basic))
-
-(setq modus-themes-common-palette-overrides
-      modus-themes-preset-overrides-minimal)
-
-(load-theme 'modus-vivendi t)
-
-(keymap-global-set "<f5>" #'modus-themes-toggle)
+(load-theme 'modus-vivendi :no-confirm)
 
 ;;;; Indicators
 (setq use-short-answers t)
