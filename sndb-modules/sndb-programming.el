@@ -5,6 +5,7 @@
 (setq display-raw-bytes-as-hex t)
 (setq tab-always-indent 'complete)
 (setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
 (global-subword-mode 1)
 (electric-indent-mode -1)
@@ -15,11 +16,17 @@
 
 ;;;; C
 (require 'c-ts-mode)
-(setq c-ts-mode-indent-offset 8)
+(setq c-ts-mode-indent-offset 4)
 (setq c-ts-mode-indent-style 'linux)
 
 ;;;; Zig
 (require 'zig-mode)
+
+;;;; Odin
+(require 'odin-mode)
+(add-hook 'odin-mode-hook #'indent-tabs-mode)
+(call-before-save 'odin-mode-hook #'eglot-format-buffer)
+(keymap-set odin-mode-map "C-c C-r" #'odin-run-project)
 
 ;;;; Go
 (require 'go-ts-mode)
@@ -37,7 +44,6 @@
 
 ;;;; Shell
 (require 'sh-script)
-(setq sh-basic-offset 8)
 (add-hook 'sh-base-mode-hook #'indent-tabs-mode)
 
 ;;;; Web
@@ -156,6 +162,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 (dolist (hook '(c-ts-mode-hook
                 zig-mode-hook
+                odin-mode-hook
                 go-ts-mode-hook
                 python-ts-mode-hook))
   (add-hook hook #'eglot-ensure))
