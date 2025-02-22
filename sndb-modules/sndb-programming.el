@@ -30,6 +30,7 @@
 
 ;;;; Go
 (require 'go-ts-mode)
+(setq go-ts-mode-indent-offset 4)
 (call-before-save 'go-ts-mode-hook #'eglot-format-buffer)
 (call-before-save 'go-ts-mode-hook #'eglot-organize-imports)
 
