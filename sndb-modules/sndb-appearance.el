@@ -1,5 +1,5 @@
 ;;;; Fonts
-(let ((family "Hack") (height 105))
+(let ((family "Hack") (height 110))
   (set-face-attribute 'default nil :family family :height height)
   (set-face-attribute 'fixed-pitch nil :family family :height height))
 
