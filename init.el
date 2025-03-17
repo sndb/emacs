@@ -47,6 +47,7 @@
         magit
         vterm
         modus-themes
+        gnome-dark-style
 
         geiser-guile
         markdown-mode
