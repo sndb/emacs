@@ -1,7 +1,7 @@
 ;;;; Fonts
-(let ((family "Hack") (height 110))
-  (set-face-attribute 'default nil :family family :height height)
-  (set-face-attribute 'fixed-pitch nil :family family :height height))
+(let ((family "Hack") (height 130))
+  (dolist (face '(default fixed-pitch))
+    (set-face-attribute face nil :family family :height height)))
 
 ;;;; Theme
 (require 'modus-themes)
