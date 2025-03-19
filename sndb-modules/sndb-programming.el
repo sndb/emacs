@@ -79,13 +79,14 @@ If the length of the previous line is 0, use the value of `fill-column'."
   (interactive "cType a character: ")
   (let* ((previous-line-length
           (save-excursion
-            (forward-line -1)
-            (- (line-end-position) (line-beginning-position))))
+            (move-end-of-line 0)
+            (current-column)))
          (underline-length
           (if (zerop previous-line-length) fill-column previous-line-length))
-         (target-length
-          (max 0 (- underline-length (current-column)))))
-    (insert (make-string target-length c))))
+         (delta
+          (- underline-length (current-column))))
+    (when (> delta 0)
+      (insert (make-string delta c)))))
 
 (keymap-global-set "C-c u" #'sndb-insert-underline)
 
