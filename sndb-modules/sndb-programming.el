@@ -25,7 +25,6 @@
 ;;;; Odin
 (require 'odin-mode)
 (add-hook 'odin-mode-hook #'indent-tabs-mode)
-(call-before-save 'odin-mode-hook #'eglot-format-buffer)
 (keymap-set odin-mode-map "C-c C-r" #'odin-run-project)
 
 ;;;; Go
