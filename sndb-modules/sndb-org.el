@@ -1,7 +1,7 @@
 ;;;; General
 (require 'org)
 
-(setq org-directory "~/Documents/Org")
+(setq org-directory "~/Documents")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-archive-location (concat org-directory "/archive.org::"))
 (setq org-startup-folded 'showall)
