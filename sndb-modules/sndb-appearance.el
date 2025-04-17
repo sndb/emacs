@@ -1,5 +1,5 @@
 ;;;; Fonts
-(let ((family "Hack") (height 130))
+(let ((family "Fira Mono") (height 130))
   (dolist (face '(default fixed-pitch))
     (set-face-attribute face nil :family family :height height)))
 
