@@ -22,7 +22,8 @@
 
         (constant fg-main)
         (fnname fg-main)
-        (variable fg-main)))
+        (variable fg-main)
+        (property fg-main)))
 
 (require 'gnome-dark-style)
 (setq gnome-light-theme 'modus-operandi)
