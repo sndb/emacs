@@ -47,12 +47,6 @@
         magit
         vterm
         modus-themes
-        gnome-dark-style
-
-        geiser-guile
-        markdown-mode
-        web-mode
-        zig-mode
         sql-indent))
 
 (defun sndb-install-packages ()

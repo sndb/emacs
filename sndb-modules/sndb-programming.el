@@ -19,9 +19,6 @@
 (setq c-ts-mode-indent-offset 4)
 (setq c-ts-mode-indent-style 'linux)
 
-;;;; Zig
-(require 'zig-mode)
-
 ;;;; Odin
 (require 'odin-mode)
 (add-hook 'odin-mode-hook #'indent-tabs-mode)
@@ -46,19 +43,9 @@
 (require 'sh-script)
 (add-hook 'sh-base-mode-hook #'indent-tabs-mode)
 
-;;;; Web
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.tmpl\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(setq web-mode-engines-alist '(("go" . "\\.tmpl\\'")))
-
 ;;;; SQL
 (require 'sql)
 (setq sql-product 'postgres)
-
-;;;; Scheme
-(require 'geiser-guile)
-(setq geiser-repl-history-filename (concat user-emacs-directory "geiser-history"))
 
 ;;;; Text
 (setq sentence-end-double-space nil)
@@ -96,8 +83,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 (dolist (hook '(emacs-lisp-mode-hook
                 eval-expression-minibuffer-setup-hook
-                scheme-mode-hook
-                geiser-repl-mode-hook))
+                scheme-mode-hook))
   (add-hook hook #'electric-pair-local-mode)
   (add-hook hook #'puni-mode))
 
@@ -157,8 +143,6 @@ If the length of the previous line is 0, use the value of `fill-column'."
 (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
 
 (dolist (hook '(c-ts-mode-hook
-                zig-mode-hook
-                odin-mode-hook
                 go-ts-mode-hook
                 python-ts-mode-hook))
   (add-hook hook #'eglot-ensure))

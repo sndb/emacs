@@ -25,10 +25,7 @@
         (variable fg-main)
         (property fg-main)))
 
-(require 'gnome-dark-style)
-(setq gnome-light-theme 'modus-operandi)
-(setq gnome-dark-theme 'modus-vivendi)
-(gnome-set-theme-based-on-color-scheme)
+(load-theme 'modus-vivendi :no-confirm)
 
 ;;;; Indicators
 (setq use-short-answers t)
