@@ -46,7 +46,7 @@
         move-text
         magit
         vterm
-        modus-themes
+        doric-themes
         sql-indent))
 
 (defun sndb-install-packages ()

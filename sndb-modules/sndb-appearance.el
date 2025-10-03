@@ -1,31 +1,12 @@
 ;;;; Fonts
-(let ((family "Hack") (height 130))
+(let ((family "Ubuntu Mono") (height 135))
   (dolist (face '(default fixed-pitch))
     (set-face-attribute face nil :family family :height height)))
 
 ;;;; Theme
-(require 'modus-themes)
-
-(setq modus-themes-common-palette-overrides
-      '((fringe unspecified)
-        (border-mode-line-active unspecified)
-        (border-mode-line-inactive unspecified)
-
-        (type fg-alt)
-        (keyword fg-alt)
-        (builtin fg-alt)
-        (preprocessor fg-alt)
-
-        (string blue-faint)
-        (docstring yellow-faint)
-        (comment yellow-faint)
-
-        (constant fg-main)
-        (fnname fg-main)
-        (variable fg-main)
-        (property fg-main)))
-
-(load-theme 'modus-vivendi :no-confirm)
+(require 'doric-themes)
+(doric-themes-select 'doric-dark)
+(keymap-global-set "<f5>" #'doric-themes-toggle)
 
 ;;;; Indicators
 (setq use-short-answers t)
