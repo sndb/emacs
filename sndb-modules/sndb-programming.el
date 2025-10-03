@@ -31,6 +31,9 @@
 (call-before-save 'go-ts-mode-hook #'eglot-format-buffer)
 (call-before-save 'go-ts-mode-hook #'eglot-organize-imports)
 
+;;;; JavaScript
+(require 'js)
+
 ;;;; Python
 (require 'python)
 
@@ -116,6 +119,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 (setq major-mode-remap-alist
       '((c-mode . c-ts-mode)
+        (javascript-mode . js-ts-mode)
         (python-mode . python-ts-mode)
         (sh-mode . bash-ts-mode)
         (css-mode . css-ts-mode)))
@@ -124,6 +128,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
       '((c "https://github.com/tree-sitter/tree-sitter-c")
         (go "https://github.com/tree-sitter/tree-sitter-go")
         (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+        (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
         (python "https://github.com/tree-sitter/tree-sitter-python")
         (bash "https://github.com/tree-sitter/tree-sitter-bash")
         (lua "https://github.com/tree-sitter-grammars/tree-sitter-lua")
@@ -145,6 +150,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 (dolist (hook '(c-ts-mode-hook
                 go-ts-mode-hook
+                js-ts-mode-hook
                 python-ts-mode-hook))
   (add-hook hook #'eglot-ensure))
 
