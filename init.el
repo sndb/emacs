@@ -46,6 +46,7 @@
         move-text
         magit
         vterm
+        hl-todo
         doric-themes
         sql-indent))
 

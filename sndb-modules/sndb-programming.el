@@ -7,6 +7,7 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
+(global-hl-todo-mode 1)
 (global-subword-mode 1)
 (electric-indent-mode -1)
 (add-hook 'prog-mode-hook #'electric-indent-local-mode)
