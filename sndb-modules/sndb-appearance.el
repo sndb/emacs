@@ -1,12 +1,10 @@
-;;;; Fonts
-(let ((family "Ubuntu Mono") (height 135))
-  (dolist (face '(default fixed-pitch))
-    (set-face-attribute face nil :family family :height height)))
-
 ;;;; Theme
 (require 'doric-themes)
 (doric-themes-select 'doric-dark)
 (keymap-global-set "<f5>" #'doric-themes-toggle)
+
+(set-face-attribute 'default nil :family "Ubuntu Mono" :height 135)
+(set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 1.0)
 
 ;;;; Indicators
 (setq use-short-answers t)
@@ -16,6 +14,7 @@
 (setq inhibit-startup-screen t)
 (setq uniquify-buffer-name-style 'forward)
 (setq ring-bell-function #'ignore)
+(setq shell-command-prompt-show-cwd t)
 
 (blink-cursor-mode -1)
 (line-number-mode 1)
@@ -35,14 +34,11 @@
 (add-to-list 'whitespace-display-mappings '(tab-mark 9 [8250 9]) t)
 
 (global-whitespace-mode 1)
-
 (keymap-global-set "C-c f" #'delete-trailing-whitespace)
 
-;;;; Frame
+;;;; Interface
 (setq frame-resize-pixelwise t)
 (setq frame-inhibit-implied-resize t)
-
-;;;; Windows
 (setq window-resize-pixelwise t)
 (setq window-combination-resize t)
 

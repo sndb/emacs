@@ -1,17 +1,25 @@
-;;;; Commands
-(dolist (c '(narrow-to-region))
-  (put c 'disabled nil))
+;;;; Control
+(setq help-window-select t)
+(setq require-final-newline t)
+(setq sentence-end-double-space nil)
+(setq view-read-only t)
+(setq save-interprogram-paste-before-kill t)
+(setq set-mark-command-repeat-pop t)
 
-(dolist (c '(overwrite-mode suspend-frame))
-  (put c 'disabled t))
+(global-auto-revert-mode 1)
+(delete-selection-mode 1)
+(repeat-mode 1)
+
+;;;; Commands
+(put #'narrow-to-region 'disabled nil)
+(put #'overwrite-mode 'disabled t)
+(put #'suspend-frame 'disabled t)
 
 (keymap-global-set "M-z" #'zap-up-to-char)
 (keymap-global-set "M-u" #'upcase-dwim)
 (keymap-global-set "M-l" #'downcase-dwim)
 (keymap-global-set "M-c" #'capitalize-dwim)
 (keymap-global-set "M-/" #'hippie-expand)
-(keymap-global-set "C-s" #'isearch-forward-regexp)
-(keymap-global-set "C-r" #'isearch-backward-regexp)
 
 ;;;; Windows
 (defun sndb-other-window ()
@@ -43,6 +51,7 @@ Close the current tab if that was its only window."
     (delete-window)))
 
 (defvar-keymap sndb-delete-window-map
+  :doc "Keymap to repeat `sndb-delete-window'."
   :repeat t
   "0" #'sndb-delete-window)
 
@@ -61,12 +70,6 @@ Close the current tab if that was its only window."
          (window-height . shrink-window-if-larger-than-buffer)
          (body-function . select-window))))
 
-(setq help-window-select t)
-
-;;;; Lines
-(setq require-final-newline t)
-(setq-default truncate-lines t)
-
 ;;;; Duplicate
 (setq duplicate-line-final-position 1)
 (setq duplicate-region-final-position 1)
@@ -77,27 +80,10 @@ Close the current tab if that was its only window."
 (keymap-global-set "C-M-S-n" #'move-text-down)
 (keymap-global-set "C-M-S-p" #'move-text-up)
 
-;;;; Read-Only
-(setq view-read-only t)
-
-;;;; Clipboard
-(setq save-interprogram-paste-before-kill t)
-
-;;;; Auto-Revert
-(global-auto-revert-mode 1)
-
-;;;; Delete selection
-(delete-selection-mode 1)
-
-;;;; Repeat
-(setq set-mark-command-repeat-pop t)
-(repeat-mode 1)
-
 ;;;; Mouse
 (setq mouse-wheel-progressive-speed nil)
 (setq mouse-yank-at-point t)
 (setq mouse-autoselect-window t)
-(setq focus-follows-mouse t)
 
 ;;;; Scrolling
 (setq scroll-preserve-screen-position t)
@@ -126,6 +112,11 @@ Close the current tab if that was its only window."
 (setq isearch-lazy-count t)
 (setq isearch-yank-on-move t)
 (setq isearch-allow-scroll t)
+(setq isearch-allow-motion t)
+(setq isearch-wrap-pause nil)
 (setq isearch-repeat-on-direction-change t)
+
+(keymap-global-set "C-s" #'isearch-forward-regexp)
+(keymap-global-set "C-r" #'isearch-backward-regexp)
 
 (provide 'sndb-control)

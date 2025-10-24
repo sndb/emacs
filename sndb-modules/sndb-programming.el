@@ -12,7 +12,7 @@
 (electric-indent-mode -1)
 (add-hook 'prog-mode-hook #'electric-indent-local-mode)
 
-(defun call-before-save (hook function)
+(defun add-hook-before-save (hook function)
   (add-hook hook (lambda () (add-hook 'before-save-hook function nil t))))
 
 ;;;; C
@@ -28,57 +28,15 @@
 ;;;; Go
 (require 'go-ts-mode)
 (setq go-ts-mode-indent-offset 4)
-(call-before-save 'go-ts-mode-hook #'eglot-format-buffer)
-(call-before-save 'go-ts-mode-hook #'eglot-organize-imports)
+(add-hook-before-save 'go-ts-mode-hook #'eglot-format-buffer)
+(add-hook-before-save 'go-ts-mode-hook #'eglot-organize-imports)
 
-;;;; JavaScript
+;;;; Other
 (require 'js)
-
-;;;; Python
 (require 'python)
-
-;;;; Lua
 (require 'lua-ts-mode)
-
-;;;; YAML
 (require 'yaml-ts-mode)
-
-;;;; Shell
 (require 'sh-script)
-(add-hook 'sh-base-mode-hook #'indent-tabs-mode)
-
-;;;; SQL
-(require 'sql)
-(setq sql-product 'postgres)
-
-;;;; Text
-(setq sentence-end-double-space nil)
-
-(defun sndb-insert-underline (arg)
-  "Insert an underline.
-Use the character '-' by default.
-If called with a prefix argument, use the provided character."
-  (interactive "P")
-  (if arg
-      (call-interactively #'sndb-insert-underline-char)
-    (sndb-insert-underline-char ?-)))
-
-(defun sndb-insert-underline-char (c)
-  "Insert an underline of the length of the previous line.
-If the length of the previous line is 0, use the value of `fill-column'."
-  (interactive "cType a character: ")
-  (let* ((previous-line-length
-          (save-excursion
-            (move-end-of-line 0)
-            (current-column)))
-         (underline-length
-          (if (zerop previous-line-length) fill-column previous-line-length))
-         (delta
-          (- underline-length (current-column))))
-    (when (> delta 0)
-      (insert (make-string delta c)))))
-
-(keymap-global-set "C-c u" #'sndb-insert-underline)
 
 ;;;; Puni
 (require 'puni)
@@ -92,6 +50,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
   (add-hook hook #'puni-mode))
 
 (defvar-keymap sndb-puni-mode-map
+  :doc "Keymap for my custom `puni-mode' bindings."
   :repeat t
   "C-r" #'puni-raise
   "C-s" #'puni-splice
@@ -156,7 +115,7 @@ If the length of the previous line is 0, use the value of `fill-column'."
 
 (keymap-set eglot-mode-map "C-c r" #'eglot-rename)
 (keymap-set eglot-mode-map "C-c t" #'eglot-code-actions)
-(keymap-set eglot-mode-map "C-c o" #'eglot-code-action-organize-imports)
+(keymap-set eglot-mode-map "C-c o" #'eglot-organize-imports)
 (keymap-set eglot-mode-map "C-c f" #'eglot-format-buffer)
 
 (defun eglot-organize-imports ()
