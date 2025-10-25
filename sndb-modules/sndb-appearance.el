@@ -15,6 +15,8 @@
 (setq uniquify-buffer-name-style 'forward)
 (setq ring-bell-function #'ignore)
 (setq shell-command-prompt-show-cwd t)
+(setq-default truncate-lines t)
+(setq-default indicate-empty-lines t)
 
 (blink-cursor-mode -1)
 (line-number-mode 1)
@@ -23,12 +25,10 @@
 ;;;; Parentheses
 (setq show-paren-when-point-in-periphery t)
 (setq show-paren-context-when-offscreen 'child-frame)
-(show-paren-mode 1)
 
 ;;;; Whitespace
 (require 'whitespace)
 
-(setq-default indicate-empty-lines t)
 (setq whitespace-style '(face tabs trailing tab-mark))
 (setq whitespace-global-modes '(not magit-mode go-ts-mode odin-mode))
 (add-to-list 'whitespace-display-mappings '(tab-mark 9 [8250 9]) t)

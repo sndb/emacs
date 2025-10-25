@@ -69,6 +69,7 @@ Close it if the Vterm buffer is selected."
 (setq dired-isearch-filenames t)
 (setq dired-movement-style 'bounded-files)
 (setq dired-filename-display-length 'window)
+(setq dired-clean-confirm-killing-deleted-buffers nil)
 (setq shell-command-guess-functions '(shell-command-guess-xdg))
 
 (keymap-set dired-mode-map "C-<return>" #'dired-do-open)

@@ -104,6 +104,8 @@
 ;;;; Eglot
 (require 'eglot)
 
+(setq eglot-sync-connect nil)
+(setq eglot-autoshutdown t)
 (setq eglot-events-buffer-config (plist-put eglot-events-buffer-config :size 0))
 (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
 

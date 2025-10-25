@@ -5,8 +5,8 @@
 
 ;;;; Minibuffer
 (setq enable-recursive-minibuffers t)
-(setq resize-mini-windows t)
 (setq minibuffer-default-prompt-format " [%s]")
+(setq read-extended-command-predicate #'command-completion-default-include-p)
 
 (minibuffer-depth-indicate-mode 1)
 (minibuffer-electric-default-mode 1)

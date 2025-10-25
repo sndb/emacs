@@ -6,6 +6,7 @@
 (setq native-comp-async-report-warnings-errors 'silent)
 (setq custom-file (make-temp-file "emacs-custom-"))
 (setq vc-follow-symlinks t)
+(setq tramp-verbose 1)
 
 ;;;; Backup
 (setq make-backup-files nil)
