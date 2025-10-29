@@ -43,12 +43,16 @@
         wgrep
         eglot
         puni
+        vundo
         move-text
         magit
         vterm
         hl-todo
+        olivetti
+        gptel
+        sql-indent
         doric-themes
-        sql-indent))
+        modus-themes))
 
 (defun sndb-install-packages ()
   "Install all the packages from `sndb-package-list'."

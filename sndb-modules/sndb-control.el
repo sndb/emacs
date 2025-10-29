@@ -27,7 +27,7 @@
 Split the frame if there is a single window."
   (interactive)
   (when (one-window-p)
-    (split-window-sensibly))
+    (split-window-right))
   (other-window 1))
 
 (defun sndb-previous-window ()
@@ -80,6 +80,10 @@ Close the current tab if that was its only window."
 (keymap-global-set "C-M-S-n" #'move-text-down)
 (keymap-global-set "C-M-S-p" #'move-text-up)
 
+;;;; Vundo
+(require 'vundo)
+(keymap-global-set "C-?" #'vundo)
+
 ;;;; Mouse
 (setq mouse-wheel-progressive-speed nil)
 (setq mouse-yank-at-point t)
@@ -110,7 +114,6 @@ Close the current tab if that was its only window."
 
 ;;;; Search
 (setq isearch-lazy-count t)
-(setq isearch-yank-on-move t)
 (setq isearch-allow-scroll t)
 (setq isearch-allow-motion t)
 (setq isearch-wrap-pause nil)
