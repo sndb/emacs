@@ -2,11 +2,15 @@
 (require 'org)
 
 (setq org-ellipsis "…")
+(setq org-use-speed-commands t)
+(setq org-startup-indented t)
+(setq org-startup-folded 'showall)
 (setq org-special-ctrl-a/e t)
 (setq org-special-ctrl-k t)
+(setq org-return-follows-link t)
+(setq org-M-RET-may-split-line nil)
 (setq org-cycle-separator-lines 0)
 (setq org-insert-heading-respect-content t)
-(setq org-startup-folded 'showall)
 (setq org-fold-catch-invisible-edits 'error)
 (setq org-enforce-todo-dependencies t)
 (setq org-enforce-todo-checkbox-dependencies t)
@@ -14,6 +18,11 @@
 
 (keymap-global-set "C-c a" #'org-agenda)
 (keymap-global-set "C-c c" #'org-capture)
+(keymap-global-set "C-c l" #'org-store-link)
+
+;;;; Consult
+(keymap-global-set "M-s M-o" #'consult-org-agenda)
+(keymap-set org-mode-map "M-s M-i" #'consult-org-heading)
 
 ;;;; Paths
 (setq org-directory "~/Documents")
@@ -29,6 +38,8 @@
 
 (setq org-agenda-files `(,org-directory))
 (setq org-agenda-window-setup 'current-window)
+(setq org-agenda-restore-windows-after-quit t)
+(setq org-agenda-use-time-grid nil)
 (setq org-agenda-todo-ignore-with-date t)
 (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
 
