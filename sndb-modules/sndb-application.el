@@ -1,3 +1,15 @@
+;;;; gptel
+(require 'gptel)
+
+(setq gptel-model 'qwen3:8b)
+(setq gptel-default-mode 'org-mode)
+(setq gptel-backend (gptel-make-ollama "Ollama"
+                      :host "localhost:11434"
+                      :stream t
+                      :models '(qwen3:8b gemma3:4b)))
+
+(keymap-global-set "C-c RET" #'gptel-send)
+
 ;;;; Magit
 (require 'magit)
 (setq magit-diff-refine-hunk 'all)
