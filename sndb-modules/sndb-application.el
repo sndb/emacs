@@ -58,6 +58,7 @@ Close it if the Vterm buffer is selected."
         (select-window window)
         (vterm name)))))
 
+(keymap-unset vterm-mode-map "M-`")
 (keymap-unset vterm-mode-map "<f2>")
 (keymap-global-set "<f2>" #'sndb-vterm)
 

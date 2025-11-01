@@ -44,6 +44,7 @@
         eglot
         puni
         vundo
+        popper
         move-text
         magit
         vterm

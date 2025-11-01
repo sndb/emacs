@@ -122,4 +122,21 @@ Close the current tab if that was its only window."
 (keymap-global-set "C-s" #'isearch-forward-regexp)
 (keymap-global-set "C-r" #'isearch-backward-regexp)
 
+;;;; Popper
+(require 'popper)
+
+(setq popper-reference-buffers
+      '(help-mode
+        compilation-mode
+        "\\*Messages\\*"
+        "\\*Shell Command Output\\*"
+        "\\*Async Shell Command\\*"
+        "\\*vterm\\*" vterm-mode))
+
+(keymap-global-set "C-`" #'popper-toggle)
+(keymap-global-set "M-`" #'popper-cycle)
+(keymap-global-set "C-M-`" #'popper-toggle-type)
+
+(popper-mode 1)
+
 (provide 'sndb-control)
