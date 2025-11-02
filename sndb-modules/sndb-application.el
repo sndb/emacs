@@ -32,35 +32,35 @@
 (defun sndb-project-name (name)
   "Create a name corresponding to the current project or directory."
   (let* ((project (project-current))
-         (base (file-name-nondirectory
-                (directory-file-name
-                 (if project
-                     (project-root project)
-                   default-directory)))))
+         (base (if project
+                   (project-name project)
+                 (file-name-nondirectory
+                  (directory-file-name default-directory)))))
     (concat "*" base "-" name "*")))
 
 (defun sndb-vterm ()
   "Switch to the local Vterm buffer.
 Close it if the Vterm buffer is selected."
   (interactive)
-  (let* ((name (sndb-project-name "vterm"))
-         (buffer (get-buffer name))
-         (split-function #'split-window-right))
-    (if buffer
-        (if (equal (current-buffer) buffer)
-            (unless (one-window-p)
-              (delete-window (get-buffer-window buffer)))
-          (let ((window (or (get-buffer-window buffer)
-                            (funcall split-function))))
-            (set-window-buffer window buffer)
-            (select-window window)))
-      (let ((window (funcall split-function)))
-        (select-window window)
-        (vterm name)))))
+  (let ((name (sndb-project-name "vterm"))
+        (prev (current-buffer)))
+    (pop-to-buffer name)
+    (if (equal (current-buffer) prev)
+        (unless (one-window-p)
+          (delete-window (get-buffer-window)))
+      (unless (derived-mode-p 'vterm-mode)
+        (vterm-mode)))))
+
+(defun sndb-terminal ()
+  "Open a terminal window in the current directory."
+  (interactive)
+  (let ((term "xfce4-terminal"))
+    (start-process term nil term)))
 
 (keymap-unset vterm-mode-map "M-`")
 (keymap-unset vterm-mode-map "<f2>")
 (keymap-global-set "<f2>" #'sndb-vterm)
+(keymap-global-set "M-<f2>" #'sndb-terminal)
 
 ;;;; GnuPG
 (require 'epg)

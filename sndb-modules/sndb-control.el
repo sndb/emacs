@@ -125,13 +125,14 @@ Close the current tab if that was its only window."
 ;;;; Popper
 (require 'popper)
 
+(setq popper-window-height 24)
 (setq popper-reference-buffers
       '(help-mode
         compilation-mode
         "\\*Messages\\*"
         "\\*Shell Command Output\\*"
         "\\*Async Shell Command\\*"
-        "\\*vterm\\*" vterm-mode))
+        "-vterm\\*" "\\*vterm\\*" vterm-mode))
 
 (keymap-global-set "C-`" #'popper-toggle)
 (keymap-global-set "M-`" #'popper-cycle)
