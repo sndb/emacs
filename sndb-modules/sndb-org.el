@@ -11,6 +11,7 @@
 (setq org-M-RET-may-split-line nil)
 (setq org-cycle-separator-lines 0)
 (setq org-insert-heading-respect-content t)
+(setq org-yank-folded-subtrees nil)
 (setq org-fold-catch-invisible-edits 'error)
 (setq org-enforce-todo-dependencies t)
 (setq org-enforce-todo-checkbox-dependencies t)
