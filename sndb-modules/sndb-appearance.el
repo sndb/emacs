@@ -6,11 +6,8 @@
         (border-mode-line-active unspecified)
         (border-mode-line-inactive unspecified)
         (bg-line-number-active unspecified)
-        (bg-line-number-inactive unspecified)))
-(setq modus-vivendi-palette-overrides
-      '((bg-mode-line-active bg-lavender)))
-(setq modus-operandi-palette-overrides
-      '((bg-mode-line-active bg-blue-intense)))
+        (bg-line-number-inactive unspecified)
+        (bg-mode-line-active bg-lavender)))
 
 (modus-themes-select 'modus-vivendi)
 
@@ -88,7 +85,8 @@
   "l" #'display-line-numbers-mode
   "t" #'toggle-truncate-lines
   "v" #'visual-line-mode
-  "o" #'olivetti-mode)
+  "o" #'olivetti-mode
+  "f" #'auto-fill-mode)
 
 (keymap-global-set "C-c v" sndb-visual-map)
 
