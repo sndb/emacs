@@ -37,7 +37,7 @@
 ;;;; Agenda
 (require 'org-agenda)
 
-(setq org-agenda-files `(,org-directory))
+(setq org-agenda-files `(,org-default-notes-file))
 (setq org-agenda-window-setup 'current-window)
 (setq org-agenda-restore-windows-after-quit t)
 (setq org-agenda-use-time-grid nil)
@@ -50,7 +50,7 @@
 ;;;; Capture
 (setq org-capture-templates
       '(("t" "Task" entry
-         (file "tasks.org")
+         (file "")
          "* TODO %?\n%i"
          :empty-lines 1)))
 
