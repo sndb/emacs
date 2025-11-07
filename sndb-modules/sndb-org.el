@@ -37,12 +37,15 @@
 ;;;; Agenda
 (require 'org-agenda)
 
-(setq org-agenda-files `(,org-default-notes-file))
+(setq org-agenda-files `(,org-directory))
 (setq org-agenda-window-setup 'current-window)
 (setq org-agenda-restore-windows-after-quit t)
 (setq org-agenda-use-time-grid nil)
 (setq org-agenda-todo-ignore-with-date t)
 (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
+(setq org-agenda-custom-commands
+      '(("n" "Agenda (notes)" ((agenda "") (alltodo ""))
+         ((org-agenda-files `(,org-default-notes-file))))))
 
 (keymap-set org-mode-map "C-c y" #'org-todo-yesterday)
 (keymap-set org-agenda-mode-map "C-c y" #'org-agenda-todo-yesterday)
