@@ -1,6 +1,8 @@
 ;;;; Theme
 (require 'modus-themes)
 
+(setq modus-themes-bold-constructs t)
+(setq modus-themes-italic-constructs t)
 (setq modus-themes-common-palette-overrides
       '((fringe unspecified)
         (border-mode-line-active unspecified)
