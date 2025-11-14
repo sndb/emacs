@@ -8,8 +8,7 @@
         (border-mode-line-active unspecified)
         (border-mode-line-inactive unspecified)
         (bg-line-number-active unspecified)
-        (bg-line-number-inactive unspecified)
-        (bg-mode-line-active bg-lavender)))
+        (bg-line-number-inactive unspecified)))
 
 (modus-themes-select 'modus-vivendi)
 
